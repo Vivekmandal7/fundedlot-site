@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FundedLot — Practice Prop Firm Challenges Before You Pay</title>
+<meta name="description" content="Rehearse the exact prop-firm evaluation — real prices, real daily-loss and drawdown rules, virtual funds — and learn why you fail before an attempt costs $500.">
+<link rel="canonical" href="https://www.fundedlot.com/">
+<script>
+(function () {
+  var d = document.documentElement; d.classList.add('js');
+  /* Light (Ink & Lime) is the default; a stored choice wins; ?theme= is a
+     preview override for QA and screenshots. */
+  var stored = null; try { stored = localStorage.getItem('fl-theme'); } catch (e) {}
+  var qs = null; try { qs = new URLSearchParams(location.search).get('theme'); } catch (e) {}
+  var theme = (qs === 'light' || qs === 'dark') ? qs
+    : (stored === 'light' || stored === 'dark') ? stored : 'light';
+  d.setAttribute('data-theme', theme);
+  var mc = document.querySelector('meta[name="theme-color"]');
+  if (mc && theme === 'dark') mc.setAttribute('content', '#000000');
+})();
+</script>
+<meta name="theme-color" content="#F4F4F0">
+<meta property="og:site_name" content="FundedLot">
+<meta property="og:type" content="website">
+<meta property="og:title" content="FundedLot — Practice Prop Firm Challenges Before You Pay">
+<meta property="og:description" content="Rehearse the exact prop-firm evaluation — real prices, real daily-loss and drawdown rules, virtual funds — and learn why you fail before an attempt costs $500.">
+<meta property="og:url" content="https://www.fundedlot.com/">
+<meta property="og:image" content="https://www.fundedlot.com/assets/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="FundedLot — practice prop firm challenges before you pay">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@fundedlot">
+<meta name="twitter:title" content="FundedLot — Practice Prop Firm Challenges Before You Pay">
+<meta name="twitter:description" content="Rehearse the exact prop-firm evaluation — real prices, real daily-loss and drawdown rules, virtual funds — and learn why you fail before an attempt costs $500.">
+<meta name="twitter:image" content="https://www.fundedlot.com/assets/og.png">
+
+<link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="alternate" type="application/rss+xml" title="FundedLot Blog" href="/feed.xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400..800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/styles.css?v=ca293429">
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"Organization","name":"FundedLot","alternateName":["Funded Lot","Fundedlot","funded lot app","FundedLot simulator","FundedLot prop firm practice"],"url":"https://www.fundedlot.com/","logo":"https://www.fundedlot.com/assets/og.png","email":"support@fundedlot.com","sameAs":["https://www.instagram.com/fundedlot","https://x.com/fundedlot"],"contactPoint":{"@type":"ContactPoint","email":"support@fundedlot.com","contactType":"customer support","availableLanguage":"en"}},{"@context":"https://schema.org","@type":"WebSite","name":"FundedLot","alternateName":["Funded Lot","Fundedlot","funded lot app","FundedLot simulator","FundedLot prop firm practice"],"url":"https://www.fundedlot.com/"},{"@context":"https://schema.org","@type":"MobileApplication","name":"FundedLot","alternateName":"Funded Lot","operatingSystem":"iOS, Android","applicationCategory":"EducationApplication","description":"Prop-firm challenge practice: a realistic trading simulator with evaluation rules, virtual funds, and mistake coaching.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"url":"https://www.fundedlot.com/download/"},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Is FundedLot a prop firm?","acceptedAnswer":{"@type":"Answer","text":"No. FundedLot is an educational trading simulator. Everything inside the app runs on virtual funds — we are not a broker, we don't offer real-money trading, and we don't sell funded accounts or pay out profits. What we do is let you rehearse the exact rules prop firms use, so a real attempt isn't your first attempt."}},{"@type":"Question","name":"Is it really free?","acceptedAnswer":{"@type":"Answer","text":"The simulator, real market prices, all instruments, and your first full evaluation are free, with no card required. Paid attempt packs and the Pro subscription exist for people who want unlimited evaluations and the deeper analysis suite."}},{"@type":"Question","name":"Are the prices and rules realistic?","acceptedAnswer":{"@type":"Answer","text":"Prices are real market quotes across forex, metals, indices and crypto, with realistic spreads and slippage. Rules are enforced the way real evaluations enforce them — daily loss checked against equity including open positions, drawdown tracked tick by tick, breaches final."}},{"@type":"Question","name":"Will passing a FundedLot evaluation get me a funded account?","acceptedAnswer":{"@type":"Answer","text":"No — and be wary of anyone who promises that. Passing on FundedLot earns a simulated funded stage and a shareable certificate. The real value is arriving at a paid evaluation already knowing the rules, your risk numbers, and your failure patterns."}},{"@type":"Question","name":"Which platforms does it run on?","acceptedAnswer":{"@type":"Answer","text":"FundedLot is built for iOS and Android. See the download page for current availability."}},{"@type":"Question","name":"Is this financial advice?","acceptedAnswer":{"@type":"Answer","text":"No. FundedLot is for education and practice. Nothing in the app or on this site is investment advice, and simulated results never guarantee real ones. Read our risk disclosure ."}}]}]</script>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="container">
+    <nav class="nav" aria-label="Main">
+      <a class="brand" href="/" aria-label="FundedLot home">
+        <svg class="mark" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+<rect width="32" height="32" rx="9.6" fill="#C9F158"/>
+<path d="M9.55 14.6v11.4M16 10.4v14.9M22.45 6.2v18.1" stroke="#101109" stroke-width="1.5" stroke-linecap="round"/>
+<rect x="7.6" y="17.3" width="3.9" height="7.6" rx="1.95" fill="#101109"/>
+<rect x="14.05" y="13.4" width="3.9" height="10.9" rx="1.95" fill="#101109"/>
+<rect x="20.5" y="9" width="3.9" height="13" rx="1.95" fill="#101109"/>
+</svg>
+        <span>Funded<span class="lot">lot</span></span>
+      </a>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="/how-it-works/">How it works</a></li>
+        <li><a href="/features/">Features</a></li>
+        <li><a href="/pricing/">Pricing</a></li>
+        <li><a href="/blog/">Blog</a></li>
+        <li><a href="/glossary/">Glossary</a></li>
+        <li><a href="/about/">About</a></li>
+        <li class="nav-cta"><a class="btn btn-volt btn-sm" href="/download/">Get the app</a></li>
+      </ul>
+      <button class="theme-toggle" type="button" aria-label="Switch theme" title="Switch theme">
+        <svg class="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.4"/><path d="M12 2.5v2.4M12 19.1v2.4M2.5 12h2.4M19.1 12h2.4M5 5l1.7 1.7M17.3 17.3 19 19M19 5l-1.7 1.7M6.7 17.3 5 19"/></svg>
+        <svg class="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.6 14.2A8.6 8.6 0 0 1 9.8 3.4a8.6 8.6 0 1 0 10.8 10.8Z"/></svg>
+      </button>
+      <button class="nav-toggle" aria-label="Menu" aria-expanded="false" aria-controls="nav-links">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+<!-- ============================== HERO ============================== -->
+<section class="hero">
+  <div class="sweep" aria-hidden="true"></div>
+  <div class="container">
+    <div class="hero-center">
+      <span class="eyebrow">Prop-firm challenge practice app</span>
+      <a class="hero-pill" href="/download/"><b>v1.0</b> Launching soon on iOS &amp; Android <i>→</i></a>
+      <h1>Practice the challenge <span class="accent">before you pay</span> for it.</h1>
+      <p class="sub">FundedLot is a realistic prop-firm challenge simulator. Real market prices, the exact evaluation rules — <strong>daily loss limits, drawdown, profit targets</strong> — and a coach that shows you precisely why you fail. On virtual funds, not on a $500 fee.</p>
+      <div class="hero-ctas">
+        <div class="store-badges">
+<a class="badge-store is-soon" href="/download/"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.05 12.54c-.03-2.89 2.36-4.27 2.47-4.34-1.34-1.96-3.43-2.23-4.18-2.26-1.78-.18-3.47 1.05-4.37 1.05-.9 0-2.29-1.02-3.77-1-1.94.03-3.72 1.13-4.72 2.86-2.01 3.49-.51 8.66 1.45 11.49.96 1.39 2.1 2.95 3.6 2.89 1.44-.06 1.99-.93 3.73-.93s2.23.93 3.76.9c1.55-.03 2.53-1.41 3.48-2.8 1.1-1.61 1.55-3.17 1.57-3.25-.03-.02-3-1.15-3.02-4.61zM14.16 4.06c.8-.96 1.33-2.3 1.19-3.64-1.15.05-2.53.76-3.35 1.72-.74.85-1.38 2.21-1.21 3.52 1.28.1 2.58-.65 3.37-1.6z"/></svg><span class="txt"><small>Download on the</small><span>App Store</span></span><span class="soon-pill">Soon</span></a>
+<a class="badge-store is-soon" href="/download/"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4.1 2.02c-.34.18-.56.54-.56.98v18c0 .44.22.8.56.98l9.9-9.98-9.9-9.98zM15.3 10.7 6.06 1.4l11.6 6.66-2.36 2.64zm0 2.6 2.36 2.64L6.06 22.6l9.24-9.3zm4.9-2.02-2.77-1.59-2.6 2.31 2.6 2.31 2.77-1.59c.83-.48.83-1.96 0-2.44z" transform="translate(1.5 0)"/></svg><span class="txt"><small>Get it on</small><span>Google Play</span></span><span class="soon-pill">Soon</span></a>
+</div>
+      </div>
+      <p class="hero-note"><strong>FREE TO START</strong> · NO CARD · VIRTUAL FUNDS · iOS &amp; ANDROID</p>
+    </div>
+    <div class="island hero-island reveal">
+      <span class="island-kicker">The actual app · real screenshots</span>
+      <div class="phone-stage" role="img" aria-label="Three floating phones showing the real FundedLot app: the live challenge dashboard with rule meters, the trading chart, and the behaviour coach">
+        <div class="stage-glow" aria-hidden="true"></div>
+        <div class="p3d pl" aria-hidden="true"><div class="pfloat">
+          <div class="device device-3d"><span class="scr">
+            <img class="for-dark" loading="lazy" src="/assets/screens/trade-dark.webp" width="860" height="1869" alt="">
+            <img class="for-light" loading="lazy" src="/assets/screens/home-light.webp" width="860" height="1869" alt="">
+          </span></div>
+        </div></div>
+        <div class="p3d pc">
+          <div class="pfloat">
+            <div class="device device-3d device-hero"><span class="scr">
+              <img class="for-dark" loading="lazy" src="/assets/screens/challenge-dark.webp" width="860" height="1869" alt="FundedLot challenge screen: 31% to the profit target, every rule passing">
+              <img class="for-light" fetchpriority="high" src="/assets/screens/trade-light.webp" width="860" height="1869" alt="FundedLot trade screen: EUR/USD chart on a $100,000 practice account">
+              <i class="glare" aria-hidden="true"></i>
+            </span></div>
+          </div>
+        </div>
+        <div class="p3d pr" aria-hidden="true"><div class="pfloat">
+          <div class="device device-3d"><span class="scr">
+            <img class="for-dark" loading="lazy" src="/assets/screens/coach-dark.webp" width="860" height="1869" alt="">
+            <img class="for-light" loading="lazy" src="/assets/screens/portfolio-light.webp" width="860" height="1869" alt="">
+          </span></div>
+        </div></div>
+      </div>
+    </div>
+    <script>
+    (function () {
+      var stage = document.querySelector('.phone-stage');
+      if (!stage || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      var fine = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+      /* pointer tilt — the ensemble leans a few degrees toward the cursor */
+      if (fine) {
+        var hero = document.querySelector('.hero');
+        var tx = 0, ty = 0, cx = 0, cy = 0, raf = null;
+        function tick() {
+          cx += (tx - cx) * .08; cy += (ty - cy) * .08;
+          stage.style.setProperty('--my', cx.toFixed(2) + 'deg');
+          stage.style.setProperty('--mx', cy.toFixed(2) + 'deg');
+          if (Math.abs(tx - cx) > .01 || Math.abs(ty - cy) > .01) raf = requestAnimationFrame(tick);
+          else raf = null;
+        }
+        hero.addEventListener('pointermove', function (e) {
+          var r = stage.getBoundingClientRect();
+          tx = ((e.clientX - r.left) / r.width - .5) * 7;
+          ty = -((e.clientY - r.top) / r.height - .5) * 5;
+          if (!raf) raf = requestAnimationFrame(tick);
+        });
+        hero.addEventListener('pointerleave', function () {
+          tx = 0; ty = 0; if (!raf) raf = requestAnimationFrame(tick);
+        });
+      }
+      /* scroll parallax — side phones drift at different rates */
+      var lastY = -1;
+      function onScroll() {
+        var r = stage.getBoundingClientRect();
+        var mid = r.top + r.height / 2 - innerHeight / 2;
+        var k = Math.max(-1, Math.min(1, mid / innerHeight));
+        stage.style.setProperty('--pyl', (k * 26) + 'px');
+        stage.style.setProperty('--pyc', (k * 10) + 'px');
+        stage.style.setProperty('--pyr', (k * 34) + 'px');
+      }
+      addEventListener('scroll', function () {
+        if (lastY === scrollY) return; lastY = scrollY;
+        requestAnimationFrame(onScroll);
+      }, { passive: true });
+      onScroll();
+    })();
+    </script>
+  </div>
+</section>
+
+<!-- ============================== TICKER ============================== -->
+<div class="ticker" aria-hidden="true">
+  <div class="ticker-track">
+    <span class="tick"><span class="s">EURUSD</span><span class="p">1.08425</span><span class="up">+0.42%</span></span>
+    <span class="tick"><span class="s">XAUUSD</span><span class="p">2,412.80</span><span class="up">+0.85%</span></span>
+    <span class="tick"><span class="s">GBPUSD</span><span class="p">1.27180</span><span class="dn">−0.12%</span></span>
+    <span class="tick"><span class="s">US500</span><span class="p">5,590.2</span><span class="dn">−0.21%</span></span>
+    <span class="tick"><span class="s">BTCUSD</span><span class="p">64,210</span><span class="up">+1.90%</span></span>
+    <span class="tick"><span class="s">USDJPY</span><span class="p">148.52</span><span class="up">+0.31%</span></span>
+    <span class="tick"><span class="s">NAS100</span><span class="p">19,882.4</span><span class="up">+0.44%</span></span>
+    <span class="tick"><span class="s">XAGUSD</span><span class="p">28.94</span><span class="up">+1.20%</span></span>
+    <span class="tick"><span class="s">EURUSD</span><span class="p">1.08425</span><span class="up">+0.42%</span></span>
+    <span class="tick"><span class="s">XAUUSD</span><span class="p">2,412.80</span><span class="up">+0.85%</span></span>
+    <span class="tick"><span class="s">GBPUSD</span><span class="p">1.27180</span><span class="dn">−0.12%</span></span>
+    <span class="tick"><span class="s">US500</span><span class="p">5,590.2</span><span class="dn">−0.21%</span></span>
+    <span class="tick"><span class="s">BTCUSD</span><span class="p">64,210</span><span class="up">+1.90%</span></span>
+    <span class="tick"><span class="s">USDJPY</span><span class="p">148.52</span><span class="up">+0.31%</span></span>
+    <span class="tick"><span class="s">NAS100</span><span class="p">19,882.4</span><span class="up">+0.44%</span></span>
+    <span class="tick"><span class="s">XAGUSD</span><span class="p">28.94</span><span class="up">+1.20%</span></span>
+  </div>
+</div>
+
+<!-- ============================== PROOF BAR ============================== -->
+<div class="proof-bar" aria-label="What's inside FundedLot">
+  <div class="container">
+    <span class="pf"><b data-count="28">28</b> mistake detectors</span>
+    <span class="pf"><b data-count="61">61</b>-term glossary</span>
+    <span class="pf"><b data-count="24">24</b> in-depth guides</span>
+    <span class="pf"><b>$0</b> real money at risk</span>
+  </div>
+</div>
+
+<!-- ============================== STAT BAND ============================== -->
+<section class="dark-band">
+  <div class="band-art twin" aria-hidden="true">
+    <img class="for-dark" src="/assets/heroart/hero_wide_vault.webp" width="1200" height="900" alt="" loading="lazy" decoding="async">
+    <img class="for-light" src="/assets/heroart/hero_wide_vault_light.webp" width="1200" height="900" alt="" loading="lazy" decoding="async">
+  </div>
+  <div class="container">
+    <div class="stats-row">
+      <div class="stat reveal">
+        <div class="num"><span data-count="90" data-pre="~" data-suf="%">~90%</span></div>
+        <div class="lbl">of first challenge attempts end in a breach, by commonly cited industry estimates</div>
+      </div>
+      <div class="stat reveal">
+        <div class="num"><span data-count="540" data-pre="$50–$">$50–$540</span></div>
+        <div class="lbl">what a single real evaluation attempt costs — and the fee is gone the moment you breach</div>
+      </div>
+      <div class="stat reveal">
+        <div class="num">$0</div>
+        <div class="lbl">to rehearse the same rules on FundedLot, with your first full evaluation included free</div>
+      </div>
+    </div>
+    <p class="band-foot">Fees and pass rates vary by firm and account size. FundedLot is an educational simulator, not affiliated with any prop firm.</p>
+  </div>
+</section>
+
+<!-- ============================== REAL SCREENS ============================== -->
+<section class="section">
+  <div class="container">
+    <div class="section-head center">
+      <span class="eyebrow">No renders</span>
+      <h2>This is the actual app.</h2>
+      <p>Every frame on this page is a real screenshot from the shipping build — the same pixels you'll trade on.</p>
+    </div>
+    <div class="screen-row">
+      <div class="col screen-tile reveal">
+        <div class="cap"><b>One tap from a challenge</b><span>Your practice account, your active evaluation, and the coach's plan for today — on one screen.</span></div>
+        <div class="device device-sm"><span class="scr">
+          <img class="for-dark" loading="lazy" src="/assets/screens/home-dark.webp" width="860" height="1869" alt="FundedLot home: $100,005 practice balance with challenges, learn, journal and readiness shortcuts">
+          <img class="for-light" loading="lazy" src="/assets/screens/home-light.webp" width="860" height="1869" alt="FundedLot home in light mode: $100,000 practice balance and start-a-challenge card">
+        </span></div>
+      </div>
+      <div class="col screen-tile reveal">
+        <div class="cap"><b>Charts that mean business</b><span>Professional candles, indicators and one-tap tickets — with your open positions drawn on the chart.</span></div>
+        <div class="device device-sm"><span class="scr">
+          <img class="for-dark" loading="lazy" src="/assets/screens/trade-dark.webp" width="860" height="1869" alt="FundedLot trade screen: BTC/USD candlestick chart with one-tap sell and buy at live prices">
+          <img class="for-light" loading="lazy" src="/assets/screens/position-light.webp" width="860" height="1869" alt="FundedLot trade screen in light mode with an open BTC/USD position marked on the chart">
+        </span></div>
+      </div>
+      <div class="col screen-tile reveal">
+        <div class="cap"><b>A coach, not a scoreboard</b><span>Mistake Center, readiness estimate, and trade-by-trade analysis — built from your own behaviour.</span></div>
+        <div class="device device-sm"><span class="scr">
+          <img class="for-dark" loading="lazy" src="/assets/screens/coach-dark.webp" width="860" height="1869" alt="FundedLot coach: behaviour engine with Mistake Center, Readiness and AI analyst report">
+          <img class="for-light" loading="lazy" src="/assets/screens/portfolio-light.webp" width="860" height="1869" alt="FundedLot portfolio in light mode showing an open BTC/USD position in profit">
+        </span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== CATALOG ============================== -->
+<section class="section tight">
+  <div class="container">
+    <div class="island cat-island reveal">
+      <span class="island-kicker">The catalog · 21 instruments</span>
+      <div class="cat-head">
+        <h2>Four asset classes. One rulebook.</h2>
+        <p>Real quotes across the markets prop firms actually evaluate — market hours respected, spreads realistic, slippage modelled.</p>
+      </div>
+      <div class="cat-grid">
+        <div class="cat-tile">
+          <img src="/assets/editorial/fx.webp" width="640" height="640" alt="" loading="lazy" decoding="async">
+          <b>Forex</b><span>7 MAJOR PAIRS</span>
+        </div>
+        <div class="cat-tile">
+          <img src="/assets/editorial/xau.webp" width="640" height="640" alt="" loading="lazy" decoding="async">
+          <b>Metals</b><span>GOLD &amp; SILVER</span>
+        </div>
+        <div class="cat-tile">
+          <img src="/assets/editorial/indices.webp" width="640" height="640" alt="" loading="lazy" decoding="async">
+          <b>Indices</b><span>5 GLOBAL INDICES</span>
+        </div>
+        <div class="cat-tile">
+          <img src="/assets/editorial/crypto.webp" width="640" height="640" alt="" loading="lazy" decoding="async">
+          <b>Crypto</b><span>7 COINS · 24/7</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== BENTO ============================== -->
+<section class="section">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">Why practice first</span>
+      <h2>Broker demos don't enforce the rules. Prop firms don't let you rehearse them.</h2>
+      <p>That gap is where most fees are lost. A demo never breaches you for a 5% down day — so the first time you feel a real daily loss limit is the day it takes your money.</p>
+    </div>
+    <div class="bento">
+      <div class="bento-card b4 reveal">
+        <span class="tag">Rules engine</span>
+        <h3>The exact rules, enforced tick by tick</h3>
+        <p>Profit targets, daily loss limits, static and trailing drawdown, minimum trading days, consistency rules — measured against equity including open positions, the way real firms measure it. Rule profiles are editable down to the timezone of the daily reset.</p>
+        <div class="data-rows">
+          <div class="dr"><span>PROFIT TARGET</span><b class="pos">6.2% of 8%</b></div>
+          <div class="dr"><span>DAILY LOSS USED</span><b>1.1% of 5%</b></div>
+          <div class="dr"><span>DISTANCE TO TOTAL FLOOR</span><b>7.6%</b></div>
+          <div class="dr"><span>TRADING DAYS</span><b>3 of 4 min</b></div>
+        </div>
+      </div>
+      <div class="bento-card b2 reveal">
+        <span class="tag">Risk guard</span>
+        <h3>Warned before the trade</h3>
+        <p>If a loss on this order would breach your daily limit, you hear it before the fill — with the exact size that keeps you alive.</p>
+        <div class="data-rows">
+          <div class="dr"><span>THIS TRADE RISKS</span><b class="neg">3.1%</b></div>
+          <div class="dr"><span>YOUR CAP</span><b>1.0%</b></div>
+          <div class="dr"><span>SAFE SIZE</span><b class="pos">0.25 lots</b></div>
+        </div>
+      </div>
+      <div class="bento-card b2 has-shot reveal">
+        <span class="tag">Real markets</span>
+        <h3>Real prices, realistic fills</h3>
+        <p>Live FX, metals, indices and crypto. Market hours respected, spreads realistic, slippage modelled.</p>
+        <div class="shot"><div class="scr2">
+          <img class="for-dark" loading="lazy" src="/assets/screens/chart-dark.webp" width="860" height="1869" alt="FundedLot chart screen: candlesticks with indicators at live prices">
+          <img class="for-light" loading="lazy" src="/assets/screens/chart-light.webp" width="860" height="1869" alt="FundedLot chart screen in light mode: candlesticks with indicators at live prices">
+        </div></div>
+      </div>
+      <div class="bento-card b2 reveal">
+        <span class="tag">Autopsy</span>
+        <h3>Every failure explained</h3>
+        <p>The trade that ended it, the sequence behind it, and what surviving would have required. Retry costs a tap, not a fee.</p>
+        <div class="data-rows">
+          <div class="dr"><span>ENDED BY</span><b class="neg">Daily drawdown</b></div>
+          <div class="dr"><span>WITH 1% RISK</span><b class="pos">Still alive</b></div>
+        </div>
+      </div>
+      <div class="bento-card b2 reveal">
+        <span class="tag">Readiness</span>
+        <h3>Know when to pay</h3>
+        <p>A Monte Carlo pass probability simulated from your own trades — so you buy one real attempt, not five.</p>
+        <div class="data-rows">
+          <div class="dr"><span>EST. PASS PROBABILITY</span><b class="pos">61%</b></div>
+          <div class="dr"><span>TOP BLOCKER FIX</span><b class="pos">+31%</b></div>
+        </div>
+      </div>
+      <div class="bento-card b3 reveal">
+        <span class="tag">Mistake engine</span>
+        <h3>28 detectors, every mistake priced</h3>
+        <p>Revenge entries, oversizing, missing stops, cut winners — detected from context captured at the moment you acted, each with its dollar cost and a process grade out of 100.</p>
+        <div class="data-rows">
+          <div class="dr"><span>REVENGE ENTRIES · 9 TRADES</span><b class="neg">−$1,420</b></div>
+          <div class="dr"><span>PROCESS GRADE</span><b>45/100 = 100−25−25−5</b></div>
+        </div>
+      </div>
+      <div class="bento-card b3 reveal">
+        <span class="tag">Learn &amp; prove</span>
+        <h3>Courses, and proof you did the work</h3>
+        <p>Structured lessons tied to what the coach sees in your trading. Pass a full evaluation and graduate to the simulated funded stage with a shareable certificate — clearly labelled simulation, honestly earned.</p>
+        <div class="data-rows">
+          <div class="dr"><span>100K TWO-STEP</span><b class="pos">PASSED</b></div>
+          <div class="dr"><span>AVG RISK PER TRADE</span><b class="pos">0.9%</b></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== HOW IT WORKS ============================== -->
+<section class="section well">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">How it works</span>
+      <h2>Three steps between you and a confident attempt</h2>
+    </div>
+    <div class="steps">
+      <div class="step reveal">
+        <span class="n">1</span>
+        <h3>Pick your challenge</h3>
+        <p>Choose an account size from 5K to 200K virtual dollars and a rule profile that matches the firm you're targeting — targets, daily loss, drawdown, minimum days.</p>
+      </div>
+      <div class="step reveal">
+        <span class="n">2</span>
+        <h3>Trade it like it's real</h3>
+        <p>Real market prices across FX, metals, indices and crypto. Realistic spreads and slippage. Breach the daily limit and the evaluation fails, same as a paid one.</p>
+      </div>
+      <div class="step reveal">
+        <span class="n">3</span>
+        <h3>Read the autopsy. Fix it. Retry.</h3>
+        <p>Every failure gets a full post-mortem: the trade that ended it, the sequence behind it, and what surviving would have required. Retrying costs a tap, not another fee.</p>
+      </div>
+    </div>
+    <p style="text-align:center;margin-top:40px"><a class="btn btn-ghost" href="/how-it-works/">See the full loop</a></p>
+  </div>
+</section>
+
+<!-- ============================== MISTAKE SHOWCASE ============================== -->
+<section class="section tight">
+  <div class="container">
+    <div class="island lab-island reveal"><div class="lab-grid">
+      <div class="lab-copy">
+        <span class="eyebrow">The mistake engine</span>
+        <h2>Your mistakes, itemized and priced</h2>
+        <p>Trading stats tell you <em>that</em> you lost. FundedLot tells you <em>why</em> — 28 detectors watch every entry, exit and stop edit, then grade your process and price each mistake.</p>
+        <ul class="lab-list">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span>Warned <strong>before</strong> the trade — a pre-trade Risk Guard blocks the entry that would breach your daily limit.</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span>Graded <strong>after</strong> — every closed trade gets a process grade out of 100, based on discipline, not luck.</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span>Tracked <strong>over time</strong> — trend arrows show which habits are actually improving, in your own numbers.</span></li>
+        </ul>
+      </div>
+      <div class="reveal">
+        <div class="mistake-card" role="img" aria-label="Mistake Center showing mistakes ranked by dollar cost">
+          <div class="mc-label">Your mistakes cost you</div>
+          <div class="mc-total" data-count="3847" data-pre="−$">−$3,847</div>
+          <div class="mc-sub">LAST 30 DAYS · 42 TRADES</div>
+          <div class="mrow">
+            <span class="rank">1</span>
+            <span class="name">Revenge entries<small>9 trades</small></span>
+            <span class="cost">−$1,420</span>
+            <span class="trend down">improving</span>
+          </div>
+          <div class="mrow">
+            <span class="rank">2</span>
+            <span class="name">Position too large<small>6 trades</small></span>
+            <span class="cost">−$1,180</span>
+            <span class="trend up">worsening</span>
+          </div>
+          <div class="mrow">
+            <span class="rank">3</span>
+            <span class="name">Cut winners early<small>11 trades · est.</small></span>
+            <span class="cost">−$890</span>
+            <span class="trend down">improving</span>
+          </div>
+          <div class="mrow">
+            <span class="rank">4</span>
+            <span class="name">No stop loss<small>3 trades</small></span>
+            <span class="cost">−$357</span>
+            <span class="trend down">improving</span>
+          </div>
+        </div>
+      </div>
+    </div></div>
+  </div>
+</section>
+
+<!-- ============================== COMPARE ============================== -->
+<section class="section">
+  <div class="container">
+    <div class="section-head center">
+      <span class="eyebrow">The math</span>
+      <h2>Learning the rules the expensive way vs. the free way</h2>
+    </div>
+    <div class="compare-wrap reveal">
+      <table class="compare">
+        <thead>
+          <tr><th>What happens</th><th>Real challenge attempt</th><th>FundedLot practice</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Cost per attempt</td><td class="bad">$50–$540, paid up front</td><td class="good">Free to start · packs from $4.99</td></tr>
+          <tr><td>When you breach a rule</td><td class="bad">Fee gone. Buy a new attempt.</td><td class="good">Full autopsy, then retry instantly</td></tr>
+          <tr><td>Feedback on why you failed</td><td class="bad">A "challenge failed" email</td><td class="good">Every mistake detected and priced</td></tr>
+          <tr><td>Rules enforced</td><td>Targets, daily loss, drawdown, min days</td><td class="good">The same rules, tick by tick</td></tr>
+          <tr><td>Market prices</td><td>Real</td><td class="good">Real</td></tr>
+          <tr><td>Money at risk</td><td class="bad">Your fee, every attempt</td><td class="good">None — virtual funds only</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== PRICING TEASER ============================== -->
+<section class="section well">
+  <div class="container">
+    <div class="section-head center">
+      <span class="eyebrow">Pricing</span>
+      <h2>Generous free tier. Honest paid tiers.</h2>
+      <p>Practice should be nearly free — that's the whole point. Paid tiers exist for people who want unlimited evaluations and the full analysis suite.</p>
+    </div>
+    <div class="pricing">
+      <div class="price-card reveal">
+        <h3>Free</h3>
+        <div class="amount">$0</div>
+        <div class="per">forever</div>
+        <ul>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Full simulator, all instruments</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Real market prices</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>1 full evaluation included</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Coach headlines &amp; mistake counts</li>
+        </ul>
+        <a class="btn btn-ghost" href="/download/">Start free</a>
+      </div>
+      <div class="price-card reveal">
+        <h3>Attempt packs</h3>
+        <div class="amount">$4.99<small> +</small></div>
+        <div class="per">1, 3 or 10 evaluations · any account size</div>
+        <ul>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Everything in Free</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Extra evaluation attempts</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Pay once, no subscription</li>
+        </ul>
+        <a class="btn btn-ghost" href="/pricing/">See pack pricing</a>
+      </div>
+      <div class="price-card featured reveal">
+        <span class="flag">Most popular</span>
+        <h3>FundedLot Pro</h3>
+        <div class="amount">$14.99<small>/mo</small></div>
+        <div class="per">or $89.99/yr (save 50%) · $199 lifetime</div>
+        <ul>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Unlimited evaluations</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Full mistake costs &amp; analysis reports</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Challenge autopsy &amp; readiness score</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Courses + graduate certificate</li>
+        </ul>
+        <a class="btn btn-volt" href="/pricing/">See full pricing</a>
+      </div>
+    </div>
+    <p class="price-note">Prices in USD; local pricing applies on the App Store and Google Play. Subscriptions unlock educational features only.</p>
+  </div>
+</section>
+
+<!-- ============================== FAQ ============================== -->
+<section class="section">
+  <div class="container">
+    <div class="section-head center">
+      <span class="eyebrow">Questions</span>
+      <h2>Asked often, answered straight</h2>
+    </div>
+    <div class="faq-list">
+      <details class="faq">
+        <summary>Is FundedLot a prop firm?</summary>
+        <div class="a"><p>No. FundedLot is an educational trading simulator. Everything inside the app runs on virtual funds — we are not a broker, we don't offer real-money trading, and we don't sell funded accounts or pay out profits. What we do is let you rehearse the exact rules prop firms use, so a real attempt isn't your first attempt.</p></div>
+      </details>
+      <details class="faq">
+        <summary>Is it really free?</summary>
+        <div class="a"><p>The simulator, real market prices, all instruments, and your first full evaluation are free, with no card required. Paid attempt packs and the Pro subscription exist for people who want unlimited evaluations and the deeper analysis suite.</p></div>
+      </details>
+      <details class="faq">
+        <summary>Are the prices and rules realistic?</summary>
+        <div class="a"><p>Prices are real market quotes across forex, metals, indices and crypto, with realistic spreads and slippage. Rules are enforced the way real evaluations enforce them — daily loss checked against equity including open positions, drawdown tracked tick by tick, breaches final.</p></div>
+      </details>
+      <details class="faq">
+        <summary>Will passing a FundedLot evaluation get me a funded account?</summary>
+        <div class="a"><p>No — and be wary of anyone who promises that. Passing on FundedLot earns a simulated funded stage and a shareable certificate. The real value is arriving at a paid evaluation already knowing the rules, your risk numbers, and your failure patterns.</p></div>
+      </details>
+      <details class="faq">
+        <summary>Which platforms does it run on?</summary>
+        <div class="a"><p>FundedLot is built for iOS and Android. See the <a href="/download/">download page</a> for current availability.</p></div>
+      </details>
+      <details class="faq">
+        <summary>Is this financial advice?</summary>
+        <div class="a"><p>No. FundedLot is for education and practice. Nothing in the app or on this site is investment advice, and simulated results never guarantee real ones. Read our <a href="/risk-disclosure/">risk disclosure</a>.</p></div>
+      </details>
+    </div>
+    <p style="text-align:center;margin-top:28px"><a class="btn btn-ghost" href="/faq/">Read the full FAQ</a></p>
+  </div>
+</section>
+
+<!-- ============================== FROM THE BLOG ============================== -->
+<section class="section well">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">Learn</span>
+      <h2>Guides that pay for themselves</h2>
+      <p>The rules, the failure statistics, the psychology — explained with real arithmetic in the <a href="/blog/">blog</a> and the <a href="/glossary/">glossary</a>.</p>
+    </div>
+    <div class="cards c3">
+      <a class="post-card reveal" href="/blog/what-is-a-prop-firm-challenge/">
+        <img class="etok-crop" src="/assets/editorial/challenge.webp" width="640" height="400" alt="" loading="lazy" decoding="async">
+        <span class="cat">Guides</span>
+        <h3>What is a prop firm challenge? Rules, costs, and how it works</h3>
+        <p>The evaluation model explained end to end — phases, rules, fees, and what actually happens after you pass.</p>
+        <span class="meta">START HERE</span>
+      </a>
+      <a class="post-card reveal" href="/blog/why-traders-fail-prop-firm-challenges/">
+        <img class="etok-crop" src="/assets/editorial/psychology.webp" width="640" height="400" alt="" loading="lazy" decoding="async">
+        <span class="cat">Psychology</span>
+        <h3>Why most traders fail prop firm challenges</h3>
+        <p>The commonly cited ~90% failure rate isn't about strategy. It's about rules meeting behaviour — here's the breakdown.</p>
+        <span class="meta">6 MIN READ</span>
+      </a>
+      <a class="post-card reveal" href="/blog/practice-prop-firm-challenges-free/">
+        <img class="etok-crop" src="/assets/editorial/practice.webp" width="640" height="400" alt="" loading="lazy" decoding="async">
+        <span class="cat">Practice</span>
+        <h3>How to practice a prop firm challenge before paying for one</h3>
+        <p>A practical rehearsal plan: rules first, sizing second, and the numbers that tell you when you're ready to pay.</p>
+        <span class="meta">6 MIN READ</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== FINAL CTA ============================== -->
+<section class="section">
+  <div class="container">
+    <div class="cta-panel reveal">
+      <svg class="cta-curve" viewBox="0 0 1200 260" preserveAspectRatio="none" aria-hidden="true" style="position:absolute;left:0;right:0;bottom:0;width:100%;height:34%;z-index:0;opacity:.75">
+        <path class="draw" pathLength="1" d="M-10 250 C 140 235, 210 200, 320 208 S 520 150, 640 152 S 860 84, 980 74 S 1130 30, 1215 18" fill="none" stroke="#C9F158" stroke-width="2.5" stroke-linecap="round" opacity=".9" style="filter:drop-shadow(0 0 10px rgba(201,241,88,.55))"/>
+        <path class="draw" pathLength="1" d="M-10 250 C 140 235, 210 200, 320 208 S 520 150, 640 152 S 860 84, 980 74 S 1130 30, 1215 18" fill="none" stroke="rgba(201,241,88,.28)" stroke-width="9" stroke-linecap="round" style="filter:blur(6px)"/>
+      </svg>
+      <h2>Fail here for free.<br>Not out there for $500.</h2>
+      <p>Your first full evaluation is included. Practice the rules until the rules are boring — then go take the real one.</p>
+      <div class="store-badges">
+<a class="badge-store is-soon" href="/download/"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.05 12.54c-.03-2.89 2.36-4.27 2.47-4.34-1.34-1.96-3.43-2.23-4.18-2.26-1.78-.18-3.47 1.05-4.37 1.05-.9 0-2.29-1.02-3.77-1-1.94.03-3.72 1.13-4.72 2.86-2.01 3.49-.51 8.66 1.45 11.49.96 1.39 2.1 2.95 3.6 2.89 1.44-.06 1.99-.93 3.73-.93s2.23.93 3.76.9c1.55-.03 2.53-1.41 3.48-2.8 1.1-1.61 1.55-3.17 1.57-3.25-.03-.02-3-1.15-3.02-4.61zM14.16 4.06c.8-.96 1.33-2.3 1.19-3.64-1.15.05-2.53.76-3.35 1.72-.74.85-1.38 2.21-1.21 3.52 1.28.1 2.58-.65 3.37-1.6z"/></svg><span class="txt"><small>Download on the</small><span>App Store</span></span><span class="soon-pill">Soon</span></a>
+<a class="badge-store is-soon" href="/download/"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4.1 2.02c-.34.18-.56.54-.56.98v18c0 .44.22.8.56.98l9.9-9.98-9.9-9.98zM15.3 10.7 6.06 1.4l11.6 6.66-2.36 2.64zm0 2.6 2.36 2.64L6.06 22.6l9.24-9.3zm4.9-2.02-2.77-1.59-2.6 2.31 2.6 2.31 2.77-1.59c.83-.48.83-1.96 0-2.44z" transform="translate(1.5 0)"/></svg><span class="txt"><small>Get it on</small><span>Google Play</span></span><span class="soon-pill">Soon</span></a>
+</div>
+      <p class="fine">EDUCATIONAL SIMULATOR · VIRTUAL FUNDS ONLY · NOT AFFILIATED WITH ANY PROP FIRM</p>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-main">
+      <div class="footer-brand">
+        <a class="brand" href="/">
+          <svg class="mark" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+<rect width="32" height="32" rx="9.6" fill="#C9F158"/>
+<path d="M9.55 14.6v11.4M16 10.4v14.9M22.45 6.2v18.1" stroke="#101109" stroke-width="1.5" stroke-linecap="round"/>
+<rect x="7.6" y="17.3" width="3.9" height="7.6" rx="1.95" fill="#101109"/>
+<rect x="14.05" y="13.4" width="3.9" height="10.9" rx="1.95" fill="#101109"/>
+<rect x="20.5" y="9" width="3.9" height="13" rx="1.95" fill="#101109"/>
+</svg>
+          <span>Funded<span class="lot">lot</span></span>
+        </a>
+        <p>The prop-firm challenge practice app. Rehearse the exact rules — profit targets, daily loss limits, drawdown — on virtual funds, and learn precisely why you fail before you pay for a real attempt.</p>
+        <div class="f-social">
+          <a href="https://www.instagram.com/fundedlot" aria-label="FundedLot on Instagram" rel="noopener" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.2" cy="6.8" r="1.1" fill="currentColor" stroke="none"/></svg></a>
+          <a href="https://x.com/fundedlot" aria-label="FundedLot on X" rel="noopener" target="_blank"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.7 3H20.6L14.3 10.2L21.7 21H15.9L11.4 14.9L6.2 21H3.3L10 13.3L2.9 3H8.8L12.9 8.6L17.7 3ZM16.7 19.3H18.3L7.9 4.6H6.2L16.7 19.3Z"/></svg></a>
+        </div>
+      </div>
+      <div class="f-col">
+        <h4>Product</h4>
+        <ul>
+          <li><a href="/how-it-works/">How it works</a></li>
+          <li><a href="/features/">Features</a></li>
+          <li><a href="/pricing/">Pricing</a></li>
+          <li><a href="/download/">Download</a></li>
+          <li><a href="/changelog/">Changelog</a></li>
+        </ul>
+      </div>
+      <div class="f-col">
+        <h4>Compare</h4>
+        <ul>
+          <li><a href="/compare/">All comparisons</a></li>
+          <li><a href="/compare/broker-demo/">vs broker demo</a></li>
+          <li><a href="/compare/paid-challenge/">vs paying first</a></li>
+          <li><a href="/prop-firm-challenge-simulator/">Challenge simulator</a></li>
+          <li><a href="/prop-trading-practice-app/">Practice app</a></li>
+          <li><a href="/free-prop-firm-practice/">Free practice</a></li>
+        </ul>
+      </div>
+      <div class="f-col">
+        <h4>Learn</h4>
+        <ul>
+          <li><a href="/blog/">Blog</a></li>
+          <li><a href="/glossary/">Glossary</a></li>
+          <li><a href="/faq/">FAQ</a></li>
+          <li><a href="/manifesto/">Manifesto</a></li>
+        </ul>
+      </div>
+      <div class="f-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="/about/">About us</a></li>
+          <li><a href="/press/">Press kit</a></li>
+          <li><a href="/brand/">Brand</a></li>
+          <li><a href="/contact/">Contact &amp; support</a></li>
+        </ul>
+      </div>
+      <div class="f-col">
+        <h4>Legal</h4>
+        <ul>
+          <li><a href="/privacy/">Privacy policy</a></li>
+          <li><a href="/terms/">Terms of service</a></li>
+          <li><a href="/risk-disclosure/">Risk disclosure</a></li>
+          <li><a href="/account-deletion/">Account deletion</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-legal">
+      <p>FundedLot is an educational trading simulator. All trading inside the app uses virtual funds only. FundedLot is not a broker, does not provide real-money trading, does not offer funded accounts or payouts, and does not provide investment, financial, legal, or tax advice. Simulated practice and simulated results do not guarantee success in any real evaluation or in live trading. Trading real money involves substantial risk of loss. FundedLot is not affiliated with, endorsed by, or connected to any proprietary trading firm or broker.</p>
+      <div class="footer-meta">
+        <span>© 2026 FundedLot. All rights reserved.</span>
+        <a href="mailto:support@fundedlot.com">support@fundedlot.com</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var t = document.querySelector('.nav-toggle');
+  var l = document.getElementById('nav-links');
+  if (t && l) t.addEventListener('click', function () {
+    var open = l.classList.toggle('open');
+    t.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+
+  var tt = document.querySelector('.theme-toggle');
+  if (tt) tt.addEventListener('click', function () {
+    var d = document.documentElement;
+    var next = d.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+    d.setAttribute('data-theme', next);
+    try { localStorage.setItem('fl-theme', next); } catch (e) {}
+    var mc = document.querySelector('meta[name="theme-color"]:not([media])');
+    if (!mc) {
+      mc = document.createElement('meta'); mc.name = 'theme-color';
+      document.head.appendChild(mc);
+    }
+    mc.content = next === 'light' ? '#F4F4F0' : '#000000';
+  });
+
+  /* mono numeral count-up: [data-count] rolls from 0 on first view */
+  (function () {
+    var els = Array.prototype.slice.call(document.querySelectorAll('[data-count]'));
+    if (!els.length || !('IntersectionObserver' in window)) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    function fmt(v, dec) { return dec ? v.toFixed(dec) : Math.round(v).toLocaleString('en-US'); }
+    var io = new IntersectionObserver(function (es) {
+      es.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        io.unobserve(e.target);
+        var el = e.target, target = parseFloat(el.getAttribute('data-count'));
+        if (isNaN(target)) return;
+        var pre = el.getAttribute('data-pre') || '', suf = el.getAttribute('data-suf') || '';
+        var dec = parseInt(el.getAttribute('data-dec') || '0', 10);
+        var t0 = null;
+        function step(ts) {
+          if (!t0) t0 = ts;
+          var p = Math.min(1, (ts - t0) / 1100);
+          el.textContent = pre + fmt(target * (1 - Math.pow(1 - p, 3)), dec) + suf;
+          if (p < 1) requestAnimationFrame(step);
+        }
+        requestAnimationFrame(step);
+      });
+    }, { threshold: .6 });
+    els.forEach(function (el) { io.observe(el); });
+  })();
+
+  var els = Array.prototype.slice.call(document.querySelectorAll('.reveal'));
+  var showAll = function () { els.forEach(function (el) { el.classList.add('in'); }); };
+  if ('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    var io = new IntersectionObserver(function (es) {
+      es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.05 });
+    els.forEach(function (el) { io.observe(el); });
+    setTimeout(showAll, 2500); /* failsafe: never leave content hidden */
+  } else {
+    showAll();
+  }
+})();
+</script>
+</body>
+</html>

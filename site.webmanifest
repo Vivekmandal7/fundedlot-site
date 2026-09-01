@@ -1,0 +1,13 @@
+{
+  "name": "FundedLot",
+  "short_name": "FundedLot",
+  "description": "Practice prop-firm challenges before you pay for them. Educational trading simulator — virtual funds only.",
+  "start_url": "/",
+  "display": "browser",
+  "background_color": "#F4F4F0",
+  "theme_color": "#C9F158",
+  "icons": [
+    { "src": "/assets/brand/fundedlot-icon-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "/assets/brand/fundedlot-icon-1024.png", "sizes": "1024x1024", "type": "image/png" }
+  ]
+}

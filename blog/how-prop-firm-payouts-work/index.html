@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>How Prop Firm Payouts Work: Splits, Schedules, and Denials</title>
+<meta name="description" content="How prop firm payouts really work: 75–90% profit splits, payout schedules and thresholds, refundable fees, and the common reasons requests get denied.">
+<link rel="canonical" href="https://www.fundedlot.com/blog/how-prop-firm-payouts-work/">
+<script>
+(function () {
+  var d = document.documentElement; d.classList.add('js');
+  /* Light (Ink & Lime) is the default; a stored choice wins; ?theme= is a
+     preview override for QA and screenshots. */
+  var stored = null; try { stored = localStorage.getItem('fl-theme'); } catch (e) {}
+  var qs = null; try { qs = new URLSearchParams(location.search).get('theme'); } catch (e) {}
+  var theme = (qs === 'light' || qs === 'dark') ? qs
+    : (stored === 'light' || stored === 'dark') ? stored : 'light';
+  d.setAttribute('data-theme', theme);
+  var mc = document.querySelector('meta[name="theme-color"]');
+  if (mc && theme === 'dark') mc.setAttribute('content', '#000000');
+})();
+</script>
+<meta name="theme-color" content="#F4F4F0">
+<meta property="og:site_name" content="FundedLot">
+<meta property="og:type" content="article">
+<meta property="og:title" content="How Prop Firm Payouts Work: Splits, Schedules, and Denials">
+<meta property="og:description" content="How prop firm payouts really work: 75–90% profit splits, payout schedules and thresholds, refundable fees, and the common reasons requests get denied.">
+<meta property="og:url" content="https://www.fundedlot.com/blog/how-prop-firm-payouts-work/">
+<meta property="og:image" content="https://www.fundedlot.com/assets/og/blog-how-prop-firm-payouts-work.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="FundedLot — practice prop firm challenges before you pay">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@fundedlot">
+<meta name="twitter:title" content="How Prop Firm Payouts Work: Splits, Schedules, and Denials">
+<meta name="twitter:description" content="How prop firm payouts really work: 75–90% profit splits, payout schedules and thresholds, refundable fees, and the common reasons requests get denied.">
+<meta name="twitter:image" content="https://www.fundedlot.com/assets/og/blog-how-prop-firm-payouts-work.png">
+<meta property="article:published_time" content="2026-07-22"><meta property="article:modified_time" content="2026-07-22"><meta property="article:section" content="Guides">
+<link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="alternate" type="application/rss+xml" title="FundedLot Blog" href="/feed.xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400..800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/styles.css?v=ca293429">
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"Article","headline":"How Prop Firm Payouts Work: Splits, Schedules, and Denials","description":"How prop firm payouts really work: 75–90% profit splits, payout schedules and thresholds, refundable fees, and the common reasons requests get denied.","datePublished":"2026-07-22","dateModified":"2026-07-22","articleSection":"Guides","wordCount":941,"timeRequired":"PT6M","author":{"@type":"Organization","name":"FundedLot","url":"https://www.fundedlot.com/"},"publisher":{"@type":"Organization","name":"FundedLot","logo":{"@type":"ImageObject","url":"https://www.fundedlot.com/assets/og.png"}},"image":"https://www.fundedlot.com/assets/og/blog-how-prop-firm-payouts-work.png","mainEntityOfPage":"https://www.fundedlot.com/blog/how-prop-firm-payouts-work/"},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.fundedlot.com/"},{"@type":"ListItem","position":2,"name":"Blog","item":"https://www.fundedlot.com/blog/"},{"@type":"ListItem","position":3,"name":"How Prop Firm Payouts Work: Splits, Schedules, and Denials","item":"https://www.fundedlot.com/blog/how-prop-firm-payouts-work/"}]}]</script>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="container">
+    <nav class="nav" aria-label="Main">
+      <a class="brand" href="/" aria-label="FundedLot home">
+        <svg class="mark" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+<rect width="32" height="32" rx="9.6" fill="#C9F158"/>
+<path d="M9.55 14.6v11.4M16 10.4v14.9M22.45 6.2v18.1" stroke="#101109" stroke-width="1.5" stroke-linecap="round"/>
+<rect x="7.6" y="17.3" width="3.9" height="7.6" rx="1.95" fill="#101109"/>
+<rect x="14.05" y="13.4" width="3.9" height="10.9" rx="1.95" fill="#101109"/>
+<rect x="20.5" y="9" width="3.9" height="13" rx="1.95" fill="#101109"/>
+</svg>
+        <span>Funded<span class="lot">lot</span></span>
+      </a>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="/how-it-works/">How it works</a></li>
+        <li><a href="/features/">Features</a></li>
+        <li><a href="/pricing/">Pricing</a></li>
+        <li><a href="/blog/" aria-current="page">Blog</a></li>
+        <li><a href="/glossary/">Glossary</a></li>
+        <li><a href="/about/">About</a></li>
+        <li class="nav-cta"><a class="btn btn-volt btn-sm" href="/download/">Get the app</a></li>
+      </ul>
+      <button class="theme-toggle" type="button" aria-label="Switch theme" title="Switch theme">
+        <svg class="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.4"/><path d="M12 2.5v2.4M12 19.1v2.4M2.5 12h2.4M19.1 12h2.4M5 5l1.7 1.7M17.3 17.3 19 19M19 5l-1.7 1.7M6.7 17.3 5 19"/></svg>
+        <svg class="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.6 14.2A8.6 8.6 0 0 1 9.8 3.4a8.6 8.6 0 1 0 10.8 10.8Z"/></svg>
+      </button>
+      <button class="nav-toggle" aria-label="Menu" aria-expanded="false" aria-controls="nav-links">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+<div class="container">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a><span class="sep">/</span><a href="/blog/">Blog</a><span class="sep">/</span><span>How Prop Firm Payouts Work: Splits, Schedules, and Denials</span></nav>
+  <div class="article-head">
+    <img class="etok etok-article" src="/assets/editorial/payout.webp" width="96" height="96" alt="" loading="lazy" decoding="async">
+    <div class="article-head-text">
+      <h1>How Prop Firm Payouts Work: Splits, Schedules, and Denials</h1>
+      <div class="article-meta">
+        <span class="chip">Guides</span>
+        <span>22 July 2026</span><span class="dot">·</span>
+        <span>6 min read</span><span class="dot">·</span>
+        <span>By the FundedLot team</span>
+      </div>
+    </div>
+  </div>
+  <div class="article-layout"><div class="prose">
+<p class="lede">The profit split is the easiest number in prop trading; what determines whether you ever receive money is the machinery around it — schedules, thresholds, review clauses, and the list of reasons a request can be refused. Here is how payouts work at typical firms, and where they quietly fail.</p>
+
+<h2>Where the money actually comes from</h2>
+<p>At most modern firms, the account you trade after passing is a <a href="/glossary/simulated-funded-account/">simulated funded account</a>. Your trades are virtual, no position reaches a live market on your behalf, and your payout is a business expense the firm covers from its revenue — which, by common industry description, is mostly evaluation fees.</p>
+<p>That is not automatically a scandal, but it sets the incentives you are operating inside. The firm earns when traders fail cheaply, and it manages payout risk carefully when they succeed. Every clause in a payout policy reads differently once you hold that model in mind.</p>
+
+<h2>What a profit split actually pays</h2>
+<p>A typical <a href="/glossary/profit-split/">profit split</a> runs 75% to 90% in the trader's favor, sometimes rising with tenure or sold as an upgrade. The split applies to simulated profit above the account's base balance at the time of the request.</p>
+<p>Worked example: a $100,000 simulated funded account gains 4% in a month, or $4,000. At an 80% split, you request the profit and receive $3,200. The same month at 90% pays $3,600 — a $400 difference that compounds monthly, which is why the split tier matters more than most add-ons.</p>
+<p>Two details change the math. Profit is measured on closed trades, so floating gains do not count toward a request. And most firms deduct the withdrawn amount from the account, so a full-profit withdrawal returns the balance to its base and your next cycle starts from zero.</p>
+
+<h2>Schedules, thresholds, and the first payout</h2>
+<p>First <a href="/glossary/payout/">payouts</a> commonly unlock 14 to 30 days after the first trade on the funded account, with later requests on a two-to-four-week cycle. Some firms sell faster cycles, and some offer on-demand payouts after a streak of profitable weeks. Small minimum withdrawal amounts are common, as are minimum trading-day counts between requests.</p>
+<p>The <a href="/glossary/refundable-fee/">refundable fee</a> arrives here at some firms: your original challenge fee is returned with the first payout. On a $500 fee, a first payout of $3,200 becomes $3,700. Where the refund is absent, the same product is effectively more expensive — worth noticing when two firms otherwise look alike.</p>
+<p>Waiting periods are not neutral. Every extra week you must keep trading before the first payout is another week in which a breach can erase the request entirely, which is precisely why conservative sizing after passing is common among traders who collect payouts repeatedly.</p>
+<p>Run the calendar once before choosing a firm. Passing in five weeks, a 30-day first-payout wait, and a review window of several business days puts the first money roughly ten weeks from your fee at best — assuming no denial and no breach along the way. Firms with 14-day unlocks shorten that path by half a month, which is worth real money when you are deciding between two similar offers.</p>
+
+<h2>Why payouts get denied</h2>
+<p>Denials rarely say the firm does not want to pay. They cite a clause. These are the categories that appear most often in disputes.</p>
+<table>
+<thead>
+<tr><th>Reason cited</th><th>What it usually means</th></tr>
+</thead>
+<tbody>
+<tr><td>Consistency violation</td><td>Your best day exceeded the allowed share of total profit</td></tr>
+<tr><td>Prohibited strategy</td><td><a href="/glossary/news-trading/">News trading</a> inside blackout windows, <a href="/glossary/copy-trading/">copy trading</a> across accounts, or latency-style tactics</td></tr>
+<tr><td>Breach found in review</td><td>A limit crossed intraday that automated checks missed at the time</td></tr>
+<tr><td>Identity or account mismatch</td><td>Verification documents or the payment name do not match the account holder</td></tr>
+<tr><td>Gambling-pattern clause</td><td>Oversized all-in behavior judged inconsistent with the rest of your trading</td></tr>
+</tbody>
+</table>
+<p>Notice the pattern: most of these are judged at review time, not enforced live. You can trade for weeks believing you are compliant while a reviewable violation sits in your history. The two clauses that generate the most disputes have their own guides — <a href="/blog/consistency-rules-explained/">consistency rules</a> and <a href="/blog/news-trading-rules-prop-firms/">news trading rules</a>.</p>
+<div class="callout"><strong>Key point.</strong> Payout protection is mostly boredom. Uniform sizes, no blackout-window entries, no account sharing, and your own records — timestamps, sizes, screenshots — make every review clause hard to invoke against you.</div>
+
+<h2>Reading a payout policy before you pay</h2>
+<p>The payout policy is part of the price, and it is knowable in advance. Before choosing a firm, find explicit answers to each of these.</p>
+<ul>
+<li>Exact first-payout waiting period, and what starts the clock</li>
+<li>Cycle length, minimum amounts, and any trading-day requirements between requests</li>
+<li>Split percentage, how it scales, and what upgrades cost</li>
+<li>Whether the challenge fee is refunded, and at which payout</li>
+<li>The full list of denial reasons, and whether consistency applies per payout window</li>
+<li>What happens to the account after a payout — balance reset, and where the drawdown floor moves</li>
+</ul>
+<p>Two firms with identical splits can differ by weeks of waiting and an entire clause list. Price that difference in when the fees look similar.</p>
+
+<h2>A realistic expectation</h2>
+<p>Commonly cited industry figures put challenge pass rates near one in ten, and estimates suggest many funded accounts breach before a second payout. The representative journey is several hundred dollars in fees, one funded account, and a first payout in the low four figures — if discipline holds through the waiting period.</p>
+<p>The traders who beat that story treat the funded stage exactly like the evaluation: the same sizing, the same limits, the same journal. The split is the generous part of the system. The funnel in front of it is the product you are actually buying, and it is worth understanding in full before the first fee.</p>
+
+<div class="cta-inline">
+  <div class="t">
+    <b>Rehearse the rules before you pay for them</b>
+    <span>FundedLot simulates real challenge rules — daily loss, drawdown, targets — on virtual funds, and shows you every mistake with its dollar cost. Free to start.</span>
+  </div>
+  <a class="btn btn-green" href="/download/">Get the app</a>
+</div>
+  </div></div>
+  <div class="related">
+    <h2>Keep reading</h2>
+    <div class="related-grid"><a class="rel-card" href="/blog/payout-denied-reasons/"><span class="cat">Guides</span><b>Why Prop Firm Payouts Get Denied: 9 Clauses to Read First</b></a><a class="rel-card" href="/blog/how-to-choose-a-prop-firm/"><span class="cat">Guides</span><b>How to Choose a Prop Firm: A Skeptic&#39;s Guide</b></a><a class="rel-card" href="/blog/news-trading-rules-prop-firms/"><span class="cat">Guides</span><b>News Trading Rules at Prop Firms: What Is Restricted and Why</b></a></div>
+  </div>
+</div>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-main">
+      <div class="footer-brand">
+        <a class="brand" href="/">
+          <svg class="mark" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+<rect width="32" height="32" rx="9.6" fill="#C9F158"/>
+<path d="M9.55 14.6v11.4M16 10.4v14.9M22.45 6.2v18.1" stroke="#101109" stroke-width="1.5" stroke-linecap="round"/>
+<rect x="7.6" y="17.3" width="3.9" height="7.6" rx="1.95" fill="#101109"/>
+<rect x="14.05" y="13.4" width="3.9" height="10.9" rx="1.95" fill="#101109"/>
+<rect x="20.5" y="9" width="3.9" height="13" rx="1.95" fill="#101109"/>
+</svg>
+          <span>Funded<span class="lot">lot</span></span>
+        </a>
+        <p>The prop-firm challenge practice app. Rehearse the exact rules — profit targets, daily loss limits, drawdown — on virtual funds, and learn precisely why you fail before you pay for a real attempt.</p>
+        <div class="f-social">
+          <a href="https://www.instagram.com/fundedlot" aria-label="FundedLot on Instagram" rel="noopener" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.2" cy="6.8" r="1.1" fill="currentColor" stroke="none"/></svg></a>
+          <a href="https://x.com/fundedlot" aria-label="FundedLot on X" rel="noopener" target="_blank"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.7 3H20.6L14.3 10.2L21.7 21H15.9L11.4 14.9L6.2 21H3.3L10 13.3L2.9 3H8.8L12.9 8.6L17.7 3ZM16.7 19.3H18.3L7.9 4.6H6.2L16.7 19.3Z"/></svg></a>
+        </div>
+      </div>
+      <div class="f-col">
+        <h4>Product</h4>
+        <ul>
+          <li><a href="/how-it-works/">How it works</a></li>
+          <li><a href="/features/">Features</a></li>
+          <li><a href="/pricing/">Pricing</a></li>
+          <li><a href="/download/">Download</a></li>
+          <li><a href="/changelog/">Changelog</a></li>
+        </ul>
+      </div>
+      <div class="f-col">
+        <h4>Compare</h4>
+        <ul>
+          <li><a href="/compare/">All comparisons</a></li>
+          <li><a href="/compare/broker-demo/">vs broker demo</a></li>
+          <li><a href="/compare/paid-challenge/">vs paying first</a></li>
+          <li><a href="/prop-firm-challenge-simulator/">Challenge simulator</a></li>
+          <li><a href="/prop-trading-practice-app/">Practice app</a></li>
+          <li><a href="/free-prop-firm-practice/">Free practice</a></li>
+        </ul>
+      </div>
+      <div class="f-col">
+        <h4>Learn</h4>
+        <ul>
+          <li><a href="/blog/">Blog</a></li>
+          <li><a href="/glossary/">Glossary</a></li>
+          <li><a href="/faq/">FAQ</a></li>
+          <li><a href="/manifesto/">Manifesto</a></li>
+        </ul>
+      </div>
+      <div class="f-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="/about/">About us</a></li>
+          <li><a href="/press/">Press kit</a></li>
+          <li><a href="/brand/">Brand</a></li>
+          <li><a href="/contact/">Contact &amp; support</a></li>
+        </ul>
+      </div>
+      <div class="f-col">
+        <h4>Legal</h4>
+        <ul>
+          <li><a href="/privacy/">Privacy policy</a></li>
+          <li><a href="/terms/">Terms of service</a></li>
+          <li><a href="/risk-disclosure/">Risk disclosure</a></li>
+          <li><a href="/account-deletion/">Account deletion</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-legal">
+      <p>FundedLot is an educational trading simulator. All trading inside the app uses virtual funds only. FundedLot is not a broker, does not provide real-money trading, does not offer funded accounts or payouts, and does not provide investment, financial, legal, or tax advice. Simulated practice and simulated results do not guarantee success in any real evaluation or in live trading. Trading real money involves substantial risk of loss. FundedLot is not affiliated with, endorsed by, or connected to any proprietary trading firm or broker.</p>
+      <div class="footer-meta">
+        <span>© 2026 FundedLot. All rights reserved.</span>
+        <a href="mailto:support@fundedlot.com">support@fundedlot.com</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var t = document.querySelector('.nav-toggle');
+  var l = document.getElementById('nav-links');
+  if (t && l) t.addEventListener('click', function () {
+    var open = l.classList.toggle('open');
+    t.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+
+  var tt = document.querySelector('.theme-toggle');
+  if (tt) tt.addEventListener('click', function () {
+    var d = document.documentElement;
+    var next = d.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+    d.setAttribute('data-theme', next);
+    try { localStorage.setItem('fl-theme', next); } catch (e) {}
+    var mc = document.querySelector('meta[name="theme-color"]:not([media])');
+    if (!mc) {
+      mc = document.createElement('meta'); mc.name = 'theme-color';
+      document.head.appendChild(mc);
+    }
+    mc.content = next === 'light' ? '#F4F4F0' : '#000000';
+  });
+
+  /* mono numeral count-up: [data-count] rolls from 0 on first view */
+  (function () {
+    var els = Array.prototype.slice.call(document.querySelectorAll('[data-count]'));
+    if (!els.length || !('IntersectionObserver' in window)) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    function fmt(v, dec) { return dec ? v.toFixed(dec) : Math.round(v).toLocaleString('en-US'); }
+    var io = new IntersectionObserver(function (es) {
+      es.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        io.unobserve(e.target);
+        var el = e.target, target = parseFloat(el.getAttribute('data-count'));
+        if (isNaN(target)) return;
+        var pre = el.getAttribute('data-pre') || '', suf = el.getAttribute('data-suf') || '';
+        var dec = parseInt(el.getAttribute('data-dec') || '0', 10);
+        var t0 = null;
+        function step(ts) {
+          if (!t0) t0 = ts;
+          var p = Math.min(1, (ts - t0) / 1100);
+          el.textContent = pre + fmt(target * (1 - Math.pow(1 - p, 3)), dec) + suf;
+          if (p < 1) requestAnimationFrame(step);
+        }
+        requestAnimationFrame(step);
+      });
+    }, { threshold: .6 });
+    els.forEach(function (el) { io.observe(el); });
+  })();
+
+  var els = Array.prototype.slice.call(document.querySelectorAll('.reveal'));
+  var showAll = function () { els.forEach(function (el) { el.classList.add('in'); }); };
+  if ('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    var io = new IntersectionObserver(function (es) {
+      es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.05 });
+    els.forEach(function (el) { io.observe(el); });
+    setTimeout(showAll, 2500); /* failsafe: never leave content hidden */
+  } else {
+    showAll();
+  }
+})();
+</script>
+</body>
+</html>

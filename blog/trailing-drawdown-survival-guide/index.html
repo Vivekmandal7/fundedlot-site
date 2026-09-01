@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Trailing Drawdown: Why It Ends More Accounts Than Any Other Rule</title>
+<meta name="description" content="Trailing drawdown explained: how the moving floor works, why early profits set a trap, worked equity paths, and the tactics that keep accounts alive.">
+<link rel="canonical" href="https://www.fundedlot.com/blog/trailing-drawdown-survival-guide/">
+<script>
+(function () {
+  var d = document.documentElement; d.classList.add('js');
+  /* Light (Ink & Lime) is the default; a stored choice wins; ?theme= is a
+     preview override for QA and screenshots. */
+  var stored = null; try { stored = localStorage.getItem('fl-theme'); } catch (e) {}
+  var qs = null; try { qs = new URLSearchParams(location.search).get('theme'); } catch (e) {}
+  var theme = (qs === 'light' || qs === 'dark') ? qs
+    : (stored === 'light' || stored === 'dark') ? stored : 'light';
+  d.setAttribute('data-theme', theme);
+  var mc = document.querySelector('meta[name="theme-color"]');
+  if (mc && theme === 'dark') mc.setAttribute('content', '#000000');
+})();
+</script>
+<meta name="theme-color" content="#F4F4F0">
+<meta property="og:site_name" content="FundedLot">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Trailing Drawdown: Why It Ends More Accounts Than Any Other Rule">
+<meta property="og:description" content="Trailing drawdown explained: how the moving floor works, why early profits set a trap, worked equity paths, and the tactics that keep accounts alive.">
+<meta property="og:url" content="https://www.fundedlot.com/blog/trailing-drawdown-survival-guide/">
+<meta property="og:image" content="https://www.fundedlot.com/assets/og/blog-trailing-drawdown-survival-guide.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="FundedLot — practice prop firm challenges before you pay">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@fundedlot">
+<meta name="twitter:title" content="Trailing Drawdown: Why It Ends More Accounts Than Any Other Rule">
+<meta name="twitter:description" content="Trailing drawdown explained: how the moving floor works, why early profits set a trap, worked equity paths, and the tactics that keep accounts alive.">
+<meta name="twitter:image" content="https://www.fundedlot.com/assets/og/blog-trailing-drawdown-survival-guide.png">
+<meta property="article:published_time" content="2026-08-25"><meta property="article:modified_time" content="2026-08-25"><meta property="article:section" content="Risk management">
+<link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="alternate" type="application/rss+xml" title="FundedLot Blog" href="/feed.xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400..800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/styles.css?v=ca293429">
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"Article","headline":"Trailing Drawdown: Why It Ends More Accounts Than Any Other Rule","description":"Trailing drawdown explained: how the moving floor works, why early profits set a trap, worked equity paths, and the tactics that keep accounts alive.","datePublished":"2026-08-25","dateModified":"2026-08-25","articleSection":"Risk management","wordCount":1053,"timeRequired":"PT7M","author":{"@type":"Organization","name":"FundedLot","url":"https://www.fundedlot.com/"},"publisher":{"@type":"Organization","name":"FundedLot","logo":{"@type":"ImageObject","url":"https://www.fundedlot.com/assets/og.png"}},"image":"https://www.fundedlot.com/assets/og/blog-trailing-drawdown-survival-guide.png","mainEntityOfPage":"https://www.fundedlot.com/blog/trailing-drawdown-survival-guide/"},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.fundedlot.com/"},{"@type":"ListItem","position":2,"name":"Blog","item":"https://www.fundedlot.com/blog/"},{"@type":"ListItem","position":3,"name":"Trailing Drawdown: Why It Ends More Accounts Than Any Other Rule","item":"https://www.fundedlot.com/blog/trailing-drawdown-survival-guide/"}]}]</script>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="container">
+    <nav class="nav" aria-label="Main">
+      <a class="brand" href="/" aria-label="FundedLot home">
+        <svg class="mark" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+<rect width="32" height="32" rx="9.6" fill="#C9F158"/>
+<path d="M9.55 14.6v11.4M16 10.4v14.9M22.45 6.2v18.1" stroke="#101109" stroke-width="1.5" stroke-linecap="round"/>
+<rect x="7.6" y="17.3" width="3.9" height="7.6" rx="1.95" fill="#101109"/>
+<rect x="14.05" y="13.4" width="3.9" height="10.9" rx="1.95" fill="#101109"/>
+<rect x="20.5" y="9" width="3.9" height="13" rx="1.95" fill="#101109"/>
+</svg>
+        <span>Funded<span class="lot">lot</span></span>
+      </a>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="/how-it-works/">How it works</a></li>
+        <li><a href="/features/">Features</a></li>
+        <li><a href="/pricing/">Pricing</a></li>
+        <li><a href="/blog/" aria-current="page">Blog</a></li>
+        <li><a href="/glossary/">Glossary</a></li>
+        <li><a href="/about/">About</a></li>
+        <li class="nav-cta"><a class="btn btn-volt btn-sm" href="/download/">Get the app</a></li>
+      </ul>
+      <button class="theme-toggle" type="button" aria-label="Switch theme" title="Switch theme">
+        <svg class="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.4"/><path d="M12 2.5v2.4M12 19.1v2.4M2.5 12h2.4M19.1 12h2.4M5 5l1.7 1.7M17.3 17.3 19 19M19 5l-1.7 1.7M6.7 17.3 5 19"/></svg>
+        <svg class="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.6 14.2A8.6 8.6 0 0 1 9.8 3.4a8.6 8.6 0 1 0 10.8 10.8Z"/></svg>
+      </button>
+      <button class="nav-toggle" aria-label="Menu" aria-expanded="false" aria-controls="nav-links">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+<div class="container">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a><span class="sep">/</span><a href="/blog/">Blog</a><span class="sep">/</span><span>Trailing Drawdown: Why It Ends More Accounts Than Any Other Rule</span></nav>
+  <div class="article-head">
+    <img class="etok etok-article" src="/assets/editorial/risk.webp" width="96" height="96" alt="" loading="lazy" decoding="async">
+    <div class="article-head-text">
+      <h1>Trailing Drawdown: Why It Ends More Accounts Than Any Other Rule</h1>
+      <div class="article-meta">
+        <span class="chip">Risk management</span>
+        <span>25 August 2026</span><span class="dot">·</span>
+        <span>7 min read</span><span class="dot">·</span>
+        <span>By the FundedLot team</span>
+      </div>
+    </div>
+  </div>
+  <div class="article-layout"><div class="prose">
+<p class="lede">Traders plan around the daily loss limit and respect the maximum drawdown, then lose the account to the rule they understood least. The trailing drawdown is the only rule that gets stricter when you trade well: the floor under your account follows your best moment upward and never comes back down. That is how evaluations end within a few hundred dollars of breakeven — profitable on paper not long before, breached anyway. Here is the mechanism, a worked equity path that fails under one variant and survives under another, and the tactics that keep the floor at a distance.</p>
+
+<h2>Three rules that share one word</h2>
+<p>On a $100,000 account:</p>
+<ul>
+<li><strong>Static drawdown.</strong> A fixed floor for the whole attempt. 10% static means equity may never touch $90,000, whatever happens in between.</li>
+<li><strong>End-of-day trailing.</strong> The floor is recalculated from your highest closing equity. Close at $104,000 with a 6% trail and the floor rises to $98,000 — but an intraday spike that retreats before the close never counts. Details in the <a href="/glossary/end-of-day-drawdown/">end-of-day drawdown</a> entry.</li>
+<li><strong>Intraday trailing.</strong> The floor is recalculated continuously from the highest equity ever recorded, including the peak of an open trade you never closed. The strictest variant, defined in the <a href="/glossary/trailing-drawdown/">trailing drawdown</a> entry.</li>
+</ul>
+<p>Two offers advertising "6% drawdown" can therefore be entirely different products. A side-by-side of all three types is in <a href="/blog/drawdown-types-explained/">drawdown types explained</a>.</p>
+
+<h2>The mechanism, in four numbers</h2>
+<p>A 6% trail starts the floor at $94,000. Every new equity high drags the floor up behind it at a fixed $6,000 distance, and no loss ever lowers it. At many firms the floor stops rising — "locks" — once it reaches the starting balance, which happens the moment equity first touches $106,000. From then on the rule behaves like a static floor at $100,000. Some firms never lock and trail all the way up. That single sentence in the terms changes the whole product, so find it before paying.</p>
+
+<h2>The trap: early profits convert breakeven into a cliff</h2>
+<p>Here is the part that catches good traders. A strong first week that ends at $104,000 feels like safety. It is not. The floor moved to $98,000, so the $4,000 of profit is now load-bearing: give it back and you stand at your starting balance just $2,000 from a breach, while a static trader at the same equity has $10,000 of room. Breakeven, the most psychologically neutral place on the account, has quietly become a cliff edge.</p>
+<p>Watch a full path in a table. Same trades throughout; the trail is 6%, the static floor 10%.</p>
+<table>
+<thead>
+<tr><th>Day</th><th>Path</th><th>Close</th><th>Intraday-trail floor</th><th>EOD-trail floor</th><th>Static floor</th></tr>
+</thead>
+<tbody>
+<tr><td>Start</td><td>—</td><td>$100,000</td><td>$94,000</td><td>$94,000</td><td>$90,000</td></tr>
+<tr><td>1</td><td>+$4,000</td><td>$104,000</td><td>$98,000</td><td>$98,000</td><td>$90,000</td></tr>
+<tr><td>2</td><td>−$3,000</td><td>$101,000</td><td>$98,000</td><td>$98,000</td><td>$90,000</td></tr>
+<tr><td>3</td><td>Spikes to $106,500, closes $103,000</td><td>$103,000</td><td>$100,500</td><td>$98,000</td><td>$90,000</td></tr>
+<tr><td>4</td><td>−$3,200</td><td>$99,800</td><td>Breached</td><td>$98,000</td><td>$90,000</td></tr>
+</tbody>
+</table>
+<p>Day 4 is the whole article. Under the intraday rule the account died the moment equity touched $100,500 on the way down — ended by a Day 3 peak that was never realised, while showing a $500 profit on the entire attempt. Under the end-of-day rule the same trader survives with $1,800 to spare, because the spike never became a close. Under the static rule the day was unremarkable, with $9,800 of room left. One equity path, three verdicts.</p>
+
+<h2>Floating peaks are the sharp edge</h2>
+<p>Under the intraday variant, an open trade that shows +$3,500 and then retreats to +$500 did real damage on the way past: the high-water mark rose $3,000 and the floor rose with it. You pay for <a href="/glossary/floating-pnl/">floating profit</a> whether or not you bank it. This is why holding a large unrealised winner through news is doubly dangerous under trailing rules — the spike raises your floor, then the reversal comes down to meet it.</p>
+
+<h2>Survival tactics</h2>
+<ol>
+<li><strong>Size from the floor, not the account.</strong> Your true balance is equity minus floor. On Day 2 above that is $101,000 − $98,000 = $3,000; risking a quarter of it caps the next trade at $750, not the $1,125 that a fresh account would justify. Recompute every morning before the first order.</li>
+<li><strong>Bank what raises the mark.</strong> Under intraday trailing, take partial profits as a winner extends. Realised gains at least travel with the floor they drag upward; a round-tripped floating winner leaves nothing behind except the higher floor.</li>
+<li><strong>Play for the lock.</strong> Where the floor locks at breakeven, the account has two regimes: fragile below $106,000, ordinary above it. Reduced size and A-grade setups only until the lock, then trade the normal plan. Treat reaching the lock as the real phase one.</li>
+<li><strong>Never round-trip a big day.</strong> A personal rule such as "stop after giving back 40% of the day's peak profit" keeps the gap between equity and a freshly raised floor from closing on the same day it opened.</li>
+<li><strong>Confirm the variant in writing.</strong> Intraday or end-of-day, floating peaks counted or not, locked or unlocked — one support message before paying. The answer moves more expected value than any discount code.</li>
+</ol>
+
+<h2>If you get to choose</h2>
+<p>Given the option, end-of-day trailing is materially more survivable than intraday at the same percentage — the table above is the proof — and a modest static floor often beats a generous-sounding trail. After a $4,000 run-up, an 8% static rule still offers $12,000 of room; a 10% trail offers $10,000 and keeps taking ground back as you improve. Advertised percentages only compare within the same type, never across types.</p>
+
+<div class="callout"><strong>Key point.</strong> Under a trailing rule, giving back profit is more dangerous than losing from scratch, because the retreat happens above a floor that has already moved. Know your average give-back after a winning streak — that number, set against the trail width, is your real risk of ruin.</div>
+
+<h2>Rehearse against the moving floor</h2>
+<p>Reading about the mechanism is not the same as feeling your floor rise after a good morning. Run a few full simulated attempts under the exact variant you plan to buy — FundedLot enforces trailing, end-of-day, and static floors on virtual funds — and count how often the moving floor, rather than the market, is what ends you. Most of the endings it produces are avoidable versions of the ones catalogued in <a href="/blog/mistakes-that-blow-evaluation-accounts/">mistakes that blow evaluation accounts</a>, and the broader defensive toolkit lives in <a href="/blog/risk-management-for-funded-traders/">risk management for funded traders</a>.</p>
+
+<div class="cta-inline">
+  <div class="t">
+    <b>Rehearse the rules before you pay for them</b>
+    <span>FundedLot simulates real challenge rules — daily loss, drawdown, targets — on virtual funds, and shows you every mistake with its dollar cost. Free to start.</span>
+  </div>
+  <a class="btn btn-green" href="/download/">Get the app</a>
+</div>
+  </div></div>
+  <div class="related">
+    <h2>Keep reading</h2>
+    <div class="related-grid"><a class="rel-card" href="/blog/position-sizing-daily-loss-limit/"><span class="cat">Risk management</span><b>Position Sizing for a Daily Loss Limit: The Exact Math</b></a><a class="rel-card" href="/blog/payout-denied-reasons/"><span class="cat">Guides</span><b>Why Prop Firm Payouts Get Denied: 9 Clauses to Read First</b></a><a class="rel-card" href="/blog/how-to-choose-a-prop-firm/"><span class="cat">Guides</span><b>How to Choose a Prop Firm: A Skeptic&#39;s Guide</b></a></div>
+  </div>
+</div>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-main">
+      <div class="footer-brand">
+        <a class="brand" href="/">
+          <svg class="mark" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+<rect width="32" height="32" rx="9.6" fill="#C9F158"/>
+<path d="M9.55 14.6v11.4M16 10.4v14.9M22.45 6.2v18.1" stroke="#101109" stroke-width="1.5" stroke-linecap="round"/>
+<rect x="7.6" y="17.3" width="3.9" height="7.6" rx="1.95" fill="#101109"/>
+<rect x="14.05" y="13.4" width="3.9" height="10.9" rx="1.95" fill="#101109"/>
+<rect x="20.5" y="9" width="3.9" height="13" rx="1.95" fill="#101109"/>
+</svg>
+          <span>Funded<span class="lot">lot</span></span>
+        </a>
+        <p>The prop-firm challenge practice app. Rehearse the exact rules — profit targets, daily loss limits, drawdown — on virtual funds, and learn precisely why you fail before you pay for a real attempt.</p>
+        <div class="f-social">
+          <a href="https://www.instagram.com/fundedlot" aria-label="FundedLot on Instagram" rel="noopener" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.2" cy="6.8" r="1.1" fill="currentColor" stroke="none"/></svg></a>
+          <a href="https://x.com/fundedlot" aria-label="FundedLot on X" rel="noopener" target="_blank"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.7 3H20.6L14.3 10.2L21.7 21H15.9L11.4 14.9L6.2 21H3.3L10 13.3L2.9 3H8.8L12.9 8.6L17.7 3ZM16.7 19.3H18.3L7.9 4.6H6.2L16.7 19.3Z"/></svg></a>
+        </div>
+      </div>
+      <div class="f-col">
+        <h4>Product</h4>
+        <ul>
+          <li><a href="/how-it-works/">How it works</a></li>
+          <li><a href="/features/">Features</a></li>
+          <li><a href="/pricing/">Pricing</a></li>
+          <li><a href="/download/">Download</a></li>
+          <li><a href="/changelog/">Changelog</a></li>
+        </ul>
+      </div>
+      <div class="f-col">
+        <h4>Compare</h4>
+        <ul>
+          <li><a href="/compare/">All comparisons</a></li>
+          <li><a href="/compare/broker-demo/">vs broker demo</a></li>
+          <li><a href="/compare/paid-challenge/">vs paying first</a></li>
+          <li><a href="/prop-firm-challenge-simulator/">Challenge simulator</a></li>
+          <li><a href="/prop-trading-practice-app/">Practice app</a></li>
+          <li><a href="/free-prop-firm-practice/">Free practice</a></li>
+        </ul>
+      </div>
+      <div class="f-col">
+        <h4>Learn</h4>
+        <ul>
+          <li><a href="/blog/">Blog</a></li>
+          <li><a href="/glossary/">Glossary</a></li>
+          <li><a href="/faq/">FAQ</a></li>
+          <li><a href="/manifesto/">Manifesto</a></li>
+        </ul>
+      </div>
+      <div class="f-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="/about/">About us</a></li>
+          <li><a href="/press/">Press kit</a></li>
+          <li><a href="/brand/">Brand</a></li>
+          <li><a href="/contact/">Contact &amp; support</a></li>
+        </ul>
+      </div>
+      <div class="f-col">
+        <h4>Legal</h4>
+        <ul>
+          <li><a href="/privacy/">Privacy policy</a></li>
+          <li><a href="/terms/">Terms of service</a></li>
+          <li><a href="/risk-disclosure/">Risk disclosure</a></li>
+          <li><a href="/account-deletion/">Account deletion</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-legal">
+      <p>FundedLot is an educational trading simulator. All trading inside the app uses virtual funds only. FundedLot is not a broker, does not provide real-money trading, does not offer funded accounts or payouts, and does not provide investment, financial, legal, or tax advice. Simulated practice and simulated results do not guarantee success in any real evaluation or in live trading. Trading real money involves substantial risk of loss. FundedLot is not affiliated with, endorsed by, or connected to any proprietary trading firm or broker.</p>
+      <div class="footer-meta">
+        <span>© 2026 FundedLot. All rights reserved.</span>
+        <a href="mailto:support@fundedlot.com">support@fundedlot.com</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var t = document.querySelector('.nav-toggle');
+  var l = document.getElementById('nav-links');
+  if (t && l) t.addEventListener('click', function () {
+    var open = l.classList.toggle('open');
+    t.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+
+  var tt = document.querySelector('.theme-toggle');
+  if (tt) tt.addEventListener('click', function () {
+    var d = document.documentElement;
+    var next = d.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+    d.setAttribute('data-theme', next);
+    try { localStorage.setItem('fl-theme', next); } catch (e) {}
+    var mc = document.querySelector('meta[name="theme-color"]:not([media])');
+    if (!mc) {
+      mc = document.createElement('meta'); mc.name = 'theme-color';
+      document.head.appendChild(mc);
+    }
+    mc.content = next === 'light' ? '#F4F4F0' : '#000000';
+  });
+
+  /* mono numeral count-up: [data-count] rolls from 0 on first view */
+  (function () {
+    var els = Array.prototype.slice.call(document.querySelectorAll('[data-count]'));
+    if (!els.length || !('IntersectionObserver' in window)) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    function fmt(v, dec) { return dec ? v.toFixed(dec) : Math.round(v).toLocaleString('en-US'); }
+    var io = new IntersectionObserver(function (es) {
+      es.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        io.unobserve(e.target);
+        var el = e.target, target = parseFloat(el.getAttribute('data-count'));
+        if (isNaN(target)) return;
+        var pre = el.getAttribute('data-pre') || '', suf = el.getAttribute('data-suf') || '';
+        var dec = parseInt(el.getAttribute('data-dec') || '0', 10);
+        var t0 = null;
+        function step(ts) {
+          if (!t0) t0 = ts;
+          var p = Math.min(1, (ts - t0) / 1100);
+          el.textContent = pre + fmt(target * (1 - Math.pow(1 - p, 3)), dec) + suf;
+          if (p < 1) requestAnimationFrame(step);
+        }
+        requestAnimationFrame(step);
+      });
+    }, { threshold: .6 });
+    els.forEach(function (el) { io.observe(el); });
+  })();
+
+  var els = Array.prototype.slice.call(document.querySelectorAll('.reveal'));
+  var showAll = function () { els.forEach(function (el) { el.classList.add('in'); }); };
+  if ('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    var io = new IntersectionObserver(function (es) {
+      es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.05 });
+    els.forEach(function (el) { io.observe(el); });
+    setTimeout(showAll, 2500); /* failsafe: never leave content hidden */
+  } else {
+    showAll();
+  }
+})();
+</script>
+</body>
+</html>

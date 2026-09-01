@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Prop Firm Challenge Simulator — The Exact Rules, Enforced</title>
+<meta name="description" content="A prop firm challenge simulator that enforces real evaluation rules tick by tick: daily loss, trailing drawdown, profit targets, real market prices. Free to start.">
+<link rel="canonical" href="https://www.fundedlot.com/prop-firm-challenge-simulator/">
+<script>
+(function () {
+  var d = document.documentElement; d.classList.add('js');
+  /* Light (Ink & Lime) is the default; a stored choice wins; ?theme= is a
+     preview override for QA and screenshots. */
+  var stored = null; try { stored = localStorage.getItem('fl-theme'); } catch (e) {}
+  var qs = null; try { qs = new URLSearchParams(location.search).get('theme'); } catch (e) {}
+  var theme = (qs === 'light' || qs === 'dark') ? qs
+    : (stored === 'light' || stored === 'dark') ? stored : 'light';
+  d.setAttribute('data-theme', theme);
+  var mc = document.querySelector('meta[name="theme-color"]');
+  if (mc && theme === 'dark') mc.setAttribute('content', '#000000');
+})();
+</script>
+<meta name="theme-color" content="#F4F4F0">
+<meta property="og:site_name" content="FundedLot">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Prop Firm Challenge Simulator — The Exact Rules, Enforced">
+<meta property="og:description" content="A prop firm challenge simulator that enforces real evaluation rules tick by tick: daily loss, trailing drawdown, profit targets, real market prices. Free to start.">
+<meta property="og:url" content="https://www.fundedlot.com/prop-firm-challenge-simulator/">
+<meta property="og:image" content="https://www.fundedlot.com/assets/og/prop-firm-challenge-simulator.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="FundedLot — practice prop firm challenges before you pay">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@fundedlot">
+<meta name="twitter:title" content="Prop Firm Challenge Simulator — The Exact Rules, Enforced">
+<meta name="twitter:description" content="A prop firm challenge simulator that enforces real evaluation rules tick by tick: daily loss, trailing drawdown, profit targets, real market prices. Free to start.">
+<meta name="twitter:image" content="https://www.fundedlot.com/assets/og/prop-firm-challenge-simulator.png">
+
+<link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="alternate" type="application/rss+xml" title="FundedLot Blog" href="/feed.xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400..800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/styles.css?v=ca293429">
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"MobileApplication","name":"FundedLot","alternateName":"Funded Lot","operatingSystem":"iOS, Android","applicationCategory":"EducationApplication","description":"Prop-firm challenge practice: a realistic trading simulator with evaluation rules, virtual funds, and mistake coaching.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"url":"https://www.fundedlot.com/download/"},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is a prop firm challenge simulator?","acceptedAnswer":{"@type":"Answer","text":"It's a practice environment that recreates a prop-firm evaluation end to end: virtual capital, real market prices, and the full rulebook — profit target, daily loss limit, maximum drawdown, minimum trading days — enforced automatically. Break a rule and the simulated evaluation fails, exactly as a paid one would. The point is to rehearse the rules before a real attempt costs you a fee."}},{"@type":"Question","name":"Is a simulator the same as a demo account?","acceptedAnswer":{"@type":"Answer","text":"No. A demo account gives you prices with no rules — you can lose 20% in a day and keep trading. A challenge simulator adds the constraint system that actually decides evaluations. Roughly speaking: demo teaches the platform, the simulator teaches the exam."}},{"@type":"Question","name":"Can I match the rules of the specific firm I'm targeting?","acceptedAnswer":{"@type":"Answer","text":"Yes. Rule profiles in FundedLot are editable: one-step or two-step, target percentages, daily loss method, static or trailing drawdown, minimum trading days, consistency rules, and the reset timezone. Copy the numbers from the firm's help pages and rehearse those exact settings."}},{"@type":"Question","name":"Will passing in a simulator guarantee I pass a real challenge?","acceptedAnswer":{"@type":"Answer","text":"No, and distrust anyone who says otherwise. What it changes is the failure modes: rule breaches from sizing errors, revenge trades and limit misunderstandings are rehearsable, and those are what end most first attempts. The market risk is still yours."}},{"@type":"Question","name":"How much does it cost?","acceptedAnswer":{"@type":"Answer","text":"FundedLot is free to start — full simulator, real prices, and your first complete evaluation included, no card required. Attempt packs and Pro exist for unlimited runs and the deeper analysis."}}]},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.fundedlot.com/"},{"@type":"ListItem","position":2,"name":"Challenge simulator","item":"https://www.fundedlot.com/prop-firm-challenge-simulator/"}]}]</script>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="container">
+    <nav class="nav" aria-label="Main">
+      <a class="brand" href="/" aria-label="FundedLot home">
+        <svg class="mark" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+<rect width="32" height="32" rx="9.6" fill="#C9F158"/>
+<path d="M9.55 14.6v11.4M16 10.4v14.9M22.45 6.2v18.1" stroke="#101109" stroke-width="1.5" stroke-linecap="round"/>
+<rect x="7.6" y="17.3" width="3.9" height="7.6" rx="1.95" fill="#101109"/>
+<rect x="14.05" y="13.4" width="3.9" height="10.9" rx="1.95" fill="#101109"/>
+<rect x="20.5" y="9" width="3.9" height="13" rx="1.95" fill="#101109"/>
+</svg>
+        <span>Funded<span class="lot">lot</span></span>
+      </a>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="/how-it-works/">How it works</a></li>
+        <li><a href="/features/">Features</a></li>
+        <li><a href="/pricing/">Pricing</a></li>
+        <li><a href="/blog/">Blog</a></li>
+        <li><a href="/glossary/">Glossary</a></li>
+        <li><a href="/about/">About</a></li>
+        <li class="nav-cta"><a class="btn btn-volt btn-sm" href="/download/">Get the app</a></li>
+      </ul>
+      <button class="theme-toggle" type="button" aria-label="Switch theme" title="Switch theme">
+        <svg class="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.4"/><path d="M12 2.5v2.4M12 19.1v2.4M2.5 12h2.4M19.1 12h2.4M5 5l1.7 1.7M17.3 17.3 19 19M19 5l-1.7 1.7M6.7 17.3 5 19"/></svg>
+        <svg class="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.6 14.2A8.6 8.6 0 0 1 9.8 3.4a8.6 8.6 0 1 0 10.8 10.8Z"/></svg>
+      </button>
+      <button class="nav-toggle" aria-label="Menu" aria-expanded="false" aria-controls="nav-links">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+<div class="page-hero">
+<div class="pano twin" aria-hidden="true">
+  <img class="for-dark" src="/assets/heroart/hero_wide_terminal.webp" width="1200" height="900" alt="" decoding="async">
+  <img class="for-light" src="/assets/heroart/hero_wide_terminal_light.webp" width="1200" height="900" alt="" decoding="async">
+</div>
+<div class="container"><div class="inner">
+  <span class="eyebrow">Prop firm challenge simulator</span>
+  <h1>A challenge simulator is only useful if it can <span style="color:var(--accent)">fail you</span></h1>
+  <p class="sub">Anyone can plot prices on a chart. A real prop-firm challenge simulator has to enforce the rulebook — daily loss limits, drawdown floors, profit targets, minimum days — exactly the way a paid evaluation would. That enforcement is the entire product.</p>
+</div></div></div>
+
+<section class="section">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">What "simulator" has to mean</span>
+      <h2>Five things a challenge simulator must get right</h2>
+      <p>If any of these are missing, you're using a demo account with a costume on. FundedLot was built around all five.</p>
+    </div>
+    <div class="cards c3">
+      <div class="card reveal">
+        <h3>1 · Rules enforced tick by tick</h3>
+        <p>Daily loss and drawdown are checked against <strong>equity including open positions</strong>, not just closed balance — the measurement that actually breaches real accounts. A floating loss can end the evaluation before you ever close the trade.</p>
+      </div>
+      <div class="card reveal">
+        <h3>2 · Breaches that are final</h3>
+        <p>Cross the limit and the evaluation fails. No undo, no "just this once." The consequence is the lesson — that's what a broker demo can never teach you.</p>
+      </div>
+      <div class="card reveal">
+        <h3>3 · Real market prices</h3>
+        <p>Live quotes across forex, metals, indices and crypto, with market hours respected, realistic spreads, and slippage modelled. Rule pressure only feels real when the prices are.</p>
+      </div>
+      <div class="card reveal">
+        <h3>4 · Editable rule profiles</h3>
+        <p>Targets, daily loss, static or trailing drawdown, minimum trading days, consistency caps, even the timezone of the daily reset — configured to match the firm you're actually targeting.</p>
+      </div>
+      <div class="card reveal">
+        <h3>5 · An autopsy after every failure</h3>
+        <p>The trade that ended it, the sequence behind it, and what surviving would have required. A simulator that fails you without explaining is a slot machine.</p>
+      </div>
+      <div class="card reveal">
+        <h3>The honest limit</h3>
+        <p>No simulator reproduces the feeling of real money — nothing does, at any price. What it reproduces is the <strong>rulebook</strong>, so the rules are boring before your fee is on the line.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section well">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">The rule engine</span>
+      <h2>The numbers it watches while you trade</h2>
+      <p>Every metric a real evaluation dashboard tracks, live on every tick — plus the one real firms won't show you: how close that next trade takes you to the floor.</p>
+    </div>
+    <div class="bento">
+      <div class="bento-card b3 has-shot reveal">
+        <span class="tag">Live rule state</span>
+        <h3>Evaluation dashboard</h3>
+        <p>Progress and limits measured the way firms measure them, updated on every price tick.</p>
+        <div class="data-rows">
+          <div class="dr"><span>PROFIT TARGET</span><b class="pos">6.2% of 8%</b></div>
+          <div class="dr"><span>DAILY LOSS USED</span><b>1.1% of 5%</b></div>
+          <div class="dr"><span>DISTANCE TO TOTAL FLOOR</span><b>7.6%</b></div>
+          <div class="dr"><span>MIN TRADING DAYS</span><b>3 of 4</b></div>
+        </div>
+        <div class="shot"><div class="scr2">
+          <img class="for-dark" loading="lazy" src="/assets/screens/challenge-dark.webp" width="860" height="1869" alt="FundedLot evaluation dashboard tracking profit target, daily loss and drawdown live">
+          <img class="for-light" loading="lazy" src="/assets/screens/challenge-dark.webp" width="860" height="1869" alt="FundedLot evaluation dashboard tracking profit target, daily loss and drawdown live">
+        </div></div>
+      </div>
+      <div class="bento-card b3 reveal">
+        <span class="tag">Pre-trade check</span>
+        <h3>Risk guard before the fill</h3>
+        <p>If a stop-out on this order would breach a rule, you hear it before entry — with the size that wouldn't.</p>
+        <div class="data-rows">
+          <div class="dr"><span>THIS TRADE RISKS</span><b class="neg">3.1%</b></div>
+          <div class="dr"><span>DAILY ROOM LEFT</span><b>3.9%</b></div>
+          <div class="dr"><span>SAFE SIZE</span><b class="pos">0.25 lots</b></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="section-head center">
+      <span class="eyebrow">Simulator vs the alternatives</span>
+      <img class="etok etok-article" src="/assets/editorial/compare.webp" width="96" height="96" alt="" loading="lazy" decoding="async" style="margin:0 auto 24px">
+      <h2>Where a challenge simulator sits</h2>
+    </div>
+    <div class="compare-wrap reveal">
+      <table class="compare">
+        <thead>
+          <tr><th>Capability</th><th>Broker demo / paper trading</th><th>Challenge simulator</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Real market prices</td><td>Yes</td><td class="good">Yes</td></tr>
+          <tr><td>Daily loss limit enforced</td><td class="bad">No — trade through any loss</td><td class="good">Yes, breach ends the run</td></tr>
+          <tr><td>Trailing / static drawdown</td><td class="bad">Not tracked</td><td class="good">Tracked tick by tick</td></tr>
+          <tr><td>Profit target &amp; min days</td><td class="bad">No structure</td><td class="good">Full evaluation structure</td></tr>
+          <tr><td>Mistake detection</td><td class="bad">None</td><td class="good">28 detectors, each priced</td></tr>
+          <tr><td>Cost of failing</td><td>Nothing — and it teaches nothing</td><td class="good">Nothing — and it teaches everything</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="text-align:center;margin-top:32px"><a class="link-arrow" href="/compare/broker-demo/">Full comparison: FundedLot vs a broker demo</a></p>
+  </div>
+</section>
+
+<section class="section well">
+  <div class="container">
+    <div class="section-head center">
+      <span class="eyebrow">Questions</span>
+      <h2>Challenge simulator FAQ</h2>
+    </div>
+    <div class="faq-list">
+      <details class="faq">
+        <summary>What is a prop firm challenge simulator?</summary>
+        <div class="a"><p>It's a practice environment that recreates a prop-firm evaluation end to end: virtual capital, real market prices, and the full rulebook — profit target, daily loss limit, maximum drawdown, minimum trading days — enforced automatically. Break a rule and the simulated evaluation fails, exactly as a paid one would. The point is to rehearse the rules before a real attempt costs you a fee.</p></div>
+      </details>
+      <details class="faq">
+        <summary>Is a simulator the same as a demo account?</summary>
+        <div class="a"><p>No. A demo account gives you prices with no rules — you can lose 20% in a day and keep trading. A challenge simulator adds the constraint system that actually decides evaluations. Roughly speaking: demo teaches the platform, the simulator teaches the exam.</p></div>
+      </details>
+      <details class="faq">
+        <summary>Can I match the rules of the specific firm I'm targeting?</summary>
+        <div class="a"><p>Yes. Rule profiles in FundedLot are editable: one-step or two-step, target percentages, daily loss method, static or trailing drawdown, minimum trading days, consistency rules, and the reset timezone. Copy the numbers from the firm's help pages and rehearse those exact settings.</p></div>
+      </details>
+      <details class="faq">
+        <summary>Will passing in a simulator guarantee I pass a real challenge?</summary>
+        <div class="a"><p>No, and distrust anyone who says otherwise. What it changes is the failure modes: rule breaches from sizing errors, revenge trades and limit misunderstandings are rehearsable, and those are what end most first attempts. The market risk is still yours.</p></div>
+      </details>
+      <details class="faq">
+        <summary>How much does it cost?</summary>
+        <div class="a"><p>FundedLot is free to start — full simulator, real prices, and your first complete evaluation included, no card required. <a href="/pricing/">Attempt packs and Pro</a> exist for unlimited runs and the deeper analysis.</p></div>
+      </details>
+    </div>
+  </div>
+</section>
+
+
+<section class="section tight">
+  <div class="container">
+    <div class="related" style="margin-top:0;padding-top:0;border-top:0">
+      <h2>Keep exploring</h2>
+      <div class="related-grid">
+        <a class="rel-card" href="/prop-trading-practice-app/"><span class="cat">Practice</span><b>A prop trading practice app for ten minutes a day</b></a>
+        <a class="rel-card" href="/free-prop-firm-practice/"><span class="cat">Free</span><b>Practice prop-firm rules free — no card, no catch</b></a>
+        <a class="rel-card" href="/compare/"><span class="cat">Compare</span><b>Every way to prepare for a challenge, compared</b></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="cta-panel reveal">
+      <div class="cta-art" aria-hidden="true">
+        <img src="/assets/heroart/hero_ascent.webp" width="640" height="640" alt="" loading="lazy" decoding="async">
+      </div>
+      <span class="eyebrow">FundedLot</span>
+      <h2>Run the evaluation until<br>the rules are boring.</h2>
+      <p>Then go pay for the real one — once.</p>
+      <div class="store-badges">
+<a class="badge-store is-soon" href="/download/"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.05 12.54c-.03-2.89 2.36-4.27 2.47-4.34-1.34-1.96-3.43-2.23-4.18-2.26-1.78-.18-3.47 1.05-4.37 1.05-.9 0-2.29-1.02-3.77-1-1.94.03-3.72 1.13-4.72 2.86-2.01 3.49-.51 8.66 1.45 11.49.96 1.39 2.1 2.95 3.6 2.89 1.44-.06 1.99-.93 3.73-.93s2.23.93 3.76.9c1.55-.03 2.53-1.41 3.48-2.8 1.1-1.61 1.55-3.17 1.57-3.25-.03-.02-3-1.15-3.02-4.61zM14.16 4.06c.8-.96 1.33-2.3 1.19-3.64-1.15.05-2.53.76-3.35 1.72-.74.85-1.38 2.21-1.21 3.52 1.28.1 2.58-.65 3.37-1.6z"/></svg><span class="txt"><small>Download on the</small><span>App Store</span></span><span class="soon-pill">Soon</span></a>
+<a class="badge-store is-soon" href="/download/"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4.1 2.02c-.34.18-.56.54-.56.98v18c0 .44.22.8.56.98l9.9-9.98-9.9-9.98zM15.3 10.7 6.06 1.4l11.6 6.66-2.36 2.64zm0 2.6 2.36 2.64L6.06 22.6l9.24-9.3zm4.9-2.02-2.77-1.59-2.6 2.31 2.6 2.31 2.77-1.59c.83-.48.83-1.96 0-2.44z" transform="translate(1.5 0)"/></svg><span class="txt"><small>Get it on</small><span>Google Play</span></span><span class="soon-pill">Soon</span></a>
+</div>
+      <p class="fine">EDUCATIONAL SIMULATOR · VIRTUAL FUNDS ONLY · NOT AFFILIATED WITH ANY PROP FIRM</p>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-main">
+      <div class="footer-brand">
+        <a class="brand" href="/">
+          <svg class="mark" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+<rect width="32" height="32" rx="9.6" fill="#C9F158"/>
+<path d="M9.55 14.6v11.4M16 10.4v14.9M22.45 6.2v18.1" stroke="#101109" stroke-width="1.5" stroke-linecap="round"/>
+<rect x="7.6" y="17.3" width="3.9" height="7.6" rx="1.95" fill="#101109"/>
+<rect x="14.05" y="13.4" width="3.9" height="10.9" rx="1.95" fill="#101109"/>
+<rect x="20.5" y="9" width="3.9" height="13" rx="1.95" fill="#101109"/>
+</svg>
+          <span>Funded<span class="lot">lot</span></span>
+        </a>
+        <p>The prop-firm challenge practice app. Rehearse the exact rules — profit targets, daily loss limits, drawdown — on virtual funds, and learn precisely why you fail before you pay for a real attempt.</p>
+        <div class="f-social">
+          <a href="https://www.instagram.com/fundedlot" aria-label="FundedLot on Instagram" rel="noopener" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.2" cy="6.8" r="1.1" fill="currentColor" stroke="none"/></svg></a>
+          <a href="https://x.com/fundedlot" aria-label="FundedLot on X" rel="noopener" target="_blank"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.7 3H20.6L14.3 10.2L21.7 21H15.9L11.4 14.9L6.2 21H3.3L10 13.3L2.9 3H8.8L12.9 8.6L17.7 3ZM16.7 19.3H18.3L7.9 4.6H6.2L16.7 19.3Z"/></svg></a>
+        </div>
+      </div>
+      <div class="f-col">
+        <h4>Product</h4>
+        <ul>
+          <li><a href="/how-it-works/">How it works</a></li>
+          <li><a href="/features/">Features</a></li>
+          <li><a href="/pricing/">Pricing</a></li>
+          <li><a href="/download/">Download</a></li>
+          <li><a href="/changelog/">Changelog</a></li>
+        </ul>
+      </div>
+      <div class="f-col">
+        <h4>Compare</h4>
+        <ul>
+          <li><a href="/compare/">All comparisons</a></li>
+          <li><a href="/compare/broker-demo/">vs broker demo</a></li>
+          <li><a href="/compare/paid-challenge/">vs paying first</a></li>
+          <li><a href="/prop-firm-challenge-simulator/">Challenge simulator</a></li>
+          <li><a href="/prop-trading-practice-app/">Practice app</a></li>
+          <li><a href="/free-prop-firm-practice/">Free practice</a></li>
+        </ul>
+      </div>
+      <div class="f-col">
+        <h4>Learn</h4>
+        <ul>
+          <li><a href="/blog/">Blog</a></li>
+          <li><a href="/glossary/">Glossary</a></li>
+          <li><a href="/faq/">FAQ</a></li>
+          <li><a href="/manifesto/">Manifesto</a></li>
+        </ul>
+      </div>
+      <div class="f-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="/about/">About us</a></li>
+          <li><a href="/press/">Press kit</a></li>
+          <li><a href="/brand/">Brand</a></li>
+          <li><a href="/contact/">Contact &amp; support</a></li>
+        </ul>
+      </div>
+      <div class="f-col">
+        <h4>Legal</h4>
+        <ul>
+          <li><a href="/privacy/">Privacy policy</a></li>
+          <li><a href="/terms/">Terms of service</a></li>
+          <li><a href="/risk-disclosure/">Risk disclosure</a></li>
+          <li><a href="/account-deletion/">Account deletion</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-legal">
+      <p>FundedLot is an educational trading simulator. All trading inside the app uses virtual funds only. FundedLot is not a broker, does not provide real-money trading, does not offer funded accounts or payouts, and does not provide investment, financial, legal, or tax advice. Simulated practice and simulated results do not guarantee success in any real evaluation or in live trading. Trading real money involves substantial risk of loss. FundedLot is not affiliated with, endorsed by, or connected to any proprietary trading firm or broker.</p>
+      <div class="footer-meta">
+        <span>© 2026 FundedLot. All rights reserved.</span>
+        <a href="mailto:support@fundedlot.com">support@fundedlot.com</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var t = document.querySelector('.nav-toggle');
+  var l = document.getElementById('nav-links');
+  if (t && l) t.addEventListener('click', function () {
+    var open = l.classList.toggle('open');
+    t.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+
+  var tt = document.querySelector('.theme-toggle');
+  if (tt) tt.addEventListener('click', function () {
+    var d = document.documentElement;
+    var next = d.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+    d.setAttribute('data-theme', next);
+    try { localStorage.setItem('fl-theme', next); } catch (e) {}
+    var mc = document.querySelector('meta[name="theme-color"]:not([media])');
+    if (!mc) {
+      mc = document.createElement('meta'); mc.name = 'theme-color';
+      document.head.appendChild(mc);
+    }
+    mc.content = next === 'light' ? '#F4F4F0' : '#000000';
+  });
+
+  /* mono numeral count-up: [data-count] rolls from 0 on first view */
+  (function () {
+    var els = Array.prototype.slice.call(document.querySelectorAll('[data-count]'));
+    if (!els.length || !('IntersectionObserver' in window)) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    function fmt(v, dec) { return dec ? v.toFixed(dec) : Math.round(v).toLocaleString('en-US'); }
+    var io = new IntersectionObserver(function (es) {
+      es.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        io.unobserve(e.target);
+        var el = e.target, target = parseFloat(el.getAttribute('data-count'));
+        if (isNaN(target)) return;
+        var pre = el.getAttribute('data-pre') || '', suf = el.getAttribute('data-suf') || '';
+        var dec = parseInt(el.getAttribute('data-dec') || '0', 10);
+        var t0 = null;
+        function step(ts) {
+          if (!t0) t0 = ts;
+          var p = Math.min(1, (ts - t0) / 1100);
+          el.textContent = pre + fmt(target * (1 - Math.pow(1 - p, 3)), dec) + suf;
+          if (p < 1) requestAnimationFrame(step);
+        }
+        requestAnimationFrame(step);
+      });
+    }, { threshold: .6 });
+    els.forEach(function (el) { io.observe(el); });
+  })();
+
+  var els = Array.prototype.slice.call(document.querySelectorAll('.reveal'));
+  var showAll = function () { els.forEach(function (el) { el.classList.add('in'); }); };
+  if ('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    var io = new IntersectionObserver(function (es) {
+      es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.05 });
+    els.forEach(function (el) { io.observe(el); });
+    setTimeout(showAll, 2500); /* failsafe: never leave content hidden */
+  } else {
+    showAll();
+  }
+})();
+</script>
+</body>
+</html>

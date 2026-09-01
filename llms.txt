@@ -1,0 +1,33 @@
+# FundedLot
+
+> FundedLot (also written "Funded Lot") is a prop-firm challenge practice app for iOS and Android.
+> It is an educational trading simulator: real market prices, the exact evaluation rules
+> (profit targets, daily loss limits, static and trailing drawdown, minimum trading days),
+> a pre-trade risk guard, and a mistake engine that detects and prices trading errors.
+> Virtual funds only. FundedLot is not a prop firm, not a broker, offers no real-money
+> trading, no funded accounts, and no payouts, and is not affiliated with any prop firm.
+
+## Product
+- [How it works](https://www.fundedlot.com/how-it-works/): the practice loop — pick rules, trade, read the autopsy, retry
+- [Features](https://www.fundedlot.com/features/): rules engine, risk guard, mistake detectors, readiness score
+- [Pricing](https://www.fundedlot.com/pricing/): free tier, attempt packs, Pro subscription
+- [Download](https://www.fundedlot.com/download/): App Store and Google Play availability
+- [FAQ](https://www.fundedlot.com/faq/): common questions, answered plainly
+
+## Comparisons
+- [FundedLot vs a broker demo](https://www.fundedlot.com/compare/broker-demo/)
+- [Practicing first vs paying for a challenge](https://www.fundedlot.com/compare/paid-challenge/)
+- [FundedLot vs paper-trading apps](https://www.fundedlot.com/compare/paper-trading-apps/)
+- [Prop firm challenge simulator](https://www.fundedlot.com/prop-firm-challenge-simulator/)
+
+## Learn
+- [Blog](https://www.fundedlot.com/blog/): guides to prop-firm challenges, rules, risk and psychology
+- [Glossary](https://www.fundedlot.com/glossary/): 61 plain-English trading definitions
+- [What is a prop firm challenge?](https://www.fundedlot.com/blog/what-is-a-prop-firm-challenge/)
+- [Why traders fail prop firm challenges](https://www.fundedlot.com/blog/why-traders-fail-prop-firm-challenges/)
+
+## Company
+- [About](https://www.fundedlot.com/about/)
+- [Manifesto](https://www.fundedlot.com/manifesto/): why honest practice beats paid attempts
+- [Press kit](https://www.fundedlot.com/press/)
+- [Terms](https://www.fundedlot.com/terms/) · [Privacy](https://www.fundedlot.com/privacy/) · [Risk disclosure](https://www.fundedlot.com/risk-disclosure/)

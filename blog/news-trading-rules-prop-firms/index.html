@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>News Trading Rules at Prop Firms: What Is Restricted and Why</title>
+<meta name="description" content="How firms restrict trading around scheduled news, the common rule patterns, why they exist, and a calendar routine that keeps your account compliant.">
+<link rel="canonical" href="https://www.fundedlot.com/blog/news-trading-rules-prop-firms/">
+<script>
+(function () {
+  var d = document.documentElement; d.classList.add('js');
+  /* Light (Ink & Lime) is the default; a stored choice wins; ?theme= is a
+     preview override for QA and screenshots. */
+  var stored = null; try { stored = localStorage.getItem('fl-theme'); } catch (e) {}
+  var qs = null; try { qs = new URLSearchParams(location.search).get('theme'); } catch (e) {}
+  var theme = (qs === 'light' || qs === 'dark') ? qs
+    : (stored === 'light' || stored === 'dark') ? stored : 'light';
+  d.setAttribute('data-theme', theme);
+  var mc = document.querySelector('meta[name="theme-color"]');
+  if (mc && theme === 'dark') mc.setAttribute('content', '#000000');
+})();
+</script>
+<meta name="theme-color" content="#F4F4F0">
+<meta property="og:site_name" content="FundedLot">
+<meta property="og:type" content="article">
+<meta property="og:title" content="News Trading Rules at Prop Firms: What Is Restricted and Why">
+<meta property="og:description" content="How firms restrict trading around scheduled news, the common rule patterns, why they exist, and a calendar routine that keeps your account compliant.">
+<meta property="og:url" content="https://www.fundedlot.com/blog/news-trading-rules-prop-firms/">
+<meta property="og:image" content="https://www.fundedlot.com/assets/og/blog-news-trading-rules-prop-firms.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="FundedLot — practice prop firm challenges before you pay">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@fundedlot">
+<meta name="twitter:title" content="News Trading Rules at Prop Firms: What Is Restricted and Why">
+<meta name="twitter:description" content="How firms restrict trading around scheduled news, the common rule patterns, why they exist, and a calendar routine that keeps your account compliant.">
+<meta name="twitter:image" content="https://www.fundedlot.com/assets/og/blog-news-trading-rules-prop-firms.png">
+<meta property="article:published_time" content="2026-08-18"><meta property="article:modified_time" content="2026-08-18"><meta property="article:section" content="Guides">
+<link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="alternate" type="application/rss+xml" title="FundedLot Blog" href="/feed.xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400..800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/styles.css?v=ca293429">
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"Article","headline":"News Trading Rules at Prop Firms: What Is Restricted and Why","description":"How firms restrict trading around scheduled news, the common rule patterns, why they exist, and a calendar routine that keeps your account compliant.","datePublished":"2026-08-18","dateModified":"2026-08-18","articleSection":"Guides","wordCount":916,"timeRequired":"PT6M","author":{"@type":"Organization","name":"FundedLot","url":"https://www.fundedlot.com/"},"publisher":{"@type":"Organization","name":"FundedLot","logo":{"@type":"ImageObject","url":"https://www.fundedlot.com/assets/og.png"}},"image":"https://www.fundedlot.com/assets/og/blog-news-trading-rules-prop-firms.png","mainEntityOfPage":"https://www.fundedlot.com/blog/news-trading-rules-prop-firms/"},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.fundedlot.com/"},{"@type":"ListItem","position":2,"name":"Blog","item":"https://www.fundedlot.com/blog/"},{"@type":"ListItem","position":3,"name":"News Trading Rules at Prop Firms: What Is Restricted and Why","item":"https://www.fundedlot.com/blog/news-trading-rules-prop-firms/"}]}]</script>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="container">
+    <nav class="nav" aria-label="Main">
+      <a class="brand" href="/" aria-label="FundedLot home">
+        <svg class="mark" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+<rect width="32" height="32" rx="9.6" fill="#C9F158"/>
+<path d="M9.55 14.6v11.4M16 10.4v14.9M22.45 6.2v18.1" stroke="#101109" stroke-width="1.5" stroke-linecap="round"/>
+<rect x="7.6" y="17.3" width="3.9" height="7.6" rx="1.95" fill="#101109"/>
+<rect x="14.05" y="13.4" width="3.9" height="10.9" rx="1.95" fill="#101109"/>
+<rect x="20.5" y="9" width="3.9" height="13" rx="1.95" fill="#101109"/>
+</svg>
+        <span>Funded<span class="lot">lot</span></span>
+      </a>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="/how-it-works/">How it works</a></li>
+        <li><a href="/features/">Features</a></li>
+        <li><a href="/pricing/">Pricing</a></li>
+        <li><a href="/blog/" aria-current="page">Blog</a></li>
+        <li><a href="/glossary/">Glossary</a></li>
+        <li><a href="/about/">About</a></li>
+        <li class="nav-cta"><a class="btn btn-volt btn-sm" href="/download/">Get the app</a></li>
+      </ul>
+      <button class="theme-toggle" type="button" aria-label="Switch theme" title="Switch theme">
+        <svg class="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.4"/><path d="M12 2.5v2.4M12 19.1v2.4M2.5 12h2.4M19.1 12h2.4M5 5l1.7 1.7M17.3 17.3 19 19M19 5l-1.7 1.7M6.7 17.3 5 19"/></svg>
+        <svg class="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.6 14.2A8.6 8.6 0 0 1 9.8 3.4a8.6 8.6 0 1 0 10.8 10.8Z"/></svg>
+      </button>
+      <button class="nav-toggle" aria-label="Menu" aria-expanded="false" aria-controls="nav-links">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+<div class="container">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a><span class="sep">/</span><a href="/blog/">Blog</a><span class="sep">/</span><span>News Trading Rules at Prop Firms: What Is Restricted and Why</span></nav>
+  <div class="article-head">
+    <img class="etok etok-article" src="/assets/editorial/rules.webp" width="96" height="96" alt="" loading="lazy" decoding="async">
+    <div class="article-head-text">
+      <h1>News Trading Rules at Prop Firms: What Is Restricted and Why</h1>
+      <div class="article-meta">
+        <span class="chip">Guides</span>
+        <span>18 August 2026</span><span class="dot">·</span>
+        <span>6 min read</span><span class="dot">·</span>
+        <span>By the FundedLot team</span>
+      </div>
+    </div>
+  </div>
+  <div class="article-layout"><div class="prose">
+<p class="lede">Many firms restrict trading around scheduled economic releases, and the penalty for getting it wrong runs from voided profits to a terminated account, sometimes while your equity is comfortably green. No rule varies more from firm to firm than this one. It is the section of the agreement worth reading twice.</p>
+
+<h2>What firms mean by news trading</h2>
+<p>In rulebooks, <a href="/glossary/news-trading/">news trading</a> means opening or closing positions in a defined window around scheduled high-impact events: central bank rate decisions, inflation prints, and the big monthly employment reports are the usual list. Firms typically publish which calendar they follow and which events count.</p>
+<p>Unscheduled news, a surprise headline or a geopolitical shock, is generally not restricted, because nobody can plan around it. The rules target the moments everyone can see coming, where a deliberate strategy of betting into the release is possible.</p>
+
+<h2>The common restriction patterns</h2>
+<p>Most rule sets are a variation of five patterns, and the differences decide whether an ordinary trade is legal.</p>
+<table>
+<thead><tr><th>Pattern</th><th>Typical form</th><th>Consequence when breached</th></tr></thead>
+<tbody>
+<tr><td>No new positions</td><td>No entries from a few minutes before the release to a few minutes after, commonly 2 to 5 each side</td><td>Trade voided or warning</td></tr>
+<tr><td>Flat requirement</td><td>All positions closed before the window opens</td><td>Possible <a href="/glossary/account-breach/">account breach</a></td></tr>
+<tr><td>Profit voiding</td><td>Gains from trades opened or closed inside the window are removed; at some firms the losses still stand</td><td>Profits deducted</td></tr>
+<tr><td>Phase-dependent rules</td><td>Unrestricted during the evaluation, restricted afterwards</td><td>Style that passed becomes illegal later</td></tr>
+<tr><td>Hard prohibition</td><td>Any activity in the window is a violation</td><td>Account terminated</td></tr>
+</tbody>
+</table>
+<p>The asymmetry in the third row deserves attention: where wins are voided and losses count, holding through news has strictly negative expectancy whatever your strategy believes. The fourth row is subtler, because a trader who passes an evaluation on release spikes may be unable to trade that style under the tighter rules that follow, a mismatch covered more broadly in <a href="/blog/prop-firm-rules-explained/">prop firm rules explained</a>.</p>
+
+<h2>Why firms restrict news at all</h2>
+<p>During a major release, real markets briefly stop resembling their simulations. The quoted <a href="/glossary/spread/">spread</a> on a major pair can widen from around one pip to ten or more, liquidity thins, and orders fill wherever liquidity actually exists rather than at the price on screen. Evaluation accounts run on simulated fills, which tend to be generous in exactly these seconds.</p>
+<p>So a demo-fill news strategy can print profits that no live market would have paid, and firms whose real hedging costs are driven by live conditions decline to reward it. The restriction is less about protecting you than about refusing to pay for fills that could not exist, but the effect on your account is the same either way: the rules define the game, and the game is not the open market.</p>
+
+<h2>The arithmetic of holding through a release</h2>
+<p>Even where holding is allowed, the risk numbers change shape. Suppose you hold two standard lots with a 20-pip stop, $10 per pip per lot, so the planned risk is $400. The release gaps the price 35 pips beyond your stop before the next tradable quote, and the order fills there, as <a href="/glossary/slippage/">slippage</a> of this size routinely does in the first seconds.</p>
+<p>The realised loss is 55 pips across two lots, or $1,100, which is 2.75 times the plan. Two such events in a month is $2,200 of unbudgeted loss, nearly half of a $5,000 daily limit spent in two candles. A <a href="/glossary/stop-loss/">stop loss</a> is an instruction to exit at the next available price, not a guarantee of that price, and scheduled releases are where the difference gets expensive.</p>
+
+<h2>A calendar routine that keeps you compliant</h2>
+<p>Compliance here is a habit problem, not a knowledge problem, so make it a routine with no daily judgment in it.</p>
+<ol>
+<li>Once a week, list the high-impact events for your instruments and mark the exact windows your firm restricts.</li>
+<li>Write those windows into each day's plan before the session starts, in your own timezone, since timezone conversion at speed is how careful traders breach.</li>
+<li>Adopt a personal rule stricter than the firm's, for example flat and no entries five minutes each side when the firm requires two. The margin absorbs clock drift and hesitation.</li>
+<li>If your strategy legitimately holds positions for days, size them so a 50-pip adverse gap stays inside your daily headroom, or take the exposure down before the window.</li>
+<li>After the release, wait for the spread to normalise, usually under a minute, before touching any order.</li>
+</ol>
+
+<h2>Rehearse the habit before it has a price</h2>
+<p>The skill being tested is remembering a calendar while managing a position, and it only becomes reliable through repetition. Practise the routine during simulated attempts: FundedLot enforces evaluation rules on virtual funds, and running your flat-before-news drill there for a few weeks makes the habit automatic before a firm attaches money to it. Tag every violation in your journal with its dollar cost, including the ones that happened to end profitably.</p>
+<p>That last part matters most. A news trade that won was still a rule breach rehearsed, and the version of you that repeats it inside a paid attempt inherits the habit without the luck. The broader risk framework that makes these windows easy to respect is set out in <a href="/blog/risk-management-for-funded-traders/">risk management that survives prop firm rules</a>.</p>
+<div class="callout"><strong>Key point.</strong> News restrictions differ more between firms than any other rule, and several versions can end a profitable account. Read your firm's exact windows, set personal ones slightly wider, and rehearse the routine until it survives an open position.</div>
+
+<div class="cta-inline">
+  <div class="t">
+    <b>Rehearse the rules before you pay for them</b>
+    <span>FundedLot simulates real challenge rules — daily loss, drawdown, targets — on virtual funds, and shows you every mistake with its dollar cost. Free to start.</span>
+  </div>
+  <a class="btn btn-green" href="/download/">Get the app</a>
+</div>
+  </div></div>
+  <div class="related">
+    <h2>Keep reading</h2>
+    <div class="related-grid"><a class="rel-card" href="/blog/payout-denied-reasons/"><span class="cat">Guides</span><b>Why Prop Firm Payouts Get Denied: 9 Clauses to Read First</b></a><a class="rel-card" href="/blog/how-to-choose-a-prop-firm/"><span class="cat">Guides</span><b>How to Choose a Prop Firm: A Skeptic&#39;s Guide</b></a><a class="rel-card" href="/blog/futures-vs-forex-prop-firms/"><span class="cat">Guides</span><b>Futures vs Forex Prop Firms: Rules, Costs, and Which Fits You</b></a></div>
+  </div>
+</div>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-main">
+      <div class="footer-brand">
+        <a class="brand" href="/">
+          <svg class="mark" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+<rect width="32" height="32" rx="9.6" fill="#C9F158"/>
+<path d="M9.55 14.6v11.4M16 10.4v14.9M22.45 6.2v18.1" stroke="#101109" stroke-width="1.5" stroke-linecap="round"/>
+<rect x="7.6" y="17.3" width="3.9" height="7.6" rx="1.95" fill="#101109"/>
+<rect x="14.05" y="13.4" width="3.9" height="10.9" rx="1.95" fill="#101109"/>
+<rect x="20.5" y="9" width="3.9" height="13" rx="1.95" fill="#101109"/>
+</svg>
+          <span>Funded<span class="lot">lot</span></span>
+        </a>
+        <p>The prop-firm challenge practice app. Rehearse the exact rules — profit targets, daily loss limits, drawdown — on virtual funds, and learn precisely why you fail before you pay for a real attempt.</p>
+        <div class="f-social">
+          <a href="https://www.instagram.com/fundedlot" aria-label="FundedLot on Instagram" rel="noopener" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.2" cy="6.8" r="1.1" fill="currentColor" stroke="none"/></svg></a>
+          <a href="https://x.com/fundedlot" aria-label="FundedLot on X" rel="noopener" target="_blank"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.7 3H20.6L14.3 10.2L21.7 21H15.9L11.4 14.9L6.2 21H3.3L10 13.3L2.9 3H8.8L12.9 8.6L17.7 3ZM16.7 19.3H18.3L7.9 4.6H6.2L16.7 19.3Z"/></svg></a>
+        </div>
+      </div>
+      <div class="f-col">
+        <h4>Product</h4>
+        <ul>
+          <li><a href="/how-it-works/">How it works</a></li>
+          <li><a href="/features/">Features</a></li>
+          <li><a href="/pricing/">Pricing</a></li>
+          <li><a href="/download/">Download</a></li>
+          <li><a href="/changelog/">Changelog</a></li>
+        </ul>
+      </div>
+      <div class="f-col">
+        <h4>Compare</h4>
+        <ul>
+          <li><a href="/compare/">All comparisons</a></li>
+          <li><a href="/compare/broker-demo/">vs broker demo</a></li>
+          <li><a href="/compare/paid-challenge/">vs paying first</a></li>
+          <li><a href="/prop-firm-challenge-simulator/">Challenge simulator</a></li>
+          <li><a href="/prop-trading-practice-app/">Practice app</a></li>
+          <li><a href="/free-prop-firm-practice/">Free practice</a></li>
+        </ul>
+      </div>
+      <div class="f-col">
+        <h4>Learn</h4>
+        <ul>
+          <li><a href="/blog/">Blog</a></li>
+          <li><a href="/glossary/">Glossary</a></li>
+          <li><a href="/faq/">FAQ</a></li>
+          <li><a href="/manifesto/">Manifesto</a></li>
+        </ul>
+      </div>
+      <div class="f-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="/about/">About us</a></li>
+          <li><a href="/press/">Press kit</a></li>
+          <li><a href="/brand/">Brand</a></li>
+          <li><a href="/contact/">Contact &amp; support</a></li>
+        </ul>
+      </div>
+      <div class="f-col">
+        <h4>Legal</h4>
+        <ul>
+          <li><a href="/privacy/">Privacy policy</a></li>
+          <li><a href="/terms/">Terms of service</a></li>
+          <li><a href="/risk-disclosure/">Risk disclosure</a></li>
+          <li><a href="/account-deletion/">Account deletion</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-legal">
+      <p>FundedLot is an educational trading simulator. All trading inside the app uses virtual funds only. FundedLot is not a broker, does not provide real-money trading, does not offer funded accounts or payouts, and does not provide investment, financial, legal, or tax advice. Simulated practice and simulated results do not guarantee success in any real evaluation or in live trading. Trading real money involves substantial risk of loss. FundedLot is not affiliated with, endorsed by, or connected to any proprietary trading firm or broker.</p>
+      <div class="footer-meta">
+        <span>© 2026 FundedLot. All rights reserved.</span>
+        <a href="mailto:support@fundedlot.com">support@fundedlot.com</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var t = document.querySelector('.nav-toggle');
+  var l = document.getElementById('nav-links');
+  if (t && l) t.addEventListener('click', function () {
+    var open = l.classList.toggle('open');
+    t.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+
+  var tt = document.querySelector('.theme-toggle');
+  if (tt) tt.addEventListener('click', function () {
+    var d = document.documentElement;
+    var next = d.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+    d.setAttribute('data-theme', next);
+    try { localStorage.setItem('fl-theme', next); } catch (e) {}
+    var mc = document.querySelector('meta[name="theme-color"]:not([media])');
+    if (!mc) {
+      mc = document.createElement('meta'); mc.name = 'theme-color';
+      document.head.appendChild(mc);
+    }
+    mc.content = next === 'light' ? '#F4F4F0' : '#000000';
+  });
+
+  /* mono numeral count-up: [data-count] rolls from 0 on first view */
+  (function () {
+    var els = Array.prototype.slice.call(document.querySelectorAll('[data-count]'));
+    if (!els.length || !('IntersectionObserver' in window)) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    function fmt(v, dec) { return dec ? v.toFixed(dec) : Math.round(v).toLocaleString('en-US'); }
+    var io = new IntersectionObserver(function (es) {
+      es.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        io.unobserve(e.target);
+        var el = e.target, target = parseFloat(el.getAttribute('data-count'));
+        if (isNaN(target)) return;
+        var pre = el.getAttribute('data-pre') || '', suf = el.getAttribute('data-suf') || '';
+        var dec = parseInt(el.getAttribute('data-dec') || '0', 10);
+        var t0 = null;
+        function step(ts) {
+          if (!t0) t0 = ts;
+          var p = Math.min(1, (ts - t0) / 1100);
+          el.textContent = pre + fmt(target * (1 - Math.pow(1 - p, 3)), dec) + suf;
+          if (p < 1) requestAnimationFrame(step);
+        }
+        requestAnimationFrame(step);
+      });
+    }, { threshold: .6 });
+    els.forEach(function (el) { io.observe(el); });
+  })();
+
+  var els = Array.prototype.slice.call(document.querySelectorAll('.reveal'));
+  var showAll = function () { els.forEach(function (el) { el.classList.add('in'); }); };
+  if ('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    var io = new IntersectionObserver(function (es) {
+      es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.05 });
+    els.forEach(function (el) { io.observe(el); });
+    setTimeout(showAll, 2500); /* failsafe: never leave content hidden */
+  } else {
+    showAll();
+  }
+})();
+</script>
+</body>
+</html>

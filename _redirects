@@ -1,0 +1,7 @@
+https://fundedlot.com/* https://www.fundedlot.com/:splat 301!
+/funded-lot / 301
+/funded-lot/* / 301
+/fundedlot / 301
+/fundedlot/* / 301
+/app /download/ 301
+/get /download/ 301

@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>How to Keep a Trading Journal That Actually Changes Behaviour</title>
+<meta name="description" content="A journal format that measures habits instead of recording feelings: the fields worth logging, how to price mistakes in dollars, and a weekly review loop.">
+<link rel="canonical" href="https://www.fundedlot.com/blog/trading-journal-guide/">
+<script>
+(function () {
+  var d = document.documentElement; d.classList.add('js');
+  /* Light (Ink & Lime) is the default; a stored choice wins; ?theme= is a
+     preview override for QA and screenshots. */
+  var stored = null; try { stored = localStorage.getItem('fl-theme'); } catch (e) {}
+  var qs = null; try { qs = new URLSearchParams(location.search).get('theme'); } catch (e) {}
+  var theme = (qs === 'light' || qs === 'dark') ? qs
+    : (stored === 'light' || stored === 'dark') ? stored : 'light';
+  d.setAttribute('data-theme', theme);
+  var mc = document.querySelector('meta[name="theme-color"]');
+  if (mc && theme === 'dark') mc.setAttribute('content', '#000000');
+})();
+</script>
+<meta name="theme-color" content="#F4F4F0">
+<meta property="og:site_name" content="FundedLot">
+<meta property="og:type" content="article">
+<meta property="og:title" content="How to Keep a Trading Journal That Actually Changes Behaviour">
+<meta property="og:description" content="A journal format that measures habits instead of recording feelings: the fields worth logging, how to price mistakes in dollars, and a weekly review loop.">
+<meta property="og:url" content="https://www.fundedlot.com/blog/trading-journal-guide/">
+<meta property="og:image" content="https://www.fundedlot.com/assets/og/blog-trading-journal-guide.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="FundedLot — practice prop firm challenges before you pay">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@fundedlot">
+<meta name="twitter:title" content="How to Keep a Trading Journal That Actually Changes Behaviour">
+<meta name="twitter:description" content="A journal format that measures habits instead of recording feelings: the fields worth logging, how to price mistakes in dollars, and a weekly review loop.">
+<meta name="twitter:image" content="https://www.fundedlot.com/assets/og/blog-trading-journal-guide.png">
+<meta property="article:published_time" content="2026-08-11"><meta property="article:modified_time" content="2026-08-11"><meta property="article:section" content="Practice">
+<link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="alternate" type="application/rss+xml" title="FundedLot Blog" href="/feed.xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400..800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/styles.css?v=ca293429">
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"Article","headline":"How to Keep a Trading Journal That Actually Changes Behaviour","description":"A journal format that measures habits instead of recording feelings: the fields worth logging, how to price mistakes in dollars, and a weekly review loop.","datePublished":"2026-08-11","dateModified":"2026-08-11","articleSection":"Practice","wordCount":963,"timeRequired":"PT6M","author":{"@type":"Organization","name":"FundedLot","url":"https://www.fundedlot.com/"},"publisher":{"@type":"Organization","name":"FundedLot","logo":{"@type":"ImageObject","url":"https://www.fundedlot.com/assets/og.png"}},"image":"https://www.fundedlot.com/assets/og/blog-trading-journal-guide.png","mainEntityOfPage":"https://www.fundedlot.com/blog/trading-journal-guide/"},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.fundedlot.com/"},{"@type":"ListItem","position":2,"name":"Blog","item":"https://www.fundedlot.com/blog/"},{"@type":"ListItem","position":3,"name":"How to Keep a Trading Journal That Actually Changes Behaviour","item":"https://www.fundedlot.com/blog/trading-journal-guide/"}]}]</script>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="container">
+    <nav class="nav" aria-label="Main">
+      <a class="brand" href="/" aria-label="FundedLot home">
+        <svg class="mark" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+<rect width="32" height="32" rx="9.6" fill="#C9F158"/>
+<path d="M9.55 14.6v11.4M16 10.4v14.9M22.45 6.2v18.1" stroke="#101109" stroke-width="1.5" stroke-linecap="round"/>
+<rect x="7.6" y="17.3" width="3.9" height="7.6" rx="1.95" fill="#101109"/>
+<rect x="14.05" y="13.4" width="3.9" height="10.9" rx="1.95" fill="#101109"/>
+<rect x="20.5" y="9" width="3.9" height="13" rx="1.95" fill="#101109"/>
+</svg>
+        <span>Funded<span class="lot">lot</span></span>
+      </a>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="/how-it-works/">How it works</a></li>
+        <li><a href="/features/">Features</a></li>
+        <li><a href="/pricing/">Pricing</a></li>
+        <li><a href="/blog/" aria-current="page">Blog</a></li>
+        <li><a href="/glossary/">Glossary</a></li>
+        <li><a href="/about/">About</a></li>
+        <li class="nav-cta"><a class="btn btn-volt btn-sm" href="/download/">Get the app</a></li>
+      </ul>
+      <button class="theme-toggle" type="button" aria-label="Switch theme" title="Switch theme">
+        <svg class="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.4"/><path d="M12 2.5v2.4M12 19.1v2.4M2.5 12h2.4M19.1 12h2.4M5 5l1.7 1.7M17.3 17.3 19 19M19 5l-1.7 1.7M6.7 17.3 5 19"/></svg>
+        <svg class="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.6 14.2A8.6 8.6 0 0 1 9.8 3.4a8.6 8.6 0 1 0 10.8 10.8Z"/></svg>
+      </button>
+      <button class="nav-toggle" aria-label="Menu" aria-expanded="false" aria-controls="nav-links">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+<div class="container">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a><span class="sep">/</span><a href="/blog/">Blog</a><span class="sep">/</span><span>How to Keep a Trading Journal That Actually Changes Behaviour</span></nav>
+  <div class="article-head">
+    <img class="etok etok-article" src="/assets/editorial/journal.webp" width="96" height="96" alt="" loading="lazy" decoding="async">
+    <div class="article-head-text">
+      <h1>How to Keep a Trading Journal That Actually Changes Behaviour</h1>
+      <div class="article-meta">
+        <span class="chip">Practice</span>
+        <span>11 August 2026</span><span class="dot">·</span>
+        <span>6 min read</span><span class="dot">·</span>
+        <span>By the FundedLot team</span>
+      </div>
+    </div>
+  </div>
+  <div class="article-layout"><div class="prose">
+<p class="lede">Most trading journals are diaries: faithfully written, warmly reviewed, and behaviourally useless. A journal changes what you do only when it measures specific habits, prices them in dollars, and feeds exactly one rule change per week. Here is a format built to do that, tuned for evaluation-style trading.</p>
+
+<h2>Why most journals change nothing</h2>
+<p>The standard failure is recording outcomes and moods instead of behaviours. "Felt impatient, market choppy, minus $430" contains nothing you can count, so nothing accumulates across entries and every week starts from zero insight.</p>
+<p>The second failure is the missing loop. Data that is never aggregated never confronts you, and a <a href="/glossary/trading-journal/">trading journal</a> without a scheduled review is a scrapbook. The format below fixes both: every field is countable, and the week ends in arithmetic.</p>
+
+<h2>The fields that matter</h2>
+<p>Log these for every trade, at the moment of entry and exit rather than from memory at night.</p>
+<table>
+<thead><tr><th>Field</th><th>What it catches</th></tr></thead>
+<tbody>
+<tr><td>Planned risk in dollars, and actual risk</td><td>Oversizing, the gap between plan and fill</td></tr>
+<tr><td>Stop in the market at entry, yes or no</td><td>Mental-stop habits</td></tr>
+<tr><td>Planned reward as an <a href="/glossary/r-multiple/">R-multiple</a>, and realised R</td><td>Cutting winners, widening losers</td></tr>
+<tr><td>Minutes since the previous trade closed</td><td>Revenge entries and overtrading</td></tr>
+<tr><td>Dollar distance to the daily loss limit at entry</td><td>Trading into the limit</td></tr>
+<tr><td>Setup tag, from a fixed list</td><td>Untagged means unplanned</td></tr>
+<tr><td>Rule broken, if any, from a fixed list</td><td>Everything else</td></tr>
+</tbody>
+</table>
+<p>The fixed lists are the point. Free text invites narrative; a dropdown of your six known mistakes invites honesty.</p>
+<p>Capture friction decides whether any of this survives contact with a live session, so design for twenty seconds per trade: prefilled lists, numbers straight from the ticket, and nothing that requires composing sentences mid-session. Long reflections can wait for the weekly review. A journal that demands paragraphs at 9:32 in the morning will be abandoned by Thursday, and an abandoned journal measures nothing.</p>
+
+<h2>Price your patterns in dollars</h2>
+<p>Once trades carry tags, aggregation turns habits into invoices. Suppose a month shows six entries within five minutes of a loss, averaging minus $310: that is a $1,860 monthly bill for <a href="/glossary/revenge-trading/">revenge trading</a>. Suppose twelve winners planned at 2R on $500 risk realised an average of 1.1R: that is $450 left on the table per winner, $5,400 for the month, from a habit that felt like prudence every single time.</p>
+<p>Dollar pricing matters because percentages and adjectives do not compete with the pleasure of the habit, but a number that resembles rent does. It also ranks your problems: most traders discover one tag funds the majority of the leak, and the popular fixes, new indicators and new markets, appear nowhere on the list. How each of these habits ends evaluations is worked through in <a href="/blog/mistakes-that-blow-evaluation-accounts/">seven mistakes that end evaluation accounts</a>.</p>
+<p>One warning about what to aggregate: win rate on its own will mislead you, because the cheap habits inflate it. Cutting winners early raises the percentage of green trades while draining <a href="/glossary/expectancy/">expectancy</a>, so a journal that celebrates win rate rewards the exact behaviour it should be catching. Rank habits by dollars, and let the percentages be trivia.</p>
+
+<h2>The weekly loop that changes behaviour</h2>
+<p>Once a week, same day, thirty minutes, run the same four steps. One: aggregate the tags and compute each one's dollar cost. Two: pick the single most expensive habit and ignore the rest, since attention is the scarce resource. Three: write one mechanical rule against it, with a trigger and an action.</p>
+<blockquote><p>After any loss of 1R or more, no new order for 30 minutes. After the second loss of the day, the platform closes and the day is over.</p></blockquote>
+<p>Four: next week, measure adherence to that rule, not profit. Behaviour is the input you control; profit is an output with noise on it. A rule adhered to above 90 percent for two consecutive weeks becomes permanent, and you promote the next habit into the spotlight. One rule at a time compounds; five simultaneous resolutions decay by Thursday.</p>
+
+<h2>Journal the challenge variables too</h2>
+<p>Evaluation trading adds fields a normal journal ignores. Log equity distance to the daily loss limit and to the <a href="/glossary/max-drawdown/">max drawdown</a> at every entry, your trading-day count against the minimum, and whether the day's first trade came within your planned session window. Breaches almost always announce themselves in these columns days early: entries drifting closer to the limit, size drifting up after green mornings.</p>
+<p>During an attempt, grade weeks by process rather than equity. A red week with full rule adherence is variance doing what variance does; a green week with three violations is a loan from the account's future. This grading is tedious by hand, which is why FundedLot automates the whole loop in its simulated challenges, detecting each mistake as it happens, pricing it in dollars, and scoring process from 0 to 100 so the weekly review starts finished.</p>
+
+<h2>A worked month</h2>
+<p>A realistic before-and-after, from a $100,000 simulated evaluation at $500 risk per trade. Week one baseline: 31 trades, nine tagged as revenge entries costing $1,950, winners realising 1.0R against a 2R plan. The review picks revenge as the expensive habit and installs the 30-minute rule above.</p>
+<p>Week four: 24 trades, one revenge entry costing $180, winners realising 1.6R because exits stopped being fear management. Win rate barely moved. The month's swing is roughly $2,700, none of it from a better strategy, all of it from one measured habit and one rule. That is what a journal is for: not a record of the trader you were, but a mechanism for replacing that trader one behaviour at a time.</p>
+<div class="callout"><strong>Key point.</strong> A journal earns its time only if every entry is countable, every count becomes a dollar figure, and every week produces exactly one new rule. Everything else is memoir.</div>
+
+<div class="cta-inline">
+  <div class="t">
+    <b>Rehearse the rules before you pay for them</b>
+    <span>FundedLot simulates real challenge rules — daily loss, drawdown, targets — on virtual funds, and shows you every mistake with its dollar cost. Free to start.</span>
+  </div>
+  <a class="btn btn-green" href="/download/">Get the app</a>
+</div>
+  </div></div>
+  <div class="related">
+    <h2>Keep reading</h2>
+    <div class="related-grid"><a class="rel-card" href="/blog/practice-trading-without-risking-money/"><span class="cat">Practice</span><b>5 Ways to Practice Trading Without Risking Money (Ranked)</b></a><a class="rel-card" href="/blog/paper-trading-vs-demo-vs-live/"><span class="cat">Practice</span><b>Paper Trading vs Demo vs Challenge Conditions: What Each Actually Trains</b></a><a class="rel-card" href="/blog/practice-prop-firm-challenges-free/"><span class="cat">Practice</span><b>How to Practice a Prop Firm Challenge Before Paying for One</b></a></div>
+  </div>
+</div>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-main">
+      <div class="footer-brand">
+        <a class="brand" href="/">
+          <svg class="mark" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+<rect width="32" height="32" rx="9.6" fill="#C9F158"/>
+<path d="M9.55 14.6v11.4M16 10.4v14.9M22.45 6.2v18.1" stroke="#101109" stroke-width="1.5" stroke-linecap="round"/>
+<rect x="7.6" y="17.3" width="3.9" height="7.6" rx="1.95" fill="#101109"/>
+<rect x="14.05" y="13.4" width="3.9" height="10.9" rx="1.95" fill="#101109"/>
+<rect x="20.5" y="9" width="3.9" height="13" rx="1.95" fill="#101109"/>
+</svg>
+          <span>Funded<span class="lot">lot</span></span>
+        </a>
+        <p>The prop-firm challenge practice app. Rehearse the exact rules — profit targets, daily loss limits, drawdown — on virtual funds, and learn precisely why you fail before you pay for a real attempt.</p>
+        <div class="f-social">
+          <a href="https://www.instagram.com/fundedlot" aria-label="FundedLot on Instagram" rel="noopener" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.2" cy="6.8" r="1.1" fill="currentColor" stroke="none"/></svg></a>
+          <a href="https://x.com/fundedlot" aria-label="FundedLot on X" rel="noopener" target="_blank"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.7 3H20.6L14.3 10.2L21.7 21H15.9L11.4 14.9L6.2 21H3.3L10 13.3L2.9 3H8.8L12.9 8.6L17.7 3ZM16.7 19.3H18.3L7.9 4.6H6.2L16.7 19.3Z"/></svg></a>
+        </div>
+      </div>
+      <div class="f-col">
+        <h4>Product</h4>
+        <ul>
+          <li><a href="/how-it-works/">How it works</a></li>
+          <li><a href="/features/">Features</a></li>
+          <li><a href="/pricing/">Pricing</a></li>
+          <li><a href="/download/">Download</a></li>
+          <li><a href="/changelog/">Changelog</a></li>
+        </ul>
+      </div>
+      <div class="f-col">
+        <h4>Compare</h4>
+        <ul>
+          <li><a href="/compare/">All comparisons</a></li>
+          <li><a href="/compare/broker-demo/">vs broker demo</a></li>
+          <li><a href="/compare/paid-challenge/">vs paying first</a></li>
+          <li><a href="/prop-firm-challenge-simulator/">Challenge simulator</a></li>
+          <li><a href="/prop-trading-practice-app/">Practice app</a></li>
+          <li><a href="/free-prop-firm-practice/">Free practice</a></li>
+        </ul>
+      </div>
+      <div class="f-col">
+        <h4>Learn</h4>
+        <ul>
+          <li><a href="/blog/">Blog</a></li>
+          <li><a href="/glossary/">Glossary</a></li>
+          <li><a href="/faq/">FAQ</a></li>
+          <li><a href="/manifesto/">Manifesto</a></li>
+        </ul>
+      </div>
+      <div class="f-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="/about/">About us</a></li>
+          <li><a href="/press/">Press kit</a></li>
+          <li><a href="/brand/">Brand</a></li>
+          <li><a href="/contact/">Contact &amp; support</a></li>
+        </ul>
+      </div>
+      <div class="f-col">
+        <h4>Legal</h4>
+        <ul>
+          <li><a href="/privacy/">Privacy policy</a></li>
+          <li><a href="/terms/">Terms of service</a></li>
+          <li><a href="/risk-disclosure/">Risk disclosure</a></li>
+          <li><a href="/account-deletion/">Account deletion</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-legal">
+      <p>FundedLot is an educational trading simulator. All trading inside the app uses virtual funds only. FundedLot is not a broker, does not provide real-money trading, does not offer funded accounts or payouts, and does not provide investment, financial, legal, or tax advice. Simulated practice and simulated results do not guarantee success in any real evaluation or in live trading. Trading real money involves substantial risk of loss. FundedLot is not affiliated with, endorsed by, or connected to any proprietary trading firm or broker.</p>
+      <div class="footer-meta">
+        <span>© 2026 FundedLot. All rights reserved.</span>
+        <a href="mailto:support@fundedlot.com">support@fundedlot.com</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var t = document.querySelector('.nav-toggle');
+  var l = document.getElementById('nav-links');
+  if (t && l) t.addEventListener('click', function () {
+    var open = l.classList.toggle('open');
+    t.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+
+  var tt = document.querySelector('.theme-toggle');
+  if (tt) tt.addEventListener('click', function () {
+    var d = document.documentElement;
+    var next = d.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+    d.setAttribute('data-theme', next);
+    try { localStorage.setItem('fl-theme', next); } catch (e) {}
+    var mc = document.querySelector('meta[name="theme-color"]:not([media])');
+    if (!mc) {
+      mc = document.createElement('meta'); mc.name = 'theme-color';
+      document.head.appendChild(mc);
+    }
+    mc.content = next === 'light' ? '#F4F4F0' : '#000000';
+  });
+
+  /* mono numeral count-up: [data-count] rolls from 0 on first view */
+  (function () {
+    var els = Array.prototype.slice.call(document.querySelectorAll('[data-count]'));
+    if (!els.length || !('IntersectionObserver' in window)) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    function fmt(v, dec) { return dec ? v.toFixed(dec) : Math.round(v).toLocaleString('en-US'); }
+    var io = new IntersectionObserver(function (es) {
+      es.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        io.unobserve(e.target);
+        var el = e.target, target = parseFloat(el.getAttribute('data-count'));
+        if (isNaN(target)) return;
+        var pre = el.getAttribute('data-pre') || '', suf = el.getAttribute('data-suf') || '';
+        var dec = parseInt(el.getAttribute('data-dec') || '0', 10);
+        var t0 = null;
+        function step(ts) {
+          if (!t0) t0 = ts;
+          var p = Math.min(1, (ts - t0) / 1100);
+          el.textContent = pre + fmt(target * (1 - Math.pow(1 - p, 3)), dec) + suf;
+          if (p < 1) requestAnimationFrame(step);
+        }
+        requestAnimationFrame(step);
+      });
+    }, { threshold: .6 });
+    els.forEach(function (el) { io.observe(el); });
+  })();
+
+  var els = Array.prototype.slice.call(document.querySelectorAll('.reveal'));
+  var showAll = function () { els.forEach(function (el) { el.classList.add('in'); }); };
+  if ('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    var io = new IntersectionObserver(function (es) {
+      es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.05 });
+    els.forEach(function (el) { io.observe(el); });
+    setTimeout(showAll, 2500); /* failsafe: never leave content hidden */
+  } else {
+    showAll();
+  }
+})();
+</script>
+</body>
+</html>
