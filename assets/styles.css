@@ -1075,17 +1075,21 @@ details.faq .a p:last-child { margin-bottom: 0; }
   border-radius: 14px; margin-bottom: 16px; background: #0B0C10;
 }
 
-/* Featured price-card interior art (hero_pro), clipped by the card radius. */
-.price-card { overflow: hidden; }
+/* Featured price-card interior art (hero_pro). The art clips to the card's
+   radius via its own layer — never `overflow: hidden` on .price-card itself,
+   which would cut the .flag badge that deliberately overhangs the top edge. */
 .price-card > * { position: relative; z-index: 1; }
 .price-art {
-  position: absolute; top: -34px; right: -44px; width: 250px; z-index: 0 !important;
-  opacity: .15; pointer-events: none;
+  position: absolute; inset: 0; z-index: 0 !important;
+  border-radius: 26px; overflow: hidden; pointer-events: none;
+}
+.price-art img {
+  position: absolute; top: -34px; right: -44px; width: 250px; height: auto;
+  display: block; opacity: .15;
   -webkit-mask-image: radial-gradient(75% 75% at 50% 45%, #000 45%, transparent 100%);
   mask-image: radial-gradient(75% 75% at 50% 45%, #000 45%, transparent 100%);
 }
-[data-theme="light"] .price-art { opacity: .22; }
-.price-art img { display: block; width: 100%; height: auto; }
+[data-theme="light"] .price-art img { opacity: .22; }
 
 /* Cinematic band figure (manifesto): glow art on its own island panel. */
 .art-band {
