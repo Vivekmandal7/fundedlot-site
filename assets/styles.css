@@ -335,7 +335,7 @@ strong, b { color: var(--text); font-weight: 600; }
 .screen-row .cap span { font-size: 14.5px; color: var(--body-c); }
 
 /* store badges */
-.store-badges { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; }
+.store-badges { display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; }
 .badge-store {
   display: inline-flex; align-items: center; gap: 11px;
   background-image: var(--card-grad); color: var(--text);
@@ -351,9 +351,20 @@ strong, b { color: var(--text); font-weight: 600; }
 .badge-store .txt span { font-size: 16.5px; font-weight: 700; letter-spacing: -.02em; }
 .badge-store .soon-pill {
   font-family: var(--mono); font-size: 10px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase;
-  background: var(--accent-tint); color: var(--accent); border: 1px solid var(--accent-line);
+  background: transparent; color: var(--faint); border: 1px solid var(--hair);
   padding: 3px 8px; border-radius: var(--r-pill); margin-left: 6px;
 }
+/* A store that has not shipped yet must not look like a button: no card, no
+   shadow, dashed edge, muted mark. Otherwise its "Coming soon" pill gets read
+   as the status of the live badge beside it, and the dead badge invites clicks. */
+.badge-store.is-soon {
+  background-image: none; background: transparent;
+  border-style: dashed; border-color: var(--hair);
+  box-shadow: none; color: var(--faint);
+}
+.badge-store.is-soon:hover { border-color: var(--card-line); }
+.badge-store.is-soon svg { opacity: .5; }
+.badge-store.is-soon .txt span { font-weight: 600; }
 
 /* -------------------------------------------------------------- ticker ---- */
 .ticker { border-bottom: 1px solid var(--hair); overflow: hidden; position: relative; z-index: 2; background: var(--canvas); }
