@@ -88,13 +88,13 @@
   <div class="inner">
     <span class="eyebrow">Legal</span>
     <h1>Privacy Policy</h1>
-    <p class="sub">Effective 27 August 2026. Applies to the FundedLot mobile app and fundedlot.com.</p>
+    <p class="sub">Effective 2 September 2026. Applies to the FundedLot mobile app and fundedlot.com.</p>
   </div>
 </div></div>
 
 <section class="section">
   <div class="container"><div class="prose" style="margin:0 auto">
-    <p class="lede">The short version: we collect the minimum needed to run a practice app — an email if you create an account, your practice activity, purchase records from the app stores, and standard crash and usage analytics. We don't sell your data, we don't collect financial credentials, and you can delete your account and data at any time.</p>
+    <p class="lede">The short version: we collect the minimum needed to run a practice app — an email if you create an account, your practice activity, purchase records from the app stores, and basic diagnostics. On the free plan, clearly labelled sponsored cards are served by Google AdMob, which may use your device's advertising identifier; FundedLot Pro removes ads entirely. We don't sell your data, we don't collect financial credentials, and you can delete your account and data at any time.</p>
 
     <h2>1. Who we are</h2>
     <p>FundedLot ("FundedLot", "we", "us") operates the FundedLot mobile application and the website fundedlot.com (together, the "Service"). For any privacy question or request, contact <a href="mailto:support@fundedlot.com">support@fundedlot.com</a>.</p>
@@ -109,51 +109,65 @@
     <ul>
       <li><strong>Practice activity</strong> — your simulated trades, evaluations, journal entries, settings and coach results. This is simulation data on virtual funds; it is not real financial account data.</li>
       <li><strong>Purchase records</strong> — when you buy an attempt pack or subscription, we receive transaction confirmations (product, time, status) from Apple, Google, and our purchase-management provider. We never see or store your card number.</li>
-      <li><strong>Device &amp; usage data</strong> — device model, operating system version, app version, language, crash reports, and anonymized usage events (e.g., which screens are used), used to fix bugs and improve the app.</li>
+      <li><strong>Device &amp; usage data</strong> — device model, operating system version, app version and language, and — only if we add such a tool in a future version, which this policy will say — crash reports and anonymized usage events. The app currently ships no crash-reporting or usage-analytics SDK.</li>
+      <li><strong>Advertising identifier (free plan only)</strong> — on the free plan, Google AdMob may read your device's advertising identifier to serve and measure the sponsored cards; on iOS this happens only if you allow tracking when asked. Pro subscribers see no ads and the identifier is not used. Details and controls are in section 5.</li>
     </ul>
     <p><strong>What we do not collect:</strong> real brokerage or bank credentials, government identification, precise location, or your contacts. The app has no real-money trading, so it never asks for payment details outside the app stores' own billing systems.</p>
 
     <h2>3. How we use it</h2>
     <ul>
       <li>To provide the Service: run simulations, sync your data across devices when signed in, and restore purchases.</li>
-      <li>To operate coaching features: your practice history is analyzed inside the Service to produce mistake reports, grades and readiness estimates for you.</li>
+      <li>To operate coaching features: your practice history is analyzed inside the Service to produce mistake reports, grades and readiness estimates for you. The mistake detectors, grades and readiness estimate run on your device.</li>
+      <li>To answer you with AI: when you open an AI Analyst report or use Ask-the-coach, the practice data those features need (recent simulated trades, the coach's findings, and the question you typed) is sent to our server, which generates the response with Anthropic's Claude models, accessed through Amazon Bedrock (Amazon Web Services) or Anthropic's API. Nothing is sent until you use one of those features.</li>
       <li>To fix and improve: crash diagnostics and aggregated usage patterns.</li>
       <li>To communicate: service messages (e.g., purchase receipts, important changes) and replies to your support requests. Marketing emails, if we ever send them, will be opt-in with one-tap unsubscribe.</li>
       <li>To comply with law and enforce our <a href="/terms/">terms</a>.</li>
     </ul>
-    <p>We do not sell personal data, and we do not share it with third parties for their own advertising.</p>
+    <p>We do not sell personal data for money. The only advertising-related processing is Google AdMob serving the sponsored cards on the free plan, described in section 5 — Pro subscribers are not subject to it at all.</p>
 
     <h2>4. Who we share it with</h2>
     <p>Only service providers that make the app work, bound by their own confidentiality and data-protection obligations:</p>
     <ul>
       <li><strong>App stores &amp; billing</strong> — Apple App Store, Google Play, and our subscription-management provider, to process and validate purchases.</li>
       <li><strong>Cloud infrastructure</strong> — hosting, databases, and authentication providers that store account and sync data.</li>
-      <li><strong>Diagnostics &amp; analytics</strong> — crash-reporting and product-analytics tools, configured without advertising identifiers.</li>
+      <li><strong>AI processing</strong> — Anthropic's Claude models, accessed through Amazon Bedrock (Amazon Web Services) or Anthropic's API, receive the practice data described in section 3 to generate AI Analyst reports and Ask-the-coach answers. They receive no advertising identifier and no account credentials.</li>
+      <li><strong>Diagnostics &amp; analytics</strong> — none today; if a crash-reporting or product-analytics tool is added, it will be configured without advertising identifiers and listed here.</li>
+      <li><strong>Advertising (free plan)</strong> — Google AdMob, to serve and measure the sponsored cards; section 5 lists what it receives and how to opt out.</li>
     </ul>
     <p>We may also disclose information if required by law, or as part of a merger or acquisition (in which case this policy continues to apply to data collected under it).</p>
 
-    <h2>5. Retention</h2>
+    <h2>5. Advertising on the free plan &amp; your choices</h2>
+    <p>The free plan is supported by a small number of clearly labelled sponsored cards, served by <strong>Google AdMob</strong>. They never appear on trading screens, in coaching reports, or on the paywall. <strong>FundedLot Pro removes them entirely</strong>, and Pro subscribers' devices never initialise the advertising SDK.</p>
+    <ul>
+      <li><strong>What Google receives.</strong> To serve and measure ads, Google may process your device's advertising identifier (IDFA on iOS — only after you allow tracking in the system prompt; Google Advertising ID on Android), your IP address and the approximate location derived from it, device and app information, and interactions with the ads themselves. Google processes this data under its own <a href="https://policies.google.com/privacy" rel="noopener" target="_blank">privacy policy</a>; see also <a href="https://policies.google.com/technologies/partner-sites" rel="noopener" target="_blank">how Google uses information from apps that use its services</a>.</li>
+      <li><strong>Consent.</strong> In the EEA, the UK and Switzerland the app shows Google's consent form before any ad loads, and you can change your choice at any time from <strong>Settings → Legal &amp; compliance → Ad privacy options</strong>. On iOS, Apple's App Tracking Transparency prompt controls whether the advertising identifier is shared; declining it means ads are not personalised.</li>
+      <li><strong>Opting out elsewhere.</strong> iOS: Settings → Privacy &amp; Security → Tracking. Android: Settings → Google → Ads (delete or reset your advertising ID, or opt out of ads personalisation).</li>
+      <li><strong>"Sale" or "sharing" under US state laws.</strong> Personalised advertising through a third party can count as "sharing" for cross-context behavioural advertising under the CCPA/CPRA and similar laws. We do not sell personal data for money. To opt out of such sharing, decline tracking (iOS), turn off ads personalisation (Android), use the in-app ad privacy options, or upgrade to Pro, which serves no ads at all.</li>
+      <li><strong>Content.</strong> We ask Google to apply a "PG" maximum ad-content rating. Sponsored cards are never financial advice and never an endorsement by us.</li>
+    </ul>
+
+    <h2>6. Retention</h2>
     <p>Account data and practice history are kept while your account exists. If you delete your account, associated personal data is deleted or irreversibly anonymized within 30 days, except records we must keep for legal, tax, or fraud-prevention reasons (kept only as long as required). Local-only practice data lives on your device and is removed when you delete the app or clear its data.</p>
 
-    <h2>6. Your rights</h2>
+    <h2>7. Your rights</h2>
     <p>Depending on where you live (including under the GDPR, UK GDPR, CCPA/CPRA, and India's DPDP Act), you may have rights to access, correct, export, restrict, object to processing of, or delete your personal data, and to withdraw consent where processing is based on consent. Exercise any of them by emailing <a href="mailto:support@fundedlot.com">support@fundedlot.com</a> from the address linked to your account — we respond within the timelines your local law sets. Account deletion is also self-serve: see <a href="/account-deletion/">account &amp; data deletion</a>. You may also lodge a complaint with your local data-protection authority.</p>
 
-    <h2>7. International transfers</h2>
+    <h2>8. International transfers</h2>
     <p>Our providers may process data in countries other than yours. Where required, transfers are protected by recognized safeguards such as standard contractual clauses or equivalent mechanisms.</p>
 
-    <h2>8. Security</h2>
+    <h2>9. Security</h2>
     <p>Data is encrypted in transit, access is restricted to what operating the Service requires, and authentication is handled by established identity providers. No system is perfectly secure; if a breach affects your personal data, we will notify you and the relevant authorities as the law requires.</p>
 
-    <h2>9. Children</h2>
+    <h2>10. Children</h2>
     <p>The Service is for adults preparing for trading evaluations and is not directed at anyone under 18. We do not knowingly collect personal data from children; if you believe a minor has created an account, contact us and we will delete it.</p>
 
-    <h2>10. Cookies &amp; the website</h2>
+    <h2>11. Cookies &amp; the website</h2>
     <p>fundedlot.com is a static informational site. It does not set advertising cookies. If we add analytics to the website, it will be privacy-respecting and reflected here.</p>
 
-    <h2>11. Changes</h2>
+    <h2>12. Changes</h2>
     <p>We will post any changes on this page and update the effective date. For material changes affecting app users, we will notify you in the app or by email before they take effect.</p>
 
-    <h2>12. Contact</h2>
+    <h2>13. Contact</h2>
     <p>Privacy questions and requests: <a href="mailto:support@fundedlot.com">support@fundedlot.com</a>.</p>
   </div></div>
 </section>

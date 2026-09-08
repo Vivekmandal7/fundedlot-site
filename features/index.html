@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Features — Challenge Rules, Risk Guard, Mistake Coaching</title>
-<meta name="description" content="Everything inside FundedLot: enforced evaluation rules, a pre-trade Risk Guard, a 28-detector mistake engine with dollar costs, autopsies and readiness scores.">
+<meta name="description" content="Everything inside FundedLot: enforced evaluation rules, a pre-trade Risk Guard, a 32-detector mistake engine with dollar costs, autopsies and readiness scores.">
 <link rel="canonical" href="https://www.fundedlot.com/features/">
 <script>
 (function () {
@@ -24,7 +24,7 @@
 <meta property="og:site_name" content="FundedLot">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Features — Challenge Rules, Risk Guard, Mistake Coaching">
-<meta property="og:description" content="Everything inside FundedLot: enforced evaluation rules, a pre-trade Risk Guard, a 28-detector mistake engine with dollar costs, autopsies and readiness scores.">
+<meta property="og:description" content="Everything inside FundedLot: enforced evaluation rules, a pre-trade Risk Guard, a 32-detector mistake engine with dollar costs, autopsies and readiness scores.">
 <meta property="og:url" content="https://www.fundedlot.com/features/">
 <meta property="og:image" content="https://www.fundedlot.com/assets/og/features.png">
 <meta property="og:image:width" content="1200">
@@ -34,7 +34,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:site" content="@fundedlot">
 <meta name="twitter:title" content="Features — Challenge Rules, Risk Guard, Mistake Coaching">
-<meta name="twitter:description" content="Everything inside FundedLot: enforced evaluation rules, a pre-trade Risk Guard, a 28-detector mistake engine with dollar costs, autopsies and readiness scores.">
+<meta name="twitter:description" content="Everything inside FundedLot: enforced evaluation rules, a pre-trade Risk Guard, a 32-detector mistake engine with dollar costs, autopsies and readiness scores.">
 <meta name="twitter:image" content="https://www.fundedlot.com/assets/og/features.png">
 
 <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
@@ -101,9 +101,9 @@
     <div class="feat-row">
       <div class="copy">
         <span class="eyebrow">Rules engine</span>
-        <h3>Every evaluation rule, enforced tick by tick</h3>
-        <p>Profit targets, <a href="/glossary/daily-loss-limit/">daily loss limits</a>, static and <a href="/glossary/trailing-drawdown/">trailing drawdown</a>, minimum trading days, consistency rules — all live, all measured against equity including open positions, the way real firms measure them.</p>
-        <p>Rule profiles are fully editable with timezone-aware daily resets, so you can rehearse the exact fine print of the firm you're targeting. Breaches are final, timestamped, and attributed to the trade that caused them.</p>
+        <h3>The core evaluation rules, enforced tick by tick</h3>
+        <p>Profit targets, <a href="/glossary/daily-loss-limit/">daily loss limits</a>, total <a href="/glossary/max-drawdown/">drawdown</a>, minimum trading days — all live, all measured against equity including open positions, the way real firms measure them. Breaches are final, timestamped, and attributed to the trade that caused them.</p>
+        <p><a href="/glossary/trailing-drawdown/">Trailing drawdown</a>, consistency and timezone rules are judged in the simulated payout check, against your full trade history, in an editable rule profile — so the fine print of the firm you're targeting stops you here, not at withdrawal time.</p>
       </div>
       <div class="visual">
         <div class="mini-ui">
@@ -136,7 +136,7 @@
     <div class="feat-row">
       <div class="copy">
         <span class="eyebrow">Mistake engine</span>
-        <h3>28 detectors. Every mistake priced in dollars.</h3>
+        <h3>32 detectors. Every mistake priced in dollars.</h3>
         <p><a href="/glossary/revenge-trading/">Revenge entries</a>, oversizing, missing stops, widened stops, adding to losers, cut winners, held losers, <a href="/glossary/overtrading/">overtrading</a>, trading into the daily limit — detected from the context captured at the moment you acted, not reconstructed afterwards.</p>
         <p>Each mistake carries evidence in your own numbers ("opened 74s after a $312 loss, at 1.8× the size") and a dollar cost. Every closed trade gets a process grade out of 100 — a winning trade with no stop and 4% risk scores badly, because it should.</p>
       </div>
@@ -253,7 +253,7 @@
       <p>The full simulator, real prices, and one complete evaluation cost nothing. Upgrade only if you want unlimited attempts and the deep analysis.</p>
       <div class="store-badges">
 <a class="badge-store is-soon" href="/download/"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.05 12.54c-.03-2.89 2.36-4.27 2.47-4.34-1.34-1.96-3.43-2.23-4.18-2.26-1.78-.18-3.47 1.05-4.37 1.05-.9 0-2.29-1.02-3.77-1-1.94.03-3.72 1.13-4.72 2.86-2.01 3.49-.51 8.66 1.45 11.49.96 1.39 2.1 2.95 3.6 2.89 1.44-.06 1.99-.93 3.73-.93s2.23.93 3.76.9c1.55-.03 2.53-1.41 3.48-2.8 1.1-1.61 1.55-3.17 1.57-3.25-.03-.02-3-1.15-3.02-4.61zM14.16 4.06c.8-.96 1.33-2.3 1.19-3.64-1.15.05-2.53.76-3.35 1.72-.74.85-1.38 2.21-1.21 3.52 1.28.1 2.58-.65 3.37-1.6z"/></svg><span class="txt"><small>Download on the</small><span>App Store</span></span><span class="soon-pill">Soon</span></a>
-<a class="badge-store is-soon" href="/download/"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4.1 2.02c-.34.18-.56.54-.56.98v18c0 .44.22.8.56.98l9.9-9.98-9.9-9.98zM15.3 10.7 6.06 1.4l11.6 6.66-2.36 2.64zm0 2.6 2.36 2.64L6.06 22.6l9.24-9.3zm4.9-2.02-2.77-1.59-2.6 2.31 2.6 2.31 2.77-1.59c.83-.48.83-1.96 0-2.44z" transform="translate(1.5 0)"/></svg><span class="txt"><small>Get it on</small><span>Google Play</span></span><span class="soon-pill">Soon</span></a>
+<a class="badge-store" href="https://play.google.com/store/apps/details?id=com.myindianow.fundedlot" rel="noopener" target="_blank"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4.1 2.02c-.34.18-.56.54-.56.98v18c0 .44.22.8.56.98l9.9-9.98-9.9-9.98zM15.3 10.7 6.06 1.4l11.6 6.66-2.36 2.64zm0 2.6 2.36 2.64L6.06 22.6l9.24-9.3zm4.9-2.02-2.77-1.59-2.6 2.31 2.6 2.31 2.77-1.59c.83-.48.83-1.96 0-2.44z" transform="translate(1.5 0)"/></svg><span class="txt"><small>Get it on</small><span>Google Play</span></span></a>
 </div>
       <p class="fine">Educational simulator · Virtual funds only · Not financial advice</p>
     </div>
