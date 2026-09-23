@@ -44,7 +44,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400..800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/assets/styles.css?v=dca5f650">
+<link rel="stylesheet" href="/assets/styles.css?v=62920123">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.fundedlot.com/"},{"@type":"ListItem","position":2,"name":"Privacy policy","item":"https://www.fundedlot.com/privacy/"}]}</script>
 </head>
 <body>
@@ -109,7 +109,7 @@
     <ul>
       <li><strong>Practice activity</strong> — your simulated trades, evaluations, journal entries, settings and coach results. This is simulation data on virtual funds; it is not real financial account data.</li>
       <li><strong>Purchase records</strong> — when you buy an attempt pack or subscription, we receive transaction confirmations (product, time, status) from Apple, Google, and our purchase-management provider. We never see or store your card number.</li>
-      <li><strong>Device &amp; usage data</strong> — device model, operating system version, app version and language, and — only if we add such a tool in a future version, which this policy will say — crash reports and anonymized usage events. The app currently ships no crash-reporting or usage-analytics SDK.</li>
+      <li><strong>Device &amp; crash data</strong> — device model, operating system version, app version and language, and, if the app crashes, a crash report: the error and its stack trace, the app version, your device model and OS version, and a Firebase installation identifier. Crash reports carry no advertising identifier, no e-mail address and no trade data. The app ships no usage-analytics SDK.</li>
       <li><strong>Advertising identifier (free plan only)</strong> — on the free plan, Google AdMob may read your device's advertising identifier to serve and measure the sponsored cards; on iOS this happens only if you allow tracking when asked. Pro subscribers see no ads and the identifier is not used. Details and controls are in section 5.</li>
     </ul>
     <p><strong>What we do not collect:</strong> real brokerage or bank credentials, government identification, precise location, or your contacts. The app has no real-money trading, so it never asks for payment details outside the app stores' own billing systems.</p>
@@ -119,7 +119,7 @@
       <li>To provide the Service: run simulations, sync your data across devices when signed in, and restore purchases.</li>
       <li>To operate coaching features: your practice history is analyzed inside the Service to produce mistake reports, grades and readiness estimates for you. The mistake detectors, grades and readiness estimate run on your device.</li>
       <li>To answer you with AI: when you open an AI Analyst report or use Ask-the-coach, the practice data those features need (recent simulated trades, the coach's findings, and the question you typed) is sent to our server, which generates the response with Anthropic's Claude models, accessed through Amazon Bedrock (Amazon Web Services) or Anthropic's API. Nothing is sent until you use one of those features.</li>
-      <li>To fix and improve: crash diagnostics and aggregated usage patterns.</li>
+      <li>To fix and improve: crash reports, so we can find and fix the bug that caused them.</li>
       <li>To communicate: service messages (e.g., purchase receipts, important changes) and replies to your support requests. Marketing emails, if we ever send them, will be opt-in with one-tap unsubscribe.</li>
       <li>To comply with law and enforce our <a href="/terms/">terms</a>.</li>
     </ul>
@@ -131,7 +131,7 @@
       <li><strong>App stores &amp; billing</strong> — Apple App Store, Google Play, and our subscription-management provider, to process and validate purchases.</li>
       <li><strong>Cloud infrastructure</strong> — hosting, databases, and authentication providers that store account and sync data.</li>
       <li><strong>AI processing</strong> — Anthropic's Claude models, accessed through Amazon Bedrock (Amazon Web Services) or Anthropic's API, receive the practice data described in section 3 to generate AI Analyst reports and Ask-the-coach answers. They receive no advertising identifier and no account credentials.</li>
-      <li><strong>Diagnostics &amp; analytics</strong> — none today; if a crash-reporting or product-analytics tool is added, it will be configured without advertising identifiers and listed here.</li>
+      <li><strong>Crash reporting</strong> — Firebase Crashlytics (Google), which receives the crash reports described in section 2. It is configured without advertising identifiers. No product-analytics tool is used.</li>
       <li><strong>Advertising (free plan)</strong> — Google AdMob, to serve and measure the sponsored cards; section 5 lists what it receives and how to opt out.</li>
     </ul>
     <p>We may also disclose information if required by law, or as part of a merger or acquisition (in which case this policy continues to apply to data collected under it).</p>
