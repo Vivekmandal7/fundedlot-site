@@ -517,7 +517,8 @@ table.compare td.good { color: var(--accent); font-weight: 600; }
 .mrow .trend.up { color: var(--loss); background: var(--loss-tint); border: 1px solid var(--loss-line); }
 
 /* ------------------------------------------------------------- pricing ---- */
-.pricing { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; align-items: stretch; }
+.pricing { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; align-items: stretch; }
+@media (max-width: 1180px) { .pricing { grid-template-columns: repeat(2, 1fr); } }
 .price-card {
   background-image: var(--card-grad); border: 1px solid var(--card-line); border-radius: 26px;
   padding: 38px 34px; display: flex; flex-direction: column; position: relative;
@@ -532,7 +533,7 @@ table.compare td.good { color: var(--accent); font-weight: 600; }
 }
 [data-theme="light"] .price-card .flag { background: #101109; color: #C9F158; }
 .price-card h3 { font-size: 12px; font-weight: 500; color: var(--body-c); font-family: var(--mono); letter-spacing: .24em; text-transform: uppercase; }
-.price-card .amount { font-family: var(--mono); font-size: 46px; font-weight: 600; letter-spacing: -.05em; margin: 10px 0 2px; color: var(--text); }
+.price-card .amount { font-family: var(--mono); font-size: clamp(36px, 3.1vw, 46px); font-weight: 600; letter-spacing: -.05em; margin: 10px 0 2px; color: var(--text); }
 .price-card .amount small { font-size: 14px; color: var(--faint); font-weight: 500; letter-spacing: 0; }
 .price-card .per { color: var(--faint); font-size: 13px; margin-bottom: 24px; font-family: var(--mono); }
 .price-card ul { list-style: none; margin: 0 0 30px; padding: 0; display: grid; gap: 13px; }
@@ -995,7 +996,7 @@ details.faq .a p:last-child { margin-bottom: 0; }
   .hero .sweep { left: 70%; }
   .cards.c3, .steps, .post-grid, .related-grid, .gloss-grid { grid-template-columns: repeat(2, 1fr); }
   .bento .b4, .bento .b3, .bento .b2 { grid-column: span 3; }
-  .pricing { grid-template-columns: 1fr; max-width: 500px; margin: 0 auto; }
+  .pricing { grid-template-columns: repeat(2, 1fr); }
   .lab-grid, .feat-row { grid-template-columns: 1fr; gap: 40px; }
   .lab-grid { padding: 96px 0; }
   .feat-row:nth-child(even) .copy { order: 0; }
@@ -1010,6 +1011,7 @@ details.faq .a p:last-child { margin-bottom: 0; }
   .device-stage { margin-bottom: -110px; }
 }
 @media (max-width: 760px) {
+  .pricing { grid-template-columns: 1fr; max-width: 500px; margin: 0 auto; }
   :root { --gutter: 24px; }
   body { font-size: 16px; }
   .section { padding: 84px 0; }
