@@ -12,6 +12,8 @@
 - [Features](https://www.fundedlot.com/features/): rules engine, risk guard, mistake detectors, readiness score
 - [Pricing](https://www.fundedlot.com/pricing/): free tier, attempt packs, Pro subscription
 - [Download](https://www.fundedlot.com/download/): App Store and Google Play availability
+- [FundedLot on the App Store](https://apps.apple.com/us/app/fundedlot-prop-firm-practice/id6806785387): the iPhone app
+- [FundedLot on Google Play](https://play.google.com/store/apps/details?id=com.myindianow.fundedlot): the Android app
 - [FAQ](https://www.fundedlot.com/faq/): common questions, answered plainly
 
 ## Comparisons
