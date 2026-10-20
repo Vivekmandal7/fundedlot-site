@@ -154,6 +154,10 @@
 <script>
 (function () {
   var API = 'https://fundedlot-server.0tstyd219apn2.us-east-1.cs.amazonlightsail.com/api/prop/withdrawal-form';
+  // A simulated funded account's payout is practice: no money is sent and no
+  // real payout details are asked for (the server keeps none either).
+  var practice = false;
+  function submitLabel() { return practice ? 'Complete practice payout' : 'Send my payout details'; }
   var card = document.getElementById('wd-card');
   var $ = function (id) { return document.getElementById(id); };
   var token = new URLSearchParams(location.search).get('t') || '';
@@ -212,7 +216,17 @@
     .then(function (res) {
       var s = res.body || {};
       if (s.state === 'ready') {
-        state('ready', 'Where should we send it?', 'Tell us how you want to be paid. It takes a minute.');
+        practice = s.simulated === true;
+        if (practice) {
+          state('ready', 'Practice payout', 'This funded account is simulated, so no real money is sent. Pick a method to see how a real payout works. No real details are needed.');
+          $('wd-details').closest('.wd-field').hidden = true;
+          $('wd-confirm').parentNode.querySelector('span').textContent =
+            'I understand this is a practice payout on a simulated account and that no money will be sent.';
+          $('wd-submit').textContent = submitLabel();
+          document.querySelector('.wd-amount-label').textContent = 'Practice payout';
+        } else {
+          state('ready', 'Where should we send it?', 'Tell us how you want to be paid. It takes a minute.');
+        }
         showAmount(s);
         $('wd-form').hidden = false;
       } else if (s.state === 'expired') { fail('EXPIRED', 410); }
@@ -240,7 +254,7 @@
     var body = {
       t: token,
       method: picked ? picked.value : '',
-      details: $('wd-details').value.trim(),
+      details: practice ? '' : $('wd-details').value.trim(),
       fullName: $('wd-name').value.trim(),
       confirm: $('wd-confirm').checked
     };
@@ -249,9 +263,14 @@
     fetch(API, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' }, body: JSON.stringify(body) })
       .then(function (r) { return r.json().then(function (j) { return { status: r.status, body: j }; }); })
       .then(function (res) {
-        btn.disabled = false; btn.textContent = 'Send my payout details';
+        btn.disabled = false; btn.textContent = submitLabel();
         if (res.body && res.body.ok) {
-          state('done', 'Details received', 'Thank you. A receipt is on its way to your email.');
+          if (practice) {
+            state('done', 'Practice payout complete', 'That is the whole payout flow. A simulated account sends no money; a receipt is on its way to your email.');
+            $('wd-done').querySelector('.wd-steps').hidden = true;
+          } else {
+            state('done', 'Details received', 'Thank you. A receipt is on its way to your email.');
+          }
           $('wd-form').hidden = true; $('wd-done').hidden = false;
           window.scrollTo({ top: 0, behavior: 'smooth' });
         } else if (res.status === 422 || res.status === 429) {
@@ -261,7 +280,7 @@
         }
       })
       .catch(function () {
-        btn.disabled = false; btn.textContent = 'Send my payout details';
+        btn.disabled = false; btn.textContent = submitLabel();
         err.textContent = 'We could not reach FundedLot. Check your connection and try again.'; err.hidden = false;
       });
   });
