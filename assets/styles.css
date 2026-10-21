@@ -1342,3 +1342,11 @@ details.faq .a p:last-child { margin-bottom: 0; }
   .mn-feed .mn-feed-side { flex-wrap: wrap; }
   .mn-live { grid-template-columns: repeat(2, 1fr); }
 }
+
+/* Guide videos (build.mjs {{GUIDE_VIDEO:id}}) */
+.gv { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 340px); gap: 48px; align-items: center; max-width: 920px; margin: 0 auto; }
+.gv-copy h2 { margin: 10px 0 12px; }
+.gv-copy p { color: var(--muted, #69707A); max-width: 46ch; }
+.gv-note { font-size: 14px; }
+.gv-video { width: 100%; max-width: 340px; height: auto; aspect-ratio: 9 / 16; border-radius: 28px; background: #101109; box-shadow: 0 24px 60px rgba(17, 19, 24, .18); justify-self: center; }
+@media (max-width: 760px) { .gv { grid-template-columns: 1fr; gap: 24px; text-align: center; } .gv-copy p { margin-inline: auto; } }
