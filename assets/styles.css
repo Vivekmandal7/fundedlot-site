@@ -1266,3 +1266,79 @@ details.faq .a p:last-child { margin-bottom: 0; }
   .wd-card { padding: 28px 20px 24px; }
   .wd-methods { grid-template-columns: repeat(2, 1fr); }
 }
+
+/* ------------------------------------------------------------- mentor ---- */
+/* fundedlot.com/mentor: proof first, two plans, every call to action the app.
+   Live blocks are baked at build time (mentor-live.mjs). Reuses page-hero,
+   stats-row, steps, price-card, faq, cta-panel. */
+.mn-hero .inner { max-width: 960px; }
+.mn-proofline { margin: 22px 0 0; font-family: var(--mono); font-size: 12.5px; letter-spacing: .04em; color: var(--body-c); max-width: 46em; line-height: 1.6; }
+.mn-ctas { margin-top: 30px; }
+.mn-ctas .store-badges { justify-content: flex-start; }
+.mn-hero .hero-note a { color: var(--accent); }
+.mn-stats .stat .lbl b { font-family: var(--mono); color: var(--text); font-weight: 600; }
+.mn-two-col { display: grid; grid-template-columns: 1.15fr 1fr; gap: 64px; align-items: start; }
+.mn-two-col .section-head { margin-bottom: 30px; }
+.mn-wall { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--hair); }
+.mn-wall li {
+  display: grid; grid-template-columns: 14px 1fr auto; align-items: center; gap: 14px;
+  padding: 14px 0; border-bottom: 1px solid var(--hair); font-size: 15px; color: var(--body-c);
+}
+.mn-wall li b { color: var(--text); font-weight: 600; }
+.mn-wall li .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 4px var(--accent-tint); }
+.mn-wall .mn-wall-meta { display: block; font-family: var(--mono); font-size: 12px; color: var(--faint); margin-top: 2px; }
+.mn-wall li time { font-family: var(--mono); font-size: 12px; color: var(--faint); white-space: nowrap; }
+.mn-wall li.mn-empty { display: block; padding: 18px 0; font-size: 15px; color: var(--body-c); }
+.mn-mentors { display: grid; gap: 16px; }
+.mn-mentor .mn-mentor-head { display: flex; align-items: baseline; justify-content: space-between; gap: 14px; flex-wrap: wrap; }
+.mn-mentor h3 { margin-bottom: 10px; }
+.mn-seats { font-family: var(--mono); font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: var(--accent); white-space: nowrap; }
+.mn-firms, .mn-tz { font-family: var(--mono); font-size: 12.5px; color: var(--faint); margin: 12px 0 0 !important; }
+.mn-tz { margin-top: 4px !important; }
+.mn-ann { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+.mn-ann-card h3 { font-size: 18px; margin-bottom: 8px; }
+.mn-ann-card p { font-size: 15px; }
+.mn-feed { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--hair); max-width: 760px; }
+.mn-feed li { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 14px 0; border-bottom: 1px solid var(--hair); }
+.mn-feed .mn-feed-head b { color: var(--text); font-weight: 600; font-size: 15.5px; letter-spacing: -.016em; }
+.mn-feed .mn-feed-meta { display: block; font-family: var(--mono); font-size: 12px; color: var(--faint); margin-top: 3px; }
+.mn-feed .mn-feed-side { display: flex; align-items: center; gap: 12px; flex: none; }
+.mn-feed-join { font-family: var(--mono); font-size: 11.5px; font-weight: 600; letter-spacing: .04em; color: var(--accent); white-space: nowrap; }
+.mn-live { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin: 0 0 34px; max-width: 760px; }
+.mn-live-tile { background-image: var(--card-grad); border: 1px solid var(--card-line); border-radius: 18px; padding: 16px 18px; box-shadow: var(--card-shadow); }
+.mn-live-tile b { display: block; font-family: var(--mono); font-size: 20px; font-weight: 600; letter-spacing: -.03em; color: var(--text); line-height: 1.1; }
+.mn-live-tile span { display: block; font-family: var(--mono); font-size: 10.5px; letter-spacing: .14em; text-transform: uppercase; color: var(--faint); margin-top: 8px; }
+.mn-opens { max-width: 560px; }
+.mn-opens h3 { margin-bottom: 8px; }
+.mn-empty-line { color: var(--body-c); font-size: 15px; }
+.mn-chip.is-pin { background: var(--accent-tint); border-color: var(--accent-line); color: var(--accent); margin-bottom: 12px; }
+.mn-setups { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+.mn-setup { padding: 26px 26px 22px; display: flex; flex-direction: column; }
+.mn-setup .mn-setup-head { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 14px; }
+.mn-setup .mn-setup-head b { font-size: 19px; letter-spacing: -.024em; color: var(--text); }
+.mn-setup .data-rows { margin-top: 0; }
+.mn-why { font-size: 14.5px; color: var(--body-c); margin: 16px 0 0; }
+.mn-posted { font-family: var(--mono); font-size: 11.5px; color: var(--faint); margin: 14px 0 0 !important; }
+.mn-chip {
+  display: inline-block; font-family: var(--mono); font-size: 10.5px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase;
+  padding: 5px 10px; border-radius: var(--r-pill); border: 1px solid var(--card-line); color: var(--body-c); white-space: nowrap;
+}
+.mn-chip.is-hit { background: var(--accent-tint); border-color: var(--accent-line); color: var(--accent); }
+.mn-chip.is-inv { background: var(--loss-tint); border-color: var(--loss-line); color: var(--loss); }
+.mn-chip.is-open { border-style: dashed; }
+.mn-footer { text-align: center; font-family: var(--mono); font-size: 12px; letter-spacing: .06em; color: var(--faint); margin: 36px 0 0; }
+.pricing.mn-two { grid-template-columns: repeat(2, 1fr); max-width: 860px; margin: 0 auto; }
+.mn-who { font-size: 13.5px; color: var(--faint); margin: 0 0 26px; }
+.mn-risk { max-width: 60em; margin-left: auto; margin-right: auto; }
+@media (max-width: 1000px) {
+  .mn-two-col { grid-template-columns: 1fr; gap: 56px; }
+  .mn-setups, .mn-ann { grid-template-columns: 1fr; max-width: 560px; }
+}
+@media (max-width: 760px) {
+  .pricing.mn-two { grid-template-columns: 1fr; }
+  .mn-wall li { grid-template-columns: 12px 1fr; }
+  .mn-wall li time { grid-column: 2; justify-self: start; }
+  .mn-feed li { flex-wrap: wrap; }
+  .mn-feed .mn-feed-side { flex-wrap: wrap; }
+  .mn-live { grid-template-columns: repeat(2, 1fr); }
+}
