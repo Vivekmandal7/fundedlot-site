@@ -89,13 +89,13 @@
   <div class="inner">
     <span class="eyebrow">Legal</span>
     <h1>Privacy Policy</h1>
-    <p class="sub">Effective 2 September 2026. Applies to the FundedLot mobile app and fundedlot.com.</p>
+    <p class="sub">Effective 21 October 2026. Applies to the FundedLot mobile app and fundedlot.com.</p>
   </div>
 </div></div>
 
 <section class="section">
   <div class="container"><div class="prose" style="margin:0 auto">
-    <p class="lede">The short version: we collect the minimum needed to run a practice app — an email if you create an account, your practice activity, purchase records from the app stores, and basic diagnostics. On the free plan, clearly labelled sponsored cards are served by Google AdMob, which may use your device's advertising identifier; FundedLot Pro removes ads entirely. We don't sell your data, we don't collect financial credentials, and you can delete your account and data at any time.</p>
+    <p class="lede">The short version: we collect the minimum needed to run a practice app — an email if you create an account, your practice activity, purchase records from the app stores, basic diagnostics, and first-party usage events (what you do in the app, sent only to our own server, which you can switch off in Settings). On the free plan, clearly labelled sponsored cards are served by Google AdMob, which may use your device's advertising identifier; FundedLot Pro removes ads entirely. We don't sell your data, we don't collect financial credentials, and you can delete your account and data at any time.</p>
 
     <h2>1. Who we are</h2>
     <p>FundedLot ("FundedLot", "we", "us") operates the FundedLot mobile application and the website fundedlot.com (together, the "Service"). For any privacy question or request, contact <a href="mailto:support@fundedlot.com">support@fundedlot.com</a>.</p>
@@ -110,7 +110,8 @@
     <ul>
       <li><strong>Practice activity</strong> — your simulated trades, evaluations, journal entries, settings and coach results. This is simulation data on virtual funds; it is not real financial account data.</li>
       <li><strong>Purchase records</strong> — when you buy an attempt pack or subscription, we receive transaction confirmations (product, time, status) from Apple, Google, and our purchase-management provider. We never see or store your card number.</li>
-      <li><strong>Device &amp; crash data</strong> — device model, operating system version, app version and language, and, if the app crashes, a crash report: the error and its stack trace, the app version, your device model and OS version, and a Firebase installation identifier. Crash reports carry no advertising identifier, no e-mail address and no trade data. The app ships no usage-analytics SDK.</li>
+      <li><strong>Device &amp; crash data</strong> — device model, operating system version, app version and language, and, if the app crashes, a crash report: the error and its stack trace, the app version, your device model and OS version, and a Firebase installation identifier. Crash reports carry no advertising identifier, no e-mail address and no trade data. The app ships no third-party analytics SDK.</li>
+      <li><strong>Usage events (first-party analytics)</strong> — while <strong>Settings → Usage sharing</strong> is on, the app tells our own server what you do in it: for example that you installed or opened the app, viewed a screen, opened or closed a practice trade (the market, the size, and which account), started a challenge, viewed the Prop catalogue, or opened one of our in-app messages. Each event carries its time, the app version, the platform (Android, iOS or web) and your time-zone offset. Events are tied to a random identifier the app creates on your device — not your advertising identifier — and, while you are signed in, to your account ID. They never contain your name, e-mail address, phone number or balances: our server refuses any value that looks like an e-mail address or a phone number. Our server also records, for the same purposes, facts it already holds about your account: cloud and Prop trades, challenge orders and results, and withdrawal requests.</li>
       <li><strong>Advertising identifier (free plan only)</strong> — on the free plan, Google AdMob may read your device's advertising identifier to serve and measure the sponsored cards; on iOS this happens only if you allow tracking when asked. Pro subscribers see no ads and the identifier is not used. Details and controls are in section 5.</li>
     </ul>
     <p><strong>What we do not collect:</strong> real brokerage or bank credentials, government identification, precise location, or your contacts. The app has no real-money trading, so it never asks for payment details outside the app stores' own billing systems.</p>
@@ -120,7 +121,8 @@
       <li>To provide the Service: run simulations, sync your data across devices when signed in, and restore purchases.</li>
       <li>To operate coaching features: your practice history is analyzed inside the Service to produce mistake reports, grades and readiness estimates for you. The mistake detectors, grades and readiness estimate run on your device.</li>
       <li>To answer you with AI: when you open an AI Analyst report or use Ask-the-coach, the practice data those features need (recent simulated trades, the coach's findings, and the question you typed) is sent to our server, which generates the response with Anthropic's Claude models, accessed through Amazon Bedrock (Amazon Web Services) or Anthropic's API. Nothing is sent until you use one of those features.</li>
-      <li>To fix and improve: crash reports, so we can find and fix the bug that caused them.</li>
+      <li>To fix and improve: crash reports, so we can find and fix the bug that caused them; and usage events, so we can see which features are used, where people get stuck, and whether a change helped — as counts, funnels and retention figures in our own admin tools.</li>
+      <li>To talk to you inside the app: usage events decide which in-app messages you get — a welcome, how your challenge's rules work once you start one, a reminder if a challenge you started has no trade yet, next steps after a challenge is passed or ended, and a note if you have not opened the app for a week. They appear in the app's inbox; if you are signed in they may also arrive as a push notification (subject to your notification settings) or a service email. We do not send these push notifications or emails between 22:00 and 08:00 your local time.</li>
       <li>To communicate: service messages (e.g., purchase receipts, important changes) and replies to your support requests. Marketing emails, if we ever send them, will be opt-in with one-tap unsubscribe.</li>
       <li>To comply with law and enforce our <a href="/terms/">terms</a>.</li>
     </ul>
@@ -132,7 +134,7 @@
       <li><strong>App stores &amp; billing</strong> — Apple App Store, Google Play, and our subscription-management provider, to process and validate purchases.</li>
       <li><strong>Cloud infrastructure</strong> — hosting, databases, and authentication providers that store account and sync data.</li>
       <li><strong>AI processing</strong> — Anthropic's Claude models, accessed through Amazon Bedrock (Amazon Web Services) or Anthropic's API, receive the practice data described in section 3 to generate AI Analyst reports and Ask-the-coach answers. They receive no advertising identifier and no account credentials.</li>
-      <li><strong>Crash reporting</strong> — Firebase Crashlytics (Google), which receives the crash reports described in section 2. It is configured without advertising identifiers. No product-analytics tool is used.</li>
+      <li><strong>Crash reporting</strong> — Firebase Crashlytics (Google), which receives the crash reports described in section 2. It is configured without advertising identifiers. No third-party product-analytics tool is used: usage events are stored in our own database on our cloud infrastructure provider (Google Cloud Firestore) and are never given to advertisers.</li>
       <li><strong>Advertising (free plan)</strong> — Google AdMob, to serve and measure the sponsored cards; section 5 lists what it receives and how to opt out.</li>
     </ul>
     <p>We may also disclose information if required by law, or as part of a merger or acquisition (in which case this policy continues to apply to data collected under it).</p>
@@ -147,7 +149,10 @@
       <li><strong>Content.</strong> We ask Google to apply a "PG" maximum ad-content rating. Sponsored cards are never financial advice and never an endorsement by us.</li>
     </ul>
 
+    <p><strong>Usage sharing.</strong> You can switch first-party usage events off at any time in <strong>Settings → Usage sharing</strong> ("Share app usage to improve FundedLot"). When you do, the app stops sending usage events, our server deletes the events it already received from that device and stops sending it in-app messages. Switching it back on starts again from that moment.</p>
+
     <h2>6. Retention</h2>
+    <p>Usage events are deleted automatically 90 days after we receive them. A short summary per device (when the app was installed, the days it was used, which steps such as a first trade were reached) is deleted 180 days after the device was last used, and in-app messages 180 days after they were sent. Daily totals per event type, which identify no device or person, are kept for trend charts. Deleting your account also deletes your usage events, device summaries and messages.</p>
     <p>Account data and practice history are kept while your account exists. If you delete your account, associated personal data is deleted or irreversibly anonymized within 30 days, except records we must keep for legal, tax, or fraud-prevention reasons (kept only as long as required). Local-only practice data lives on your device and is removed when you delete the app or clear its data.</p>
 
     <h2>7. Your rights</h2>
