@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Trailing Drawdown — Meaning in Prop Trading — FundedLot</title>
-<meta name="description" content="A trailing drawdown is a loss floor that follows your equity high-water mark upward. How it is calculated, with a worked example and variants.">
+<title>Trailing Drawdown Explained: How It Moves, With Example — FundedLot</title>
+<meta name="description" content="A trailing drawdown is a loss floor that rises with your highest equity and never falls. How it moves on a $100,000 account, when it locks, and a free calculator to compare it with static.">
 <link rel="canonical" href="https://www.fundedlot.com/glossary/trailing-drawdown/">
 <meta name="fl-api" content="https://fundedlot-server.0tstyd219apn2.us-east-1.cs.amazonlightsail.com">
 <meta name="fl-key" content="AIzaSyDC8ElwIHAfeUY4uvuupcLtXAga8hKlx3g">
@@ -28,8 +28,8 @@
 <meta name="apple-itunes-app" content="app-id=6806785387">
 <meta property="og:site_name" content="FundedLot">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Trailing Drawdown — Meaning in Prop Trading — FundedLot">
-<meta property="og:description" content="A trailing drawdown is a loss floor that follows your equity high-water mark upward. How it is calculated, with a worked example and variants.">
+<meta property="og:title" content="Trailing Drawdown Explained: How It Moves, With Example — FundedLot">
+<meta property="og:description" content="A trailing drawdown is a loss floor that rises with your highest equity and never falls. How it moves on a $100,000 account, when it locks, and a free calculator to compare it with static.">
 <meta property="og:url" content="https://www.fundedlot.com/glossary/trailing-drawdown/">
 <meta property="og:image" content="https://www.fundedlot.com/assets/og.png">
 <meta property="og:image:width" content="1200">
@@ -38,8 +38,8 @@
 <meta property="og:locale" content="en_US">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:site" content="@fundedlot">
-<meta name="twitter:title" content="Trailing Drawdown — Meaning in Prop Trading — FundedLot">
-<meta name="twitter:description" content="A trailing drawdown is a loss floor that follows your equity high-water mark upward. How it is calculated, with a worked example and variants.">
+<meta name="twitter:title" content="Trailing Drawdown Explained: How It Moves, With Example — FundedLot">
+<meta name="twitter:description" content="A trailing drawdown is a loss floor that rises with your highest equity and never falls. How it moves on a $100,000 account, when it locks, and a free calculator to compare it with static.">
 <meta name="twitter:image" content="https://www.fundedlot.com/assets/og.png">
 
 <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
@@ -48,8 +48,8 @@
 <link rel="alternate" type="application/rss+xml" title="FundedLot Blog" href="/feed.xml">
 <link rel="preload" href="/assets/fonts/anton.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/assets/fonts/inter-var.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="/assets/styles.css?v=2ab34c32">
-<script type="application/ld+json">[{"@context":"https://schema.org","@type":"DefinedTerm","name":"Trailing drawdown","description":"A loss limit that rises with your equity high-water mark, so giving back gains can breach an account even above its starting balance.","url":"https://www.fundedlot.com/glossary/trailing-drawdown/","inDefinedTermSet":{"@type":"DefinedTermSet","name":"FundedLot Trading Glossary","url":"https://www.fundedlot.com/glossary/"}},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.fundedlot.com/"},{"@type":"ListItem","position":2,"name":"Glossary","item":"https://www.fundedlot.com/glossary/"},{"@type":"ListItem","position":3,"name":"Trailing drawdown","item":"https://www.fundedlot.com/glossary/trailing-drawdown/"}]}]</script>
+<link rel="stylesheet" href="/assets/styles.css?v=7098c8e9">
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"DefinedTerm","name":"Trailing drawdown","description":"A maximum-loss floor that rises with the account's highest equity (or highest close) and never moves down.","url":"https://www.fundedlot.com/glossary/trailing-drawdown/","inDefinedTermSet":{"@type":"DefinedTermSet","name":"FundedLot Trading Glossary","url":"https://www.fundedlot.com/glossary/"}},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How does a trailing drawdown work?","acceptedAnswer":{"@type":"Answer","text":"The floor is set at your highest equity minus the allowance and moves up with every new high, never down."}},{"@type":"Question","name":"Does trailing drawdown count unrealized profit?","acceptedAnswer":{"@type":"Answer","text":"A real-time trailing drawdown does; an end-of-day trailing drawdown only uses the daily close."}},{"@type":"Question","name":"When does a trailing drawdown stop trailing?","acceptedAnswer":{"@type":"Answer","text":"At many firms when the floor reaches the starting balance; it then stays there."}}]},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.fundedlot.com/"},{"@type":"ListItem","position":2,"name":"Glossary","item":"https://www.fundedlot.com/glossary/"},{"@type":"ListItem","position":3,"name":"Trailing drawdown","item":"https://www.fundedlot.com/glossary/trailing-drawdown/"}]}]</script>
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
@@ -94,17 +94,98 @@
 <div class="container">
   <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a><span class="sep">/</span><a href="/glossary/">Glossary</a><span class="sep">/</span><span>Trailing drawdown</span></nav>
   <div class="article-head">
-    <h1>Trailing drawdown</h1>
-    <div class="article-meta"><span class="chip">Challenge rules</span><span>Trading glossary</span></div>
+    <h1>Trailing drawdown explained</h1>
+    <div class="article-meta"><span class="chip">Challenge rules</span><span>Trading glossary</span><span class="dot">·</span><span>Updated 24 October 2026</span></div>
   </div>
   <div class="article-layout"><div class="prose">
-  <div class="term-def"><b>Definition.</b> A loss limit that rises with your equity high-water mark, so giving back gains can breach an account even above its starting balance.</div>
-<p class="lede">A <strong>trailing drawdown</strong> is a maximum-loss floor that follows your account's equity high-water mark upward, instead of staying anchored to the starting balance.</p>
-<p>The firm tracks the highest equity the account has reached. The breach floor sits a fixed allowance below that high-water mark and ratchets: every new equity high lifts the floor, and the floor never comes back down. Giving back profits can therefore breach an account even while it is still above its starting balance.</p>
-<p>Details vary by firm. The harshest versions trail intraday equity, so the peak of an open winning trade raises the floor before you ever bank the profit. Softer versions trail <a href="/glossary/end-of-day-drawdown/">end-of-day</a> values only. Many firms also stop the floor once it reaches the starting balance — a breakeven lock — after which the account effectively carries a static floor at its initial size.</p>
-<h2>Example</h2>
-<p>A $100,000 account has a 10% trailing drawdown, so the floor starts at $90,000. Equity runs to $104,000: the floor rises to $94,000. Price then retraces and equity settles at $95,000 — the account survives, but with only $1,000 of room, where a static <a href="/glossary/max-drawdown/">maximum drawdown</a> would still allow $5,000. If equity later peaks at $110,000 under a breakeven lock, the floor stops rising at $100,000 rather than continuing to $100,000 plus.</p>
-<p>Trailing rules are commonly cited as the hardest constraint for traders who hold winners through pullbacks, and they are the main structural difference between many one-step and two-step programs; see <a href="/blog/drawdown-types-explained/">drawdown types explained</a> for the full comparison.</p>
+  <div class="term-def"><b>Definition.</b> A maximum-loss floor that rises with the account&#39;s highest equity (or highest close) and never moves down.</div>
+<p class="lede">A <strong>trailing drawdown</strong> is a maximum-loss floor that follows your highest equity upward and never moves down. It is common at futures prop firms and in some forex programs, and it is the drawdown type that surprises traders most.</p>
+<div class="quick"><b>Quick answer</b><p>With a $5,000 trailing drawdown on a $100,000 account, the floor starts at $95,000. If equity reaches $103,000, even briefly in an open trade, the floor moves to $98,000. Give the profit back and you are much closer to a breach than the balance suggests. Many firms stop trailing once the floor reaches the starting balance.</p></div>
+<h2>Example: open profit that raises the floor</h2>
+<p>You buy and the trade runs $3,000 into profit; equity peaks at $103,000 and the floor follows to $98,000. The trade then reverses to breakeven. Your balance is $100,000 again, but your room is only $2,000, not $5,000. A real-time trailing drawdown counts the peak of open profit; an <a href="/glossary/end-of-day-drawdown/">end-of-day</a> version would only have moved on the close.</p>
+
+<div class="rule-tool" data-tool="maxdd">
+  <div class="rt-head"><span class="tape">calculator</span><h3>Max drawdown: static vs trailing</h3><p>Tap your account and the max loss, then slide to the highest your equity has reached. Compare where the floor sits under each type.</p></div>
+  <div class="rt-grid">
+    <div class="rt-ctl">
+      <h4>Account size</h4><div class="opts" data-k="size"><button class="opt" type="button" data-v="10000" aria-pressed="false">$10K</button><button class="opt" type="button" data-v="25000" aria-pressed="false">$25K</button><button class="opt" type="button" data-v="50000" aria-pressed="false">$50K</button><button class="opt" type="button" data-v="100000" aria-pressed="true">$100K</button><button class="opt" type="button" data-v="200000" aria-pressed="false">$200K</button></div>
+      <h4>Max loss</h4><div class="opts" data-k="max"><button class="opt" type="button" data-v="4" aria-pressed="false">4%</button><button class="opt" type="button" data-v="5" aria-pressed="false">5%</button><button class="opt" type="button" data-v="6" aria-pressed="false">6%</button><button class="opt" type="button" data-v="8" aria-pressed="false">8%</button><button class="opt" type="button" data-v="10" aria-pressed="true">10%</button><button class="opt" type="button" data-v="12" aria-pressed="false">12%</button></div>
+      <h4>Highest equity so far <b data-o="peak"></b></h4>
+      <input type="range" data-k="peak" min="0" max="12" step="0.5" value="4" aria-label="Highest equity reached, percent above the start">
+    </div>
+    <div class="rt-out" aria-live="polite">
+      <div><span>Static floor</span><b data-o="static"></b></div>
+      <div><span>Trailing floor</span><b data-o="trail"></b></div>
+      <div><span>Room under trailing</span><b data-o="room"></b></div>
+      <p data-o="note"></p>
+    </div>
+  </div>
+</div>
+<h2>Trading with a trailing drawdown</h2>
+<ul>
+<li>Take partial profit or move the stop to entry earlier; open profit you give back costs room.</li>
+<li>Size smaller at the start, before the floor locks at the starting balance.</li>
+<li>Prefer end-of-day trailing or <a href="/glossary/static-drawdown/">static</a> programs if your trades swing widely.</li>
+</ul>
+<p>More: <a href="/blog/drawdown-types-explained/">prop firm drawdown rules explained</a> and the <a href="/blog/trailing-drawdown-survival-guide/">trailing drawdown survival guide</a>.</p>
+
+<div class="signals-box">
+  <div><b>Signals sized to these rules</b><span>FundedLot sends trading signals with an entry, a stop loss and three targets, sized so one stop never uses more than a quarter of your daily limit or a tenth of your max loss. Practice the exact rules free, then <a href="/crack-funded-account/">crack the funded account</a>.</span></div>
+  <a class="btn btn-volt" href="/prop-firm-signals/">Prop firm signals</a>
+</div>
+<h2>FAQ</h2>
+<details class="faq"><summary>How does a trailing drawdown work?</summary><div class="a"><p>The floor is set at your highest equity minus the allowance and moves up with every new high, never down.</p></div></details>
+<details class="faq"><summary>Does trailing drawdown count unrealized profit?</summary><div class="a"><p>A real-time trailing drawdown does; an end-of-day trailing drawdown only uses the daily close.</p></div></details>
+<details class="faq"><summary>When does a trailing drawdown stop trailing?</summary><div class="a"><p>At many firms when the floor reaches the starting balance; it then stays there.</p></div></details><script>
+(function () {
+  var usd = function (n) { return (n < 0 ? '\u2212' : '') + '$' + Math.round(Math.abs(n)).toLocaleString('en-US'); };
+  document.querySelectorAll('[data-tool]').forEach(function (box) {
+    var kind = box.getAttribute('data-tool'), st = {};
+    box.querySelectorAll('.opts').forEach(function (g) {
+      var on = g.querySelector('[aria-pressed="true"]'); st[g.getAttribute('data-k')] = on ? parseFloat(on.getAttribute('data-v')) : null;
+      g.addEventListener('click', function (e) {
+        var b = e.target.closest('.opt'); if (!b) return;
+        g.querySelectorAll('.opt').forEach(function (x) { x.setAttribute('aria-pressed', x === b ? 'true' : 'false'); });
+        st[g.getAttribute('data-k')] = parseFloat(b.getAttribute('data-v')); render();
+      });
+    });
+    box.querySelectorAll('input[type=range]').forEach(function (r) {
+      st[r.getAttribute('data-k')] = parseFloat(r.value);
+      r.addEventListener('input', function () { st[r.getAttribute('data-k')] = parseFloat(r.value); render(); });
+    });
+    function out(k, v, tone) { var el = box.querySelector('[data-o="' + k + '"]'); if (!el) return; el.textContent = v; if (tone !== undefined) el.className = tone; }
+    function render() {
+      if (kind === 'daily') {
+        var limit = st.size * st.daily / 100, today = st.size * st.today / 100;
+        var room = limit + today, stop = st.size * st.risk / 100;
+        out('today', (st.today > 0 ? '+' : '') + st.today + '% (' + usd(today) + ')');
+        out('floor', usd(st.size + today - room));
+        out('room', usd(Math.max(0, room)), room <= 0 ? 'neg' : room < limit * 0.3 ? 'warn' : 'pos');
+        var n = room > 0 ? Math.floor(room / stop + 1e-9) : 0;
+        out('stops', n + (n === 1 ? ' stop' : ' stops'), n <= 1 ? 'neg' : n <= 3 ? 'warn' : 'pos');
+        out('note', room <= 0 ? 'The daily limit is reached: the account is breached.' : n === 0 ? 'Not even one full stop fits before the limit. Stop for the day.' : n === 1 ? 'One more full stop uses the rest of the day. Stop after it.' : 'Firms measure from the day\u2019s starting balance or equity, and count open losses. Check which your firm uses.');
+      } else if (kind === 'maxdd') {
+        var max = st.size * st.max / 100, peak = st.size * (1 + st.peak / 100);
+        var trail = Math.min(st.size, peak - max);
+        out('peak', '+' + st.peak + '% (' + usd(peak) + ')');
+        out('static', usd(st.size - max));
+        out('trail', usd(trail), trail > st.size - max ? 'warn' : '');
+        out('room', usd(peak - trail), 'pos');
+        out('note', trail >= st.size ? 'This trailing floor has locked at your starting balance, as most firms do once you are up by the max loss.' : 'A trailing floor rises with your highest equity; a static one never moves. Some firms trail on closed balance only (end of day).');
+      } else {
+        if (st.best > st.total) { st.best = st.total; var br = box.querySelector('input[data-k=best]'); br.value = st.best; }
+        var share = st.best / st.total * 100, need = st.best / (st.cap / 100);
+        out('total', usd(st.total)); out('best', usd(st.best));
+        out('share', share.toFixed(0) + '%', share <= st.cap ? 'pos' : 'neg');
+        out('verdict', share <= st.cap ? 'Passes' : 'Not yet', share <= st.cap ? 'pos' : 'neg');
+        out('need', usd(Math.max(st.total, need)));
+        out('note', share <= st.cap ? 'Your best day is within the cap. Keep each new day below ' + st.cap + '% of the running total.' : 'Trade on until total profit reaches ' + usd(need) + ' (' + usd(need - st.total) + ' more) at the same size. At most firms this delays a pass or payout; it is not a breach.');
+      }
+    }
+    render();
+  });
+})();
+</script>
 <h2>Related terms</h2><div class="term-chips"><a class="term-chip" href="/glossary/max-drawdown/">Maximum drawdown</a><a class="term-chip" href="/glossary/end-of-day-drawdown/">End-of-day drawdown</a><a class="term-chip" href="/glossary/drawdown/">Drawdown</a><a class="term-chip" href="/glossary/equity/">Equity</a><a class="term-chip" href="/glossary/account-breach/">Account breach</a></div>
 
 <div class="cta-inline">
