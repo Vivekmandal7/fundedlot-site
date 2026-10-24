@@ -765,7 +765,13 @@
       e.preventDefault();
       FL.openSignIn({ next: a.getAttribute('data-next') || null });
     });
-    refreshRecord();
+    // The record is baked into the page; the fresh copy waits until the page has
+    // loaded and gone idle, so the API call never competes with the first paint.
+    var refreshLater = function () {
+      if ('requestIdleCallback' in window) requestIdleCallback(refreshRecord, { timeout: 4000 });
+      else setTimeout(refreshRecord, 1500);
+    };
+    if (document.readyState === 'complete') refreshLater(); else window.addEventListener('load', refreshLater);
     glow();
     document.querySelectorAll('[data-replay]').forEach(replay);
     motion();
