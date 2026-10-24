@@ -1,5 +1,7 @@
 User-agent: *
 Allow: /
+Disallow: /account/
+Disallow: /get/
 Disallow: /withdraw/
 
 Sitemap: https://www.fundedlot.com/sitemap.xml

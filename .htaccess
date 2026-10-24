@@ -12,8 +12,7 @@ RewriteRule ^(.*)$ https://www.fundedlot.com/$1 [R=301,L]
 # Brand-misspelling and vanity paths
 RedirectMatch 301 ^/funded-lot(/.*)?$ /
 RedirectMatch 301 ^/fundedlot(/.*)?$ /
-RedirectMatch 301 ^/app/?$ /download/
-RedirectMatch 301 ^/get/?$ /download/
+RedirectMatch 301 ^/app/?$ /get/
 
 <IfModule mod_headers.c>
   Header always set X-Content-Type-Options "nosniff"

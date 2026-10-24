@@ -1,17 +1,31 @@
 # FundedLot
 
-> FundedLot (also written "Funded Lot") is a prop-firm challenge practice app for iOS and Android.
-> It is an educational trading simulator: real market prices, the exact evaluation rules
-> (profit targets, daily loss limits, static and trailing drawdown, minimum trading days),
-> a pre-trade risk guard, and a mistake engine that detects and prices trading errors.
-> Virtual funds only. FundedLot is not a prop firm, not a broker, offers no real-money
-> trading, no funded accounts, and no payouts, and is not affiliated with any prop firm.
+> FundedLot: Prop Firm Signals (also written "Funded Lot") is an iOS and Android app with
+> trading signals for forex, gold and silver, US indices and crypto. Each signal has an entry,
+> a stop loss and three targets (TP1-TP3), and the app sizes it for the member's account and
+> their prop firm's daily loss and max loss limits. AI signals are posted at the live price
+> and kept on a public record with every win and loss. Members also get a 1:1 mentor, an AI
+> coach, and free prop firm challenge practice on virtual funds. Signals arrive in the app and
+> in a Telegram room. People sign in and save their trading plan on the website; the
+> subscription (FundedLot Mentorship, monthly or yearly) is bought in the app through the App
+> Store or Google Play. FundedLot is not a broker, holds no client money, offers no funded
+> accounts or payouts, and is not affiliated with any prop firm. Signals are educational
+> analysis, not financial advice.
+
+## Signals
+- [Trading signals](https://www.fundedlot.com/signals/): every market and platform, the public AI record, a sizing calculator
+- [Prop firm signals](https://www.fundedlot.com/prop-firm-signals/): signals sized to FTMO-style daily loss and max loss rules
+- [Forex signals](https://www.fundedlot.com/signals/forex/): EUR/USD, GBP/USD, USD/JPY, AUD/USD, USD/CAD
+- [Gold & silver signals](https://www.fundedlot.com/signals/gold/): XAU/USD (gold), XAG/USD (silver)
+- [Indices signals](https://www.fundedlot.com/signals/indices/): US30 (Dow 30), NAS100 (Nasdaq 100), SPX500 (S&P 500)
+- [Crypto signals](https://www.fundedlot.com/signals/crypto/): BTC/USD, ETH/USD, SOL/USD
+- [Get the app](https://www.fundedlot.com/get/): opens the right store on a phone
 
 ## Product
 - [How it works](https://www.fundedlot.com/how-it-works/): the practice loop — pick rules, trade, read the autopsy, retry
 - [Features](https://www.fundedlot.com/features/): rules engine, risk guard, mistake detectors, readiness score
-- [Pricing](https://www.fundedlot.com/pricing/): free tier, attempt packs, Pro subscription
-- [Mentor](https://www.fundedlot.com/mentor/): paid room — daily setups with entry zones, a mentor who passed, verified proof wall; Circle and Mentor 1:1 plans, sold on the web and in the app
+- [Pricing](https://www.fundedlot.com/pricing/): free tier and the one subscription, FundedLot Mentorship, bought in the app
+- [Mentorship](https://www.fundedlot.com/mentor/): signals sized to your rules, a 1:1 mentor, the AI coach and a money-back guarantee
 - [Download](https://www.fundedlot.com/download/): App Store and Google Play availability
 - [FundedLot on the App Store](https://apps.apple.com/us/app/fundedlot-prop-firm-practice/id6806785387): the iPhone app
 - [FundedLot on Google Play](https://play.google.com/store/apps/details?id=com.myindianow.fundedlot): the Android app
