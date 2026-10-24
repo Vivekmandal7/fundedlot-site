@@ -14,6 +14,18 @@
 
 ## Signals
 - [Trading signals](https://www.fundedlot.com/signals/): every market and platform, the public AI record, a sizing calculator
+- [Free trading signals record](https://www.fundedlot.com/free-trading-signals/): every closed AI signal with its result
+- [How to crack a funded account](https://www.fundedlot.com/crack-funded-account/): passing a prop firm challenge, step by step
+- [Funded trading platform](https://www.fundedlot.com/funded-trading-platform/): the app for prop firm traders
+- [Nifty signals](https://www.fundedlot.com/nifty-signals/): Nifty setups sized in rupees, with a position size calculator
+- [Bank Nifty signals](https://www.fundedlot.com/bank-nifty-signals/): Bank Nifty setups sized in rupees, with a position size calculator
+- [Trading signals in India](https://www.fundedlot.com/signals/india/): local hours and rules
+- [Trading signals in Pakistan](https://www.fundedlot.com/signals/pakistan/): local hours and rules
+- [Trading signals in Nigeria](https://www.fundedlot.com/signals/nigeria/): local hours and rules
+- [Trading signals in South Africa](https://www.fundedlot.com/signals/south-africa/): local hours and rules
+- [Trading signals in UAE](https://www.fundedlot.com/signals/uae/): local hours and rules
+- [Trading signals in UK](https://www.fundedlot.com/signals/uk/): local hours and rules
+- [Trading signals in US](https://www.fundedlot.com/signals/usa/): local hours and rules
 - [Prop firm signals](https://www.fundedlot.com/prop-firm-signals/): signals sized to FTMO-style daily loss and max loss rules
 - [Forex signals](https://www.fundedlot.com/signals/forex/): EUR/USD, GBP/USD, USD/JPY, AUD/USD, USD/CAD
 - [Gold & silver signals](https://www.fundedlot.com/signals/gold/): XAU/USD (gold), XAG/USD (silver)

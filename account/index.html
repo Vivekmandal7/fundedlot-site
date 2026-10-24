@@ -46,10 +46,9 @@
 <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
 <link rel="manifest" href="/site.webmanifest">
 <link rel="alternate" type="application/rss+xml" title="FundedLot Blog" href="/feed.xml">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Anton&family=Caveat:wght@600&family=Fraunces:opsz,wght@9..144,600..700&family=Inter:opsz,wght@14..32,400..800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/assets/styles.css?v=87631fb4">
+<link rel="preload" href="/assets/fonts/anton.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/inter-var.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/styles.css?v=6618364f">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.fundedlot.com/"},{"@type":"ListItem","position":2,"name":"My plan","item":"https://www.fundedlot.com/account/"}]}</script>
 </head>
 <body>
@@ -213,19 +212,17 @@
 
         <div data-step="4" hidden>
           <h3>Your rules</h3>
-          <p class="q" id="q4">Filled in from your firm. Check them against your dashboard; your numbers win.</p>
-          <div class="grid4">
-            <label class="fld">Daily loss %<input type="number" inputmode="decimal" step="0.1" min="0.5" max="50" id="r-daily"></label>
-            <label class="fld">Max loss %<input type="number" inputmode="decimal" step="0.1" min="1" max="100" id="r-max"></label>
-            <label class="fld">Target %<input type="number" inputmode="decimal" step="0.1" min="0" max="200" id="r-target"></label>
-            <label class="fld">Risk / trade %<input type="number" inputmode="decimal" step="0.05" min="0.05" max="5" id="r-risk"></label>
-          </div>
-          <p class="cfg-safe" id="r-hint" style="margin:14px 0 20px"></p>
+          <p class="q" id="q4">Already picked from your firm. Tap to change. Nothing to type; pick None if a rule does not apply.</p>
+          <fieldset><legend>Daily loss limit</legend><div class="opts" data-rule="dailyLossPct" data-vals="none,2,3,4,5,10"></div></fieldset>
+          <fieldset><legend>Max loss (drawdown)</legend><div class="opts" data-rule="maxLossPct" data-vals="none,4,5,6,8,10,12"></div></fieldset>
+          <fieldset><legend>Profit target</legend><div class="opts" data-rule="targetPct" data-vals="none,4,5,6,8,10"></div></fieldset>
+          <fieldset><legend>Risk per trade</legend><div class="opts" data-rule="riskPct" data-vals="auto,0.25,0.5,1,2"></div></fieldset>
+          <p class="cfg-safe" id="r-hint" style="margin:4px 0 20px"></p>
         </div>
 
         <div data-step="5" hidden>
           <h3>What gets in your way?</h3>
-          <p class="q">Your mentor reads this first.</p>
+          <p class="q">Your mentor reads this first. Optional: tap Save to skip.</p>
           <div class="opts" data-k="struggle" data-one>
             <button class="opt" type="button" data-v="drawdown">Hitting the drawdown</button>
             <button class="opt" type="button" data-v="overtrading">Overtrading</button>
@@ -248,7 +245,13 @@
       <div id="done" hidden>
         <div class="done-mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></div>
         <h2>Your plan is saved</h2>
-        <p style="color:var(--body-c);margin:0 0 20px">Open FundedLot on your phone and sign in with <b id="done-email"></b>. Mentor shows this plan, and every signal arrives sized to it.</p>
+        <p style="color:var(--body-c);margin:0 0 14px">Your plan is in your account. To find it on your phone:</p>
+        <ol class="find-steps" style="margin-bottom:18px">
+          <li><b>Open FundedLot</b> and sign in with <b id="done-email"></b>.</li>
+          <li><b>Tap the Mentor tab.</b> As a member, the <em>Your plan</em> card shows this plan; <em>Edit</em> changes it.</li>
+          <li><b>Every signal</b> arrives with the lot size for this plan.</li>
+        </ol>
+        <figure class="ps-card" style="max-width:340px;margin:0 0 20px"><img src="/assets/screens/app-plan-card-430.webp" width="860" height="970" alt="The Your plan card in the FundedLot app's Mentor tab (sample plan)" loading="lazy" decoding="async"><figcaption>Mentor tab · Your plan (sample)</figcaption></figure>
         <div class="plan-sum" id="plan-sum"></div>
         <div class="sg-ctas">
           <a class="btn btn-volt" href="/download/" data-get-app>Open the app</a>
@@ -304,7 +307,7 @@
   };
   var DRAFT = 'fl-plan-draft';
   var $ = function (id) { return document.getElementById(id); };
-  var a = { goal: null, firm: 'FTMO', phase: null, size: null, failed: 0, capital: null, platform: null, markets: [], regions: [], session: null, struggle: null, rules: null };
+  var a = { goal: null, firm: 'FTMO', phase: null, size: null, failed: 0, capital: null, platform: null, markets: ['forex', 'metals'], regions: [], session: null, struggle: null, rules: null };
   var step = 1, rulesTouched = false, applicationId = null;
 
   function boot() {
@@ -460,11 +463,8 @@
     $('f-capital').value = a.capital || '';
     if (!rulesTouched || !a.rules) a.rules = prop ? rulesFor(a.firm, a.phase) : Object.assign({ dailyLossPct: null, maxLossPct: null, targetPct: null }, { riskPct: a.rules && a.rules.riskPct != null ? a.rules.riskPct : 1 });
     var r = a.rules;
-    $('r-daily').value = r.dailyLossPct == null ? '' : r.dailyLossPct;
-    $('r-max').value = r.maxLossPct == null ? '' : r.maxLossPct;
-    $('r-target').value = r.targetPct == null ? '' : r.targetPct;
-    $('r-risk').value = r.riskPct == null ? '' : r.riskPct;
-    $('q4').textContent = prop ? 'Filled in from your firm. Check them against your dashboard; your numbers win.' : 'Your own limits. Leave a box empty if it does not apply.';
+    paintRules();
+    $('q4').textContent = prop ? 'Already picked from your firm. Tap to change; your dashboard has the final word. Nothing to type.' : 'Your own limits. Tap None for any rule you do not use.';
     hint();
     for (var i = 1; i <= 5; i++) document.querySelector('[data-step="' + i + '"]').hidden = i !== step;
     $('wiz-step').textContent = 'Step ' + step + ' of 5';
@@ -475,8 +475,9 @@
   function hint() {
     var acct = (a.goal === 'prop' || a.goal == null) ? a.size : a.capital;
     var r = a.rules || {};
-    if (!acct || !r.riskPct) { $('r-hint').textContent = ''; return; }
-    var risk = r.riskPct, capped = '';
+    if (!acct) { $('r-hint').textContent = ''; return; }
+    // "Mentor decides" uses the app's default risk, 0.5% a trade
+    var risk = r.riskPct != null ? r.riskPct : 0.5, capped = r.riskPct == null ? ' At the mentor\u2019s default of 0.5% a trade.' : '';
     if (r.dailyLossPct != null && risk > r.dailyLossPct * 0.25) { risk = r.dailyLossPct * 0.25; capped = ' The app lowers your risk to ' + risk + '% so one stop stays inside a quarter of the day.'; }
     if (r.maxLossPct != null && risk > r.maxLossPct * 0.10) { risk = r.maxLossPct * 0.10; capped = ' The app lowers your risk to ' + risk + '% so one stop stays inside a tenth of the max loss.'; }
     var perStop = acct * risk / 100;
@@ -486,9 +487,58 @@
     $('r-hint').innerHTML = line + capped;
   }
   function num(v) { var n = parseFloat(v); return isFinite(n) ? n : null; }
-  function readRules() {
-    a.rules = { dailyLossPct: num($('r-daily').value), maxLossPct: num($('r-max').value), targetPct: num($('r-target').value), riskPct: num($('r-risk').value) };
+  /* The rules as tap targets: the firm's numbers are pre-picked; Other opens a small box only when a firm uses an odd value. */
+  var RULE_LABEL = { none: 'None', auto: 'Mentor decides' };
+  function chipLabel(rule, v) {
+    if (v === 'none' && rule === 'targetPct') return 'None (funded)';
+    return RULE_LABEL[v] || v + '%';
   }
+  function buildRules() {
+    document.querySelectorAll('[data-rule]').forEach(function (box) {
+      var rule = box.getAttribute('data-rule');
+      box.innerHTML = box.getAttribute('data-vals').split(',').map(function (v) {
+        return '<button class="opt" type="button" data-v="' + v + '">' + chipLabel(rule, v) + '</button>';
+      }).join('') + '<button class="opt" type="button" data-v="other">Other</button>' +
+        '<input class="rule-other" type="number" inputmode="decimal" step="0.05" aria-label="Other value in percent" hidden>';
+      box.addEventListener('click', function (e) {
+        var b = e.target.closest('.opt');
+        if (!b) return;
+        var v = b.getAttribute('data-v');
+        a.rules = Object.assign({}, a.rules);
+        rulesTouched = true;
+        if (v === 'other') {
+          var inp = box.querySelector('.rule-other');
+          inp.hidden = false;
+          inp.focus();
+          box.setAttribute('data-other', '1');
+        } else {
+          box.removeAttribute('data-other');
+          a.rules[rule] = v === 'none' || v === 'auto' ? null : parseFloat(v);
+        }
+        paintRules(); hint(); saveDraft();
+      });
+      box.querySelector('.rule-other').addEventListener('input', function (e) {
+        a.rules = Object.assign({}, a.rules);
+        a.rules[rule] = num(e.target.value);
+        rulesTouched = true;
+        hint(); saveDraft();
+      });
+    });
+  }
+  function paintRules() {
+    var r = a.rules || {};
+    document.querySelectorAll('[data-rule]').forEach(function (box) {
+      var rule = box.getAttribute('data-rule'), val = r[rule];
+      var vals = box.getAttribute('data-vals').split(',');
+      var match = val == null ? (vals.indexOf('none') >= 0 ? 'none' : 'auto') : (vals.indexOf(String(val)) >= 0 ? String(val) : 'other');
+      if (box.hasAttribute('data-other')) match = 'other';
+      box.querySelectorAll('.opt').forEach(function (o) { o.setAttribute('aria-pressed', o.getAttribute('data-v') === match ? 'true' : 'false'); });
+      var inp = box.querySelector('.rule-other');
+      inp.hidden = match !== 'other';
+      if (match === 'other' && val != null && document.activeElement !== inp) inp.value = val;
+    });
+  }
+  function readRules() { a.rules = Object.assign({ dailyLossPct: null, maxLossPct: null, targetPct: null, riskPct: null }, a.rules); }
   function saveDraft() { try { localStorage.setItem(DRAFT, JSON.stringify(a)); } catch (e) { /* storage blocked */ } }
 
   function wire() {
@@ -520,9 +570,7 @@
     $('f-other').addEventListener('input', function () { a.firm = $('f-other').value.trim() || '__other'; saveDraft(); });
     $('f-size').addEventListener('input', function () { a.size = parseInt($('f-size').value, 10) || null; setOpts('size'); hint(); saveDraft(); });
     $('f-capital').addEventListener('input', function () { a.capital = parseFloat($('f-capital').value) || null; hint(); saveDraft(); });
-    ['r-daily', 'r-max', 'r-target', 'r-risk'].forEach(function (id) {
-      $(id).addEventListener('input', function () { rulesTouched = true; readRules(); hint(); saveDraft(); });
-    });
+    buildRules();
     $('wiz-back').addEventListener('click', function () { if (step > 1) { step -= 1; err(''); paint(); } });
     $('wiz').addEventListener('submit', function (e) { e.preventDefault(); next(); });
     $('done-edit').addEventListener('click', function () { step = 1; $('done').hidden = true; $('wiz').hidden = false; paint(); });
@@ -545,9 +593,8 @@
       if (r.maxLossPct != null && (r.maxLossPct < 1 || r.maxLossPct > 100)) return 'The max loss limit is 1% to 100%.';
       if (r.dailyLossPct != null && r.maxLossPct != null && r.dailyLossPct > r.maxLossPct) return 'The daily loss limit cannot be larger than the max loss.';
       if (r.targetPct != null && (r.targetPct < 0 || r.targetPct > 200)) return 'The profit target is 0% to 200%.';
-      if (r.riskPct == null || r.riskPct < 0.05 || r.riskPct > 5) return 'Risk per trade is 0.05% to 5%.';
+      if (r.riskPct != null && (r.riskPct < 0.05 || r.riskPct > 5)) return 'Risk per trade is 0.05% to 5%.';
     }
-    if (step === 5 && !a.struggle) return 'Pick the one that fits best.';
     return '';
   }
   function next() {
@@ -626,7 +673,7 @@
         </div>
       </div>
       <div class="f-col">
-        <h4>Product</h4>
+        <p class="f-h">Product</p>
         <ul>
           <li><a href="/signals/">Trading signals</a></li>
           <li><a href="/prop-firm-signals/">Prop firm signals</a></li>
@@ -640,7 +687,21 @@
         </ul>
       </div>
       <div class="f-col">
-        <h4>Compare</h4>
+        <p class="f-h">Signals</p>
+        <ul>
+          <li><a href="/free-trading-signals/">Free signals record</a></li>
+          <li><a href="/signals/forex/">Forex signals</a></li>
+          <li><a href="/signals/gold/">Gold signals</a></li>
+          <li><a href="/signals/indices/">Index signals</a></li>
+          <li><a href="/signals/crypto/">Crypto signals</a></li>
+          <li><a href="/nifty-signals/">Nifty signals</a></li>
+          <li><a href="/bank-nifty-signals/">Bank Nifty signals</a></li>
+          <li><a href="/crack-funded-account/">Crack a funded account</a></li>
+          <li><a href="/funded-trading-platform/">Funded trading platform</a></li>
+        </ul>
+      </div>
+      <div class="f-col">
+        <p class="f-h">Compare</p>
         <ul>
           <li><a href="/compare/">All comparisons</a></li>
           <li><a href="/compare/broker-demo/">vs broker demo</a></li>
@@ -651,7 +712,7 @@
         </ul>
       </div>
       <div class="f-col">
-        <h4>Learn</h4>
+        <p class="f-h">Learn</p>
         <ul>
           <li><a href="/blog/">Blog</a></li>
           <li><a href="/glossary/">Glossary</a></li>
@@ -660,7 +721,7 @@
         </ul>
       </div>
       <div class="f-col">
-        <h4>Company</h4>
+        <p class="f-h">Company</p>
         <ul>
           <li><a href="/about/">About us</a></li>
           <li><a href="/press/">Press kit</a></li>
@@ -669,7 +730,7 @@
         </ul>
       </div>
       <div class="f-col">
-        <h4>Legal</h4>
+        <p class="f-h">Legal</p>
         <ul>
           <li><a href="/privacy/">Privacy policy</a></li>
           <li><a href="/terms/">Terms of service</a></li>
@@ -678,6 +739,10 @@
         </ul>
       </div>
     </div>
+    <nav class="f-countries" aria-label="Trading signals by country">
+      <span>Signals by country:</span>
+      <a href="/signals/india/">India</a><a href="/signals/pakistan/">Pakistan</a><a href="/signals/nigeria/">Nigeria</a><a href="/signals/south-africa/">South Africa</a><a href="/signals/uae/">UAE</a><a href="/signals/uk/">UK</a><a href="/signals/usa/">US</a>
+    </nav>
     <div class="footer-legal">
       <p>FundedLot signals are educational market analysis, not investment advice: you decide whether to trade, on your own account. Past results, including the public AI record, do not predict future results. Practice inside the app uses virtual funds only. FundedLot is not a broker, does not execute trades, holds no client money, and does not offer funded accounts or payouts. Trading involves substantial risk of loss. FundedLot is not affiliated with, endorsed by, or connected to any proprietary trading firm, broker or trading platform; their names identify what our members trade on.</p>
       <div class="footer-meta">
@@ -751,6 +816,6 @@
   }
 })();
 </script>
-<script src="/assets/fl.js?v=54b1119a" defer></script>
+<script src="/assets/fl.js?v=9801ae03" defer></script>
 </body>
 </html>

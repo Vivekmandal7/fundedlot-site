@@ -443,11 +443,23 @@
   };
 
   function accountButtons(u) {
-    document.querySelectorAll('[data-signin]').forEach(function (a) {
-      var label = a.querySelector('.lbl');
-      if (label) label.textContent = u ? 'My plan' : 'Sign in';
-      a.setAttribute('aria-label', u ? 'My plan' : 'Sign in');
+    // Only the header's icon button carries its own label; a button with words keeps them.
+    document.querySelectorAll('[data-signin] .lbl').forEach(function (label) {
+      label.textContent = u ? 'My plan' : 'Sign in';
+      label.parentElement.setAttribute('aria-label', u ? 'My plan' : 'Sign in');
     });
+  }
+
+  /* Video posters load only when the video comes near the screen. */
+  function lazyPosters() {
+    var vids = document.querySelectorAll('video[data-poster]');
+    if (!vids.length) return;
+    var set = function (v) { v.poster = v.getAttribute('data-poster'); v.removeAttribute('data-poster'); };
+    if (!('IntersectionObserver' in window)) { vids.forEach(set); return; }
+    var io = new IntersectionObserver(function (es) {
+      es.forEach(function (e) { if (e.isIntersecting) { io.unobserve(e.target); set(e.target); } });
+    }, { rootMargin: '600px 0px' });
+    vids.forEach(function (v) { io.observe(v); });
   }
 
   /* ---- a soft light that follows the pointer across dark panels ---- */
@@ -757,6 +769,7 @@
     glow();
     document.querySelectorAll('[data-replay]').forEach(replay);
     motion();
+    lazyPosters();
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start);
   else start();

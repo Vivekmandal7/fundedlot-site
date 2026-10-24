@@ -46,10 +46,9 @@
 <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
 <link rel="manifest" href="/site.webmanifest">
 <link rel="alternate" type="application/rss+xml" title="FundedLot Blog" href="/feed.xml">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Anton&family=Caveat:wght@600&family=Fraunces:opsz,wght@9..144,600..700&family=Inter:opsz,wght@14..32,400..800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/assets/styles.css?v=87631fb4">
+<link rel="preload" href="/assets/fonts/anton.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/inter-var.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/styles.css?v=6618364f">
 <script type="application/ld+json">[{"@context":"https://schema.org","@type":"MobileApplication","name":"FundedLot: Prop Firm Signals","alternateName":["FundedLot","Funded Lot"],"operatingSystem":"iOS, Android","applicationCategory":"FinanceApplication","description":"Prop firm signals sized to your firm's rules: entry, stop loss and three targets on forex, gold, indices and crypto, a 1:1 mentor, an AI coach with a public signal record, and free prop firm challenge practice.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"url":"https://www.fundedlot.com/download/","installUrl":["https://play.google.com/store/apps/details?id=com.myindianow.fundedlot","https://apps.apple.com/us/app/fundedlot-prop-firm-practice/id6806785387"]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is a prop firm challenge simulator?","acceptedAnswer":{"@type":"Answer","text":"It's a practice environment that recreates a prop-firm evaluation end to end: virtual capital, real market prices, and the full rulebook — profit target, daily loss limit, maximum drawdown, minimum trading days — enforced automatically. Break a rule and the simulated evaluation fails, exactly as a paid one would. The point is to rehearse the rules before a real attempt costs you a fee."}},{"@type":"Question","name":"Is a simulator the same as a demo account?","acceptedAnswer":{"@type":"Answer","text":"No. A demo account gives you prices with no rules — you can lose 20% in a day and keep trading. A challenge simulator adds the constraint system that actually decides evaluations. Roughly speaking: demo teaches the platform, the simulator teaches the exam."}},{"@type":"Question","name":"Can I match the rules of the specific firm I'm targeting?","acceptedAnswer":{"@type":"Answer","text":"In two layers. The live evaluation enforces the profit target, daily loss limit, total drawdown and minimum trading days tick by tick. The simulated payout check then judges your history against an editable rule profile — daily loss method, static or trailing drawdown, consistency rules and the reset timezone — the way the firm's payout review would. Copy those numbers from the firm's help pages."}},{"@type":"Question","name":"Will passing in a simulator guarantee I pass a real challenge?","acceptedAnswer":{"@type":"Answer","text":"No, and distrust anyone who says otherwise. What it changes is the failure modes: rule breaches from sizing errors, revenge trades and limit misunderstandings are rehearsable, and those are what end most first attempts. The market risk is still yours."}},{"@type":"Question","name":"How much does it cost?","acceptedAnswer":{"@type":"Answer","text":"FundedLot is free to start — full simulator, real prices, and your first complete evaluation included, no card required. FundedLot Mentorship , bought in the app, adds unlimited runs, live signals sized to your rules, a 1:1 mentor and the AI coach."}}]},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.fundedlot.com/"},{"@type":"ListItem","position":2,"name":"Challenge simulator","item":"https://www.fundedlot.com/prop-firm-challenge-simulator/"}]}]</script>
 </head>
 <body>
@@ -286,7 +285,7 @@
         </div>
       </div>
       <div class="f-col">
-        <h4>Product</h4>
+        <p class="f-h">Product</p>
         <ul>
           <li><a href="/signals/">Trading signals</a></li>
           <li><a href="/prop-firm-signals/">Prop firm signals</a></li>
@@ -300,7 +299,21 @@
         </ul>
       </div>
       <div class="f-col">
-        <h4>Compare</h4>
+        <p class="f-h">Signals</p>
+        <ul>
+          <li><a href="/free-trading-signals/">Free signals record</a></li>
+          <li><a href="/signals/forex/">Forex signals</a></li>
+          <li><a href="/signals/gold/">Gold signals</a></li>
+          <li><a href="/signals/indices/">Index signals</a></li>
+          <li><a href="/signals/crypto/">Crypto signals</a></li>
+          <li><a href="/nifty-signals/">Nifty signals</a></li>
+          <li><a href="/bank-nifty-signals/">Bank Nifty signals</a></li>
+          <li><a href="/crack-funded-account/">Crack a funded account</a></li>
+          <li><a href="/funded-trading-platform/">Funded trading platform</a></li>
+        </ul>
+      </div>
+      <div class="f-col">
+        <p class="f-h">Compare</p>
         <ul>
           <li><a href="/compare/">All comparisons</a></li>
           <li><a href="/compare/broker-demo/">vs broker demo</a></li>
@@ -311,7 +324,7 @@
         </ul>
       </div>
       <div class="f-col">
-        <h4>Learn</h4>
+        <p class="f-h">Learn</p>
         <ul>
           <li><a href="/blog/">Blog</a></li>
           <li><a href="/glossary/">Glossary</a></li>
@@ -320,7 +333,7 @@
         </ul>
       </div>
       <div class="f-col">
-        <h4>Company</h4>
+        <p class="f-h">Company</p>
         <ul>
           <li><a href="/about/">About us</a></li>
           <li><a href="/press/">Press kit</a></li>
@@ -329,7 +342,7 @@
         </ul>
       </div>
       <div class="f-col">
-        <h4>Legal</h4>
+        <p class="f-h">Legal</p>
         <ul>
           <li><a href="/privacy/">Privacy policy</a></li>
           <li><a href="/terms/">Terms of service</a></li>
@@ -338,6 +351,10 @@
         </ul>
       </div>
     </div>
+    <nav class="f-countries" aria-label="Trading signals by country">
+      <span>Signals by country:</span>
+      <a href="/signals/india/">India</a><a href="/signals/pakistan/">Pakistan</a><a href="/signals/nigeria/">Nigeria</a><a href="/signals/south-africa/">South Africa</a><a href="/signals/uae/">UAE</a><a href="/signals/uk/">UK</a><a href="/signals/usa/">US</a>
+    </nav>
     <div class="footer-legal">
       <p>FundedLot signals are educational market analysis, not investment advice: you decide whether to trade, on your own account. Past results, including the public AI record, do not predict future results. Practice inside the app uses virtual funds only. FundedLot is not a broker, does not execute trades, holds no client money, and does not offer funded accounts or payouts. Trading involves substantial risk of loss. FundedLot is not affiliated with, endorsed by, or connected to any proprietary trading firm, broker or trading platform; their names identify what our members trade on.</p>
       <div class="footer-meta">
@@ -411,6 +428,6 @@
   }
 })();
 </script>
-<script src="/assets/fl.js?v=54b1119a" defer></script>
+<script src="/assets/fl.js?v=9801ae03" defer></script>
 </body>
 </html>
