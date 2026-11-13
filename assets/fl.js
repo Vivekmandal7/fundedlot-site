@@ -43,6 +43,8 @@
   function signals(c) { return (c && c.ai && Array.isArray(c.ai.signals)) ? c.ai.signals : []; }
   function decided(s) { return s.outcome === 'closed' || s.outcome === 'invalidated' || s.outcome === 'hit'; }
   function inCat(s, cat) { return !cat || s.category === cat; }
+  /** Deleted by the room after it traded: off the lists, still in the counts. */
+  function listed(s) { return !s.removed; }
 
   /** The result chip: which level ended it and the R. */
   function outcome(s) {
@@ -64,10 +66,11 @@
     return signed(m.value, 1) + (m.unit === 'percent' ? '%' : ' ' + (UNITS[m.unit] || m.unit));
   }
   function tallyOf(c, cat) {
-    var t = { posted: 0, won: 0, lost: 0, netR: 0, open: 0 };
+    var t = { posted: 0, won: 0, lost: 0, netR: 0, open: 0, removed: 0 };
     signals(c).forEach(function (s) {
       if (!inCat(s, cat) || s.outcome === 'expired') return;
       t.posted += 1;
+      if (s.removed) t.removed += 1;
       if (s.outcome === 'active') { t.open += 1; return; }
       if (!decided(s)) return;
       var r = num(s.outcomeR) || 0;
@@ -92,10 +95,12 @@
         '<div class="rt"><b>' + t.lost + '</b><span>lost</span></div>' +
         '<div class="rt ' + (net > 0 ? 'is-win' : net < 0 ? 'is-loss' : '') + '"><b>' + signed(net, 2) + 'R</b><span>net, in risk units</span></div>' +
         '</div><p class="rec-note">Every AI signal' + (cat ? ' in this market' : '') + (since ? ' since ' + since : '') +
-        (t.open ? ', ' + t.open + ' live now' : '') + '. Wins and losses, nothing removed. Past results never promise future ones.</p>';
+        (t.open ? ', ' + t.open + ' live now' : '') + '. Wins and losses' +
+        (t.removed ? '; ' + t.removed + ' taken off the list by the room, still counted here' : ', nothing removed') +
+        '. Past results never promise future ones.</p>';
     },
     tape: function (c) {
-      var items = signals(c).filter(decided).slice(0, 12).map(function (s) {
+      var items = signals(c).filter(function (s) { return decided(s) && listed(s); }).slice(0, 12).map(function (s) {
         var o = outcome(s);
         return '<span class="tick"><span class="s">' + esc(market(s.instrument)) + '</span><span class="p">' +
           (s.side === 'short' ? 'SELL' : 'BUY') + '</span><span class="' + (o.tone === 'is-win' ? 'up' : o.tone === 'is-loss' ? 'dn' : 'p') + '">' +
@@ -108,7 +113,7 @@
     },
     /** [member]: the caller's own open signals (FL.api ai/live), shown with their levels. */
     cards: function (c, cat, n, member) {
-      var list = signals(c).filter(function (s) { return inCat(s, cat) && s.outcome !== 'expired'; }).slice(0, n || 6);
+      var list = signals(c).filter(function (s) { return inCat(s, cat) && listed(s) && s.outcome !== 'expired'; }).slice(0, n || 6);
       if (!list.length) {
         return '<p class="rec-empty">No AI signal in this market yet. The scan runs every 15 minutes in its session, and the first one shows here with its result.</p>';
       }
@@ -117,7 +122,7 @@
         var side = s.side === 'short' ? 'SELL' : 'BUY';
         var head = '<header><b>' + esc(market(s.instrument)) + '</b><span class="side ' + (s.side === 'short' ? 'is-sell' : 'is-buy') + '">' + side +
           '</span><time datetime="' + esc(s.postedAt) + '">' + esc(when(s.postedAt)) + '</time></header>';
-        if (s.locked || (s.outcome === 'active' && !member)) {
+        if (s.locked || (s.outcome === 'active' && !member && !s.free)) {
           return '<article class="sig-card is-locked" data-cat="' + esc(s.category) + '">' + head +
             '<div class="lock"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>Live now. Members see the entry, stop and targets in the app, sized to their account.</div>' +
             '<footer><span class="oc is-live">Live now</span></footer></article>';
@@ -127,7 +132,8 @@
         }).join('');
         return '<article class="sig-card" data-cat="' + esc(s.category) + '">' + head +
           '<dl class="lv"><div><dt>Entry</dt><dd>' + esc(s.entry) + '</dd></div><div class="stop' + (s.outcome === 'invalidated' ? ' hit' : '') + '"><dt>Stop</dt><dd>' + esc(s.stop) + '</dd></div>' + tps + '</dl>' +
-          '<footer><span class="oc ' + o.tone + '">' + o.label + '</span><span class="mv">' + esc(move(s)) + '</span></footer></article>';
+          '<footer><span class="oc ' + o.tone + '">' + o.label + (s.free && s.outcome === 'active' ? ' · Free' : '') + (s.edited ? ' · Edited' : '') +
+          '</span><span class="mv">' + esc(move(s)) + '</span></footer></article>';
       }).join('');
     },
     telegram: function (c) {
