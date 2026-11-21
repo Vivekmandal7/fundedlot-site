@@ -1,7 +1,7 @@
 /*!
  * FundedLot site script, on every page.
  *
- *   FL.rec    the AI signal record as HTML, from the public catalog. The build
+ *   FL.rec    the desk's signal record as HTML, from the public catalog. The build
  *             runs these same functions to bake the record into each page
  *             (build.mjs evaluates this file with no `document`); the page
  *             then refreshes it from /api/web/mentor/catalog.
@@ -40,100 +40,170 @@
     if (NAMES[sym]) return NAMES[sym];
     return /^[A-Z]{6}$/.test(sym) ? sym.slice(0, 3) + '/' + sym.slice(3) : sym;
   }
-  function signals(c) { return (c && c.ai && Array.isArray(c.ai.signals)) ? c.ai.signals : []; }
+  // The desk's signals: posted by hand in the panel, decided by live prices
+  // (server mentor/record.ts). c.feed holds the newest 60; c.record is the
+  // server's 7/14/30-day record by market group. An older server sends no
+  // record, so it is worked out here from the feed, the server's way.
+  var WINDOW = 30, MIN_SAMPLE = 5, DAY_MS = 864e5;
+  var LOCK = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>';
+
+  /** The desk's signals, newest first. */
+  function signals(c) {
+    var f = c && Array.isArray(c.feed) ? c.feed : [];
+    return f.filter(function (s) { return s && s.id && s.instrument; }).sort(function (a, b) {
+      return String(b.postedAt || '').localeCompare(String(a.postedAt || ''));
+    });
+  }
   function decided(s) { return s.outcome === 'closed' || s.outcome === 'invalidated' || s.outcome === 'hit'; }
   function inCat(s, cat) { return !cat || s.category === cat; }
-  /** Deleted by the room after it traded: off the lists, still in the counts. */
+  /** Deleted by the desk after it traded: off the lists, still in the counts. */
   function listed(s) { return !s.removed; }
-
-  /** The result chip: which level ended it and the R. */
-  function outcome(s) {
+  /** Won, lost, flat (a stop already at entry) or no trade; null while it runs. The server's rule. */
+  function resultOf(s) {
+    if (s.outcome === 'active') return null;
+    if (s.outcome === 'expired') return 'noTrade';
     var r = num(s.outcomeR);
-    var rr = r === null ? '' : ' · ' + signed(r, 2) + 'R';
-    var tone = r === null ? '' : r > 0 ? 'is-win' : r < 0 ? 'is-loss' : '';
+    if (r !== null) return r > 0 ? 'won' : r < 0 ? 'lost' : 'flat';
+    return s.outcome === 'hit' ? 'won' : s.outcome === 'invalidated' ? 'lost' : 'flat';
+  }
+
+  /** The result chip: which level ended it. The move (pips, points, %) sits beside it. */
+  function outcome(s) {
+    var res = resultOf(s);
+    var tone = res === 'won' ? 'is-win' : res === 'lost' ? 'is-loss' : '';
+    var hits = s.targetsHit || 0;
     switch (s.outcome) {
-      case 'active': return { tone: 'is-live', label: 'Live now' };
-      case 'expired': return { tone: '', label: 'No fill' };
-      case 'invalidated': return { tone: 'is-loss', label: 'Stop' + rr };
-      case 'hit': return { tone: 'is-win', label: 'TP' + (s.targetCount || 3) + rr };
-      case 'closed': return { tone: tone, label: ((s.targetsHit || 0) > 0 ? 'TP' + s.targetsHit : 'Time limit') + rr };
-      default: return { tone: '', label: esc(s.outcome) };
+      case 'active': return { tone: 'is-live', label: hits ? 'Live · TP' + hits + ' hit' : 'Live now' };
+      case 'expired': return { tone: '', label: 'No entry' };
+      case 'invalidated': return { tone: tone, label: (hits ? 'TP' + hits + ' hit, then stop' : 'Stop') + (res === 'flat' ? ' at entry' : '') };
+      case 'hit': return { tone: 'is-win', label: 'TP' + (s.targetCount || hits || 1) + ' hit' };
+      case 'closed': return { tone: tone, label: hits ? 'TP' + hits + ' hit, closed' : 'Closed' };
+      default: return { tone: '', label: String(s.outcome || '') };
     }
   }
-  function move(s) {
-    var m = s.move;
+  function decimals(v) { var m = String(v).match(/\.(\d+)$/); return m ? m[1].length : 0; }
+  /** One number of decimals for all of a signal's levels: JSON drops trailing zeros (1.0880 → 1.088). */
+  function dpOf(s) {
+    var d = Math.max(decimals(s.entry), decimals(s.stop));
+    (s.targets || []).forEach(function (t) { d = Math.max(d, decimals(t.price)); });
+    return Math.min(d, 6);
+  }
+  function level(v, dp) { return num(v) === null ? '' : v.toFixed(dp); }
+  function moveOf(m) {
     if (!m || num(m.value) === null) return '';
-    return signed(m.value, 1) + (m.unit === 'percent' ? '%' : ' ' + (UNITS[m.unit] || m.unit));
+    return signed(m.value, m.unit === 'percent' ? 2 : 1) + (m.unit === 'percent' ? '%' : ' ' + (UNITS[m.unit] || m.unit));
   }
-  function tallyOf(c, cat) {
-    var t = { posted: 0, won: 0, lost: 0, netR: 0, open: 0, removed: 0 };
+  function move(s) { return moveOf(s.move); }
+  /** Where a closed signal ended: the last target, the stop, or the R the record gives. */
+  function exitOf(s) {
+    var e = num(s.entry), st = num(s.stop), tg = s.targets || [], r = num(s.outcomeR);
+    if (s.outcome === 'hit' && tg.length && num(tg[tg.length - 1].price) !== null) return tg[tg.length - 1].price;
+    if (e === null || st === null || r === null) return null;
+    if (s.outcome === 'invalidated' && r <= -0.995) return st;
+    return e + (s.side === 'short' ? -1 : 1) * r * Math.abs(e - st);
+  }
+
+  /** The 30-day tally for a market group ('' = all): the server's, or worked out from the feed. */
+  function recordOf(c, cat) {
+    var rec = c && c.record && c.record.tallies;
+    if (rec) {
+      var g = rec[cat || 'all'] || {};
+      return { open: g.open || 0, t: g.d30 || null, since: c.record.since || null, min: c.record.minSample || MIN_SAMPLE };
+    }
+    var now = Date.now(), from = now - WINDOW * DAY_MS, open = 0, since = null;
+    var t = { closed: 0, won: 0, lost: 0, flat: 0, noTrade: 0, removed: 0, verified: 0, winRate: null, net: { pips: 0, points: 0, percent: 0 } };
     signals(c).forEach(function (s) {
-      if (!inCat(s, cat) || s.outcome === 'expired') return;
-      t.posted += 1;
+      if (!inCat(s, cat)) return;
+      if (s.postedAt && (!since || s.postedAt < since)) since = s.postedAt;
+      if (s.outcome === 'active') { if (!s.removed) open += 1; return; }
+      var res = resultOf(s), at = Date.parse(s.outcomeAt || s.postedAt);
+      if (!res || !(at >= from && at <= now)) return;
+      if (res === 'noTrade') { t.noTrade += 1; return; }
+      t[res] += 1;
+      t.closed += 1;
       if (s.removed) t.removed += 1;
-      if (s.outcome === 'active') { t.open += 1; return; }
-      if (!decided(s)) return;
-      var r = num(s.outcomeR) || 0;
-      if (r > 0) t.won += 1; else if (r < 0) t.lost += 1;
-      t.netR += r;
+      if (s.tracked) t.verified += 1;
+      var m = s.move;
+      if (m && num(m.value) !== null && typeof t.net[m.unit] === 'number') t.net[m.unit] += m.value;
     });
-    return t;
+    var dec = t.won + t.lost;
+    t.winRate = dec >= MIN_SAMPLE ? t.won / dec : null;
+    return { open: open, t: t, since: since, min: MIN_SAMPLE };
   }
+  /** The net move by unit, biggest first: pips (forex, metals), points (indices), % (crypto, stocks). */
+  function netParts(net) {
+    var out = [];
+    if (!net) return out;
+    if (num(net.pips)) out.push({ v: net.pips, u: 'pips' });
+    if (num(net.points)) out.push({ v: net.points, u: 'points' });
+    if (num(net.percent)) out.push({ v: net.percent, u: '%' });
+    return out;
+  }
+  function netText(p) { return p.u === '%' ? signed(p.v, 2) + '%' : signed(p.v, 1) + ' ' + p.u; }
 
   FL.rec = {
     tally: function (c, cat) {
-      var t = tallyOf(c, cat);
-      var since = c && c.ai && c.ai.since ? day(c.ai.since) : '';
-      if (!t.posted) {
-        return '<p class="rec-note">The record starts with the first AI signal' + (cat ? ' in this market' : '') +
-          '. Every one stays on it, win or loss.</p>';
+      var g = recordOf(c, cat), t = g.t, where = cat ? ' in this market' : '';
+      if (!t || (t.closed === 0 && t.noTrade === 0)) {
+        return '<p class="rec-note">' + (g.open
+          ? g.open + ' live now' + where + '. Each one goes on the record here once it closes, win or loss.'
+          : 'The desk\'s record starts with its first signal' + where + '. Every one stays on it, win or loss, decided by live prices.') + '</p>';
       }
-      var net = t.netR;
+      var parts = netParts(t.net), main = parts[0], rate = num(t.winRate);
+      var how = t.verified === t.closed ? 'each decided by live prices' : t.verified + ' of ' + t.closed + ' decided by live prices, the rest marked by the desk';
       return '<div class="rec-tally">' +
-        '<div class="rt"><b>' + t.posted + '</b><span>signals posted</span></div>' +
+        '<div class="rt"><b>' + (rate === null ? '—' : Math.round(rate * 100) + '%') + '</b><span>' + (rate === null ? 'win rate, from ' + g.min + ' closed' : 'win rate') + '</span></div>' +
         '<div class="rt"><b>' + t.won + '</b><span>won</span></div>' +
         '<div class="rt"><b>' + t.lost + '</b><span>lost</span></div>' +
-        '<div class="rt ' + (net > 0 ? 'is-win' : net < 0 ? 'is-loss' : '') + '"><b>' + signed(net, 2) + 'R</b><span>net, in risk units</span></div>' +
-        '</div><p class="rec-note">Every AI signal' + (cat ? ' in this market' : '') + (since ? ' since ' + since : '') +
-        (t.open ? ', ' + t.open + ' live now' : '') + '. Wins and losses' +
-        (t.removed ? '; ' + t.removed + ' taken off the list by the room, still counted here' : ', nothing removed') +
-        '. Past results never promise future ones.</p>';
+        '<div class="rt ' + (main && main.v > 0 ? 'is-win' : main && main.v < 0 ? 'is-loss' : '') + '"><b>' + (main ? signed(main.v, main.u === '%' ? 2 : 1) + (main.u === '%' ? '%' : '') : '0') +
+        '</b><span>' + (main && main.u !== '%' ? main.u + ' net' : main ? 'net' : 'pips net') + '</span></div>' +
+        '</div><p class="rec-note">Every FundedLot desk signal' + where + ' that closed in the last ' + WINDOW + ' days, ' + how +
+        (g.open ? '; ' + g.open + ' live now' : '') + '.' +
+        (parts.length > 1 ? ' Net: ' + parts.map(netText).join(' · ') + '.' : '') +
+        (t.flat ? ' ' + t.flat + ' closed at entry.' : '') +
+        (t.noTrade === 1 ? ' 1 never reached its entry, so it counts for nothing.' : t.noTrade ? ' ' + t.noTrade + ' never reached the entry, so they count for nothing.' : '') +
+        (t.removed ? ' ' + t.removed + ' taken off the list by the desk, still counted here.' : '') +
+        ' Past results never promise future ones.</p>';
     },
     tape: function (c) {
       var items = signals(c).filter(function (s) { return decided(s) && listed(s); }).slice(0, 12).map(function (s) {
-        var o = outcome(s);
+        var o = outcome(s), res = resultOf(s);
         return '<span class="tick"><span class="s">' + esc(market(s.instrument)) + '</span><span class="p">' +
-          (s.side === 'short' ? 'SELL' : 'BUY') + '</span><span class="' + (o.tone === 'is-win' ? 'up' : o.tone === 'is-loss' ? 'dn' : 'p') + '">' +
-          o.label + '</span><span class="p">' + esc(move(s)) + '</span></span>';
+          (s.side === 'short' ? 'SELL' : 'BUY') + '</span><span class="' + (res === 'won' ? 'up' : res === 'lost' ? 'dn' : 'p') + '">' +
+          esc(o.label) + '</span><span class="p">' + esc(move(s)) + '</span></span>';
       });
       if (!items.length) return '';
       while (items.length < 8) items = items.concat(items);
       var run = items.join('');
       return '<div class="ticker-track">' + run + run + '</div>';
     },
-    /** [member]: the caller's own open signals (FL.api ai/live), shown with their levels. */
+    /** [member]: the caller's own live signals (FL.api /api/web/mentor/live), shown with their levels. */
     cards: function (c, cat, n, member) {
       var list = signals(c).filter(function (s) { return inCat(s, cat) && listed(s) && s.outcome !== 'expired'; }).slice(0, n || 6);
       if (!list.length) {
-        return '<p class="rec-empty">No AI signal in this market yet. The scan runs every 15 minutes in its session, and the first one shows here with its result.</p>';
+        return '<p class="rec-empty">No signal from the desk' + (cat ? ' in this market' : '') + ' yet. Each one shows here with its entry, stop, targets and result once it closes. Turn on signal alerts in the app to hear the moment one posts.</p>';
       }
       return list.map(function (s) {
         var o = outcome(s);
-        var side = s.side === 'short' ? 'SELL' : 'BUY';
-        var head = '<header><b>' + esc(market(s.instrument)) + '</b><span class="side ' + (s.side === 'short' ? 'is-sell' : 'is-buy') + '">' + side +
-          '</span><time datetime="' + esc(s.postedAt) + '">' + esc(when(s.postedAt)) + '</time></header>';
-        if (s.locked || (s.outcome === 'active' && !member && !s.free)) {
-          return '<article class="sig-card is-locked" data-cat="' + esc(s.category) + '">' + head +
-            '<div class="lock"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>Live now. Members see the entry, stop and targets in the app, sized to their account.</div>' +
-            '<footer><span class="oc is-live">Live now</span></footer></article>';
+        var time = '<time datetime="' + esc(s.postedAt) + '">' + esc(when(s.postedAt)) + '</time>';
+        var open = num(s.entry) !== null && num(s.stop) !== null && (s.outcome !== 'active' || member || s.free);
+        if (!open) {
+          // Locked, like the app: the market and the time, never the side or a level.
+          return '<article class="sig-card is-locked" data-cat="' + esc(s.category) + '"><header><b>' + esc(market(s.instrument)) + '</b>' + time + '</header>' +
+            '<div class="lock">' + LOCK + 'Live now. Members see the entry, stop and targets in the app, sized to their account. Everyone sees them here once it closes.</div>' +
+            '<footer><span class="oc is-live">' + esc(o.label) + '</span><span class="mv">' + esc(moveOf(s.bestMove)) + '</span></footer></article>';
         }
+        var side = s.side === 'short' ? 'SELL' : 'BUY';
+        var dp = dpOf(s);
+        var head = '<header><b>' + esc(market(s.instrument)) + '</b><span class="side ' + (s.side === 'short' ? 'is-sell' : 'is-buy') + '">' + side + '</span>' + time + '</header>';
         var tps = (s.targets || []).map(function (t, i) {
-          return '<div class="' + (t.hitAt ? 'hit' : '') + '"><dt>TP' + (i + 1) + '</dt><dd>' + esc(t.price) + (t.hitAt ? ' <i aria-label="reached">✓</i>' : '') + '</dd></div>';
+          return '<div class="' + (t.hitAt ? 'hit' : '') + '"><dt>TP' + (i + 1) + '</dt><dd>' + esc(level(t.price, dp)) + (t.hitAt ? ' <i aria-label="reached">✓</i>' : '') + '</dd></div>';
         }).join('');
+        var live = s.outcome === 'active';
         return '<article class="sig-card" data-cat="' + esc(s.category) + '">' + head +
-          '<dl class="lv"><div><dt>Entry</dt><dd>' + esc(s.entry) + '</dd></div><div class="stop' + (s.outcome === 'invalidated' ? ' hit' : '') + '"><dt>Stop</dt><dd>' + esc(s.stop) + '</dd></div>' + tps + '</dl>' +
-          '<footer><span class="oc ' + o.tone + '">' + o.label + (s.free && s.outcome === 'active' ? ' · Free' : '') + (s.edited ? ' · Edited' : '') +
-          '</span><span class="mv">' + esc(move(s)) + '</span></footer></article>';
+          '<dl class="lv"><div><dt>Entry</dt><dd>' + esc(level(s.entry, dp)) + '</dd></div><div class="stop' + (s.outcome === 'invalidated' ? ' hit' : '') + '"><dt>Stop</dt><dd>' + esc(level(s.stop, dp)) + '</dd></div>' + tps + '</dl>' +
+          '<footer><span class="oc ' + o.tone + '">' + esc(o.label) + (s.free && live ? ' · Free' : '') + (s.edited ? ' · Edited' : '') +
+          '</span><span class="mv">' + esc(live ? moveOf(s.bestMove) : move(s)) + '</span></footer></article>';
       }).join('');
     },
     telegram: function (c) {
@@ -142,15 +212,15 @@
         ? '<span class="dot is-on"></span>Open to members. The app gives you a one-time link.'
         : '<span class="dot"></span>Not open yet. Every signal reaches the app with a notification meanwhile.';
     },
-    since: function (c) { return c && c.ai && c.ai.since ? 'since ' + day(c.ai.since) : ''; },
-    /** Closed signals with every timestamp the tracker recorded, as JSON for the replay. */
+    since: function (c) { var g = recordOf(c, ''); return g.since ? 'since ' + day(g.since) : ''; },
+    /** Closed signals with every time the tracker recorded, as JSON for the replay. */
     replay: function (c) {
       var list = signals(c).filter(function (s) {
-        return decided(s) && num(s.entry) !== null && num(s.stop) !== null && s.outcomeAt;
+        return decided(s) && listed(s) && num(s.entry) !== null && num(s.stop) !== null && s.outcomeAt;
       }).slice(0, 12).map(function (s) {
         return {
-          id: s.id, instrument: s.instrument, name: market(s.instrument), category: s.category, side: s.side,
-          entry: s.entry, stop: s.stop, exit: num(s.exitPrice), outcome: s.outcome, r: num(s.outcomeR),
+          id: s.id, instrument: s.instrument, name: market(s.instrument), category: s.category, side: s.side, dp: dpOf(s),
+          entry: s.entry, stop: s.stop, exit: exitOf(s), outcome: s.outcome, r: num(s.outcomeR),
           targets: (s.targets || []).map(function (t) { return { price: t.price, at: t.hitAt || null }; }),
           from: s.filledAt || s.postedAt, to: s.outcomeAt, when: when(s.postedAt), move: move(s),
         };
@@ -161,7 +231,7 @@
     levels: function (c) {
       var out = {};
       signals(c).forEach(function (s) {
-        if (!decided(s) || out[s.category] || num(s.entry) === null || num(s.stop) === null) return;
+        if (!decided(s) || !listed(s) || out[s.category] || num(s.entry) === null || num(s.stop) === null) return;
         out[s.category] = {
           instrument: s.instrument, name: market(s.instrument), side: s.side, entry: s.entry, stop: s.stop,
           targets: (s.targets || []).map(function (t) { return t.price; }), postedAt: s.postedAt, when: when(s.postedAt),
@@ -348,7 +418,7 @@
     var slots = document.querySelectorAll('[data-rec]');
     if (!slots.length) return;
     FL.catalog().then(function (c) {
-      if (!c || !c.ai) return;
+      if (!c) return;
       slots.forEach(function (el) {
         var fn = FL.rec[el.getAttribute('data-rec')];
         if (!fn) return;
@@ -514,7 +584,8 @@
     var pts = [], stopNow = sig.stop, hits = 0;
     for (var w = 0; w < way.length - 1; w++) {
       var a = way[w], b = way[w + 1];
-      if (a.kind === 'tp') { hits += 1; stopNow = hits === 1 ? sig.entry : sig.targets[hits - 2].price; }
+      // the desk's rule: TP1 moves the stop to the entry, and there it stays
+      if (a.kind === 'tp') { hits += 1; stopNow = sig.entry; }
       var nextTp = sig.targets[hits] ? sig.targets[hits].price : null;
       var n = Math.max(6, Math.round(22 * (b.t - a.t) / (t1 - t0)));
       for (var k = 0; k < n; k++) {
@@ -535,7 +606,12 @@
     var dataEl = root.querySelector('script[type="application/json"]');
     var list = [];
     try { list = JSON.parse(dataEl.textContent || '[]'); } catch (e) { list = []; }
-    if (!list.length) { root.hidden = true; return; }
+    if (!list.length) {
+      // Nothing closed yet: no "press play" beside an empty box.
+      var sec = root.closest('section');
+      (sec || root).hidden = true;
+      return;
+    }
     var idx = 0, size = 100000, prog = 0, playing = false, raf = 0, last = 0, model = null, fired = {};
     var DUR = 9000;
     root.insertAdjacentHTML('beforeend',
@@ -548,10 +624,11 @@
       '<input type="range" class="rp-scrub" min="0" max="1000" value="0" aria-label="Replay position">' +
       '<div class="rp-pnl"><span class="rp-on">On $100K</span><b class="rp-money">+$0</b><small class="rp-lots"></small></div>' +
       '<button type="button" class="rp-next">Next signal →</button></div>' +
-      '<p class="rp-note">Real entry, stop, targets, the times they were reached and the close, from the AI record. The line between them is drawn, not tick data. Sized at 0.5% risk.</p>');
+      '<p class="rp-note">Real entry, stop, targets, the times they were reached and the close, from the desk\'s record. The line between them is drawn, not tick data. Sized at 0.5% risk.</p>');
     var $ = function (s) { return root.querySelector(s); };
     var lines = $('.rp-lines'), path = $('.rp-path'), area = $('.rp-area'), dot = $('.rp-dot'), toasts = $('.rp-toasts');
     var lo, hi, levelEls = {};
+    function priceText(p) { var d = list[idx].dp; return typeof d === 'number' ? Number(p).toFixed(d) : String(p); }
 
     function y(p) { return (1 - (p - lo) / (hi - lo)) * 100; }
     function x(t) { return 3 + (t - model.t0) / (model.t1 - model.t0) * 94; }
@@ -563,7 +640,7 @@
     function level(key, price, label, cls) {
       var el = document.createElement('div');
       el.className = 'rp-level ' + cls;
-      el.innerHTML = '<span>' + label + ' <b>' + price + '</b></span>';
+      el.innerHTML = '<span>' + label + ' <b>' + priceText(price) + '</b></span>';
       el.style.top = y(price) + '%';
       lines.appendChild(el);
       levelEls[key] = el;
@@ -590,7 +667,7 @@
     }
     function stopAt(hits) {
       var sig = list[idx];
-      return hits <= 0 ? sig.stop : hits === 1 ? sig.entry : sig.targets[hits - 2].price;
+      return hits <= 0 ? sig.stop : sig.entry;
     }
     function seek(p) {
       prog = Math.max(0, Math.min(1, p));
@@ -609,10 +686,10 @@
       dot.style.top = y(head.p) + '%';
       var hits = model.way.filter(function (w) { return w.kind === 'tp' && w.t <= tNow; }).length;
       var done = prog >= 1;
-      // the stop follows the room's rule: TP1 → entry, TP2 → TP1
+      // the stop follows the desk's rule: TP1 → entry
       var st = levelEls.stop;
       st.style.top = y(stopAt(hits)) + '%';
-      st.querySelector('b').textContent = stopAt(hits);
+      st.querySelector('b').textContent = priceText(stopAt(hits));
       st.classList.toggle('moved', hits > 0);
       sig.targets.forEach(function (t, k) { levelEls['tp' + k].classList.toggle('hit', !!t.at && Date.parse(t.at) <= tNow); });
       var price = done ? model.exit : head.p;
@@ -631,11 +708,11 @@
         if (!playing) return;
         if (w.kind === 'tp') {
           var gain = (w.p - sig.entry) * model.dir * lots() * unitValue(sig);
-          toast('TP' + (w.i + 1) + ' reached ✓ ' + money(gain) + (w.i === 0 ? ' · stop to entry' : ' · stop to TP' + w.i), 'is-win');
+          toast('TP' + (w.i + 1) + ' reached ✓ ' + money(gain) + (w.i === 0 && w.i < sig.targets.length - 1 ? ' · stop to entry' : ''), 'is-win');
           burst();
         } else if (w.kind === 'close') {
           var r = sig.r;
-          var label = sig.outcome === 'invalidated' ? 'Stopped' : hits ? 'Closed at the trailed stop' : 'Closed at the time limit';
+          var label = sig.outcome === 'hit' ? 'Every target reached' : sig.outcome === 'invalidated' ? (r === 0 ? 'Stopped at entry' : 'Stopped') : 'Closed by the desk';
           toast(label + (r != null ? ' · ' + (r > 0 ? '+' : r < 0 ? '−' : '') + Math.abs(Math.round(r * 100) / 100) + 'R' : '') + (sig.move ? ' · ' + sig.move : ''), r > 0 ? 'is-win' : r < 0 ? 'is-loss' : '');
         }
       });

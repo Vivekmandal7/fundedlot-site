@@ -3,8 +3,8 @@
 > FundedLot: Prop Firm Signals (also written "Funded Lot") is an iOS and Android app with
 > trading signals for forex, gold and silver, US indices and crypto. Each signal has an entry,
 > a stop loss and three targets (TP1-TP3), and the app sizes it for the member's account and
-> their prop firm's daily loss and max loss limits. AI signals are posted at the live price
-> and kept on a public record with every win and loss. Members also get a 1:1 mentor, an AI
+> their prop firm's daily loss and max loss limits. The FundedLot desk posts each signal by hand at
+> the live price, and live prices decide every result on a public record, wins and losses. Members also get a 1:1 mentor, an AI
 > coach, and free prop firm challenge practice on virtual funds. Signals arrive in the app and
 > in a Telegram room. People sign in and save their trading plan on the website; the
 > subscription (FundedLot Mentorship, monthly or yearly) is bought in the app through the App
@@ -13,8 +13,8 @@
 > analysis, not financial advice.
 
 ## Signals
-- [Trading signals](https://www.fundedlot.com/signals/): every market and platform, the public AI record, a sizing calculator
-- [Free trading signals record](https://www.fundedlot.com/free-trading-signals/): every closed AI signal with its result
+- [Trading signals](https://www.fundedlot.com/signals/): every market and platform, the public record, a sizing calculator
+- [Free trading signals record](https://www.fundedlot.com/free-trading-signals/): every closed signal with its result
 - [How to crack a funded account](https://www.fundedlot.com/crack-funded-account/): passing a prop firm challenge, step by step
 - [Funded trading platform](https://www.fundedlot.com/funded-trading-platform/): the app for prop firm traders
 - [Nifty signals](https://www.fundedlot.com/nifty-signals/): Nifty setups sized in rupees, with a position size calculator
